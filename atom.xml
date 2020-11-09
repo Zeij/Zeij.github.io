@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2020-11-09T17:40:33.778Z</updated>
+  <updated>2020-11-09T17:55:35.684Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -17,18 +17,18 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>测试</title>
-    <link href="http://example.com/2020/11/10/%E6%B5%8B%E8%AF%95/"/>
-    <id>http://example.com/2020/11/10/%E6%B5%8B%E8%AF%95/</id>
-    <published>2020-11-09T17:38:54.000Z</published>
-    <updated>2020-11-09T17:40:33.778Z</updated>
+    <title>晚安</title>
+    <link href="http://example.com/2020/11/10/%E6%99%9A%E5%AE%89/"/>
+    <id>http://example.com/2020/11/10/%E6%99%9A%E5%AE%89/</id>
+    <published>2020-11-09T17:55:54.000Z</published>
+    <updated>2020-11-09T17:55:35.684Z</updated>
     
-    <content type="html"><![CDATA[<p>测试</p>]]></content>
+    <content type="html"><![CDATA[<p>hava a good night</p>]]></content>
     
     
       
       
-    <summary type="html">&lt;p&gt;测试&lt;/p&gt;
+    <summary type="html">&lt;p&gt;hava a good night&lt;/p&gt;
 </summary>
       
     
@@ -39,8 +39,8 @@
   
   <entry>
     <title>测试</title>
-    <link href="http://example.com/2020/11/10/%E6%B5%8B%E8%AF%952/"/>
-    <id>http://example.com/2020/11/10/%E6%B5%8B%E8%AF%952/</id>
+    <link href="http://example.com/2020/11/10/%E6%B5%8B%E8%AF%95/"/>
+    <id>http://example.com/2020/11/10/%E6%B5%8B%E8%AF%95/</id>
     <published>2020-11-09T17:38:54.000Z</published>
     <updated>2020-11-09T17:40:33.778Z</updated>
     
