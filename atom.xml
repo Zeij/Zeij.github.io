@@ -42,16 +42,12 @@
     <link href="http://example.com/2020/11/10/%E6%B5%8B%E8%AF%95/"/>
     <id>http://example.com/2020/11/10/%E6%B5%8B%E8%AF%95/</id>
     <published>2020-11-09T17:38:54.000Z</published>
-    <updated>2020-11-10T06:39:09.006Z</updated>
+    <updated>2020-11-10T07:24:18.437Z</updated>
     
-    <content type="html"><![CDATA[<p>测试</p>]]></content>
+    <content type="html"><![CDATA[<div id="hexo-blog-encrypt" data-wpm="抱歉, 这个密码看着不太对, 请再试试." data-whm="抱歉, 这个文章不能被校验, 不过您还是能看看解密后的内容.">  <div class="hbe-input-container">  <input type="password" id="hbePass" placeholder="" />    <label for="hbePass">Welcome to my blog, enter password to read.</label>    <div class="bottom-line"></div>  </div>  <script id="hbeData" type="hbeData" data-hmacdigest="d0ba1a7d3efb0338dd09049740329c0b5eeb32c730c442aa6ac5d5e8ab62e4ab">9c4409800630dbbb35a4263e11990c52</script></div><script src="/lib/blog-encrypt.js"></script><link href="/css/blog-encrypt.css" rel="stylesheet" type="text/css">]]></content>
     
     
-      
-      
-    <summary type="html">&lt;p&gt;测试&lt;/p&gt;
-</summary>
-      
+    <summary type="html">Welcome to my blog, enter password to read.</summary>
     
     
     

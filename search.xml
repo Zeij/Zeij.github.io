@@ -7,16 +7,17 @@
 ]]></content>
   </entry>
   <entry>
-    <title>第一篇博客</title>
-    <url>/2020/11/10/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/</url>
-    <content><![CDATA[<p>你好世界</p>
-]]></content>
-  </entry>
-  <entry>
     <title>测试</title>
     <url>/2020/11/10/%E6%B5%8B%E8%AF%95/</url>
-    <content><![CDATA[<p>测试</p>
-]]></content>
+    <content><![CDATA[<div id="hexo-blog-encrypt" data-wpm="抱歉, 这个密码看着不太对, 请再试试." data-whm="抱歉, 这个文章不能被校验, 不过您还是能看看解密后的内容.">
+  <div class="hbe-input-container">
+  <input type="password" id="hbePass" placeholder="" />
+    <label for="hbePass">Welcome to my blog, enter password to read.</label>
+    <div class="bottom-line"></div>
+  </div>
+  <script id="hbeData" type="hbeData" data-hmacdigest="d0ba1a7d3efb0338dd09049740329c0b5eeb32c730c442aa6ac5d5e8ab62e4ab">9c4409800630dbbb35a4263e11990c52</script>
+</div>
+<script src="/lib/blog-encrypt.js"></script><link href="/css/blog-encrypt.css" rel="stylesheet" type="text/css">]]></content>
       <categories>
         <category>测试</category>
         <category>测试中的测试</category>
@@ -24,5 +25,11 @@
       <tags>
         <tag>测试</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>第一篇博客</title>
+    <url>/2020/11/10/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<p>你好世界</p>
+]]></content>
   </entry>
 </search>
