@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2020-11-11T02:57:02.932Z</updated>
+  <updated>2020-12-10T15:57:14.388Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>力扣680 柠檬水找零</title>
+    <link href="http://example.com/2020/12/10/%E5%8A%9B%E6%89%A3680-%E6%9F%A0%E6%AA%AC%E6%B0%B4%E6%89%BE%E9%9B%B6/"/>
+    <id>http://example.com/2020/12/10/%E5%8A%9B%E6%89%A3680-%E6%9F%A0%E6%AA%AC%E6%B0%B4%E6%89%BE%E9%9B%B6/</id>
+    <published>2020-12-10T15:48:32.000Z</published>
+    <updated>2020-12-10T15:57:14.388Z</updated>
+    
+    <content type="html"><![CDATA[<p>#本题很简单，注意读题逻辑即可。一开始做的时候以为可以先欠着，而实际上每次都要进行判断，设置标记flag不符条件将其改为0即可（今天第一天刷力扣，尽量每天都能打卡，实在忙两天一题）</p><p>```javascript<br>var lemonadeChange = function (bills) {<br>    let fivenum = 0, tennum = 0, twenum = 0;<br>    let flag = 1;<br>    for (let item in bills) {<br>        if (bills[item] == 5) {<br>            fivenum++;<br>        }<br>        else if (bills[item] == 10) {<br>            if (!fivenum) {<br>                flag = 0;<br>            }<br>            else {<br>                fivenum–;<br>                tennum++;<br>            }<br>        }<br>        else {<br>            if (tennum &amp;&amp; fivenum) {<br>                tennum–;<br>                fivenum–;<br>            }<br>            else if (fivenum &gt;= 3) {<br>                fivenum -= 3;<br>            }<br>            else {<br>                flag = 0;<br>            }<br>        }<br>    }<br>    if (flag) {<br>        return true;<br>    }<br>    else {<br>        return false;<br>    }<br>}</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;#本题很简单，注意读题逻辑即可。一开始做的时候以为可以先欠着，而实际上每次都要进行判断，设置标记flag不符条件将其改为0即可（今天第一天刷力扣，尽量每天都能打卡，实在忙两天一题）&lt;/p&gt;
+&lt;p&gt;```javascript&lt;br&gt;var lemonadeChange = f</summary>
+      
+    
+    
+    
+    <category term="力扣" scheme="http://example.com/categories/%E5%8A%9B%E6%89%A3/"/>
+    
+    
+    <category term="顺序逻辑" scheme="http://example.com/tags/%E9%A1%BA%E5%BA%8F%E9%80%BB%E8%BE%91/"/>
+    
+  </entry>
   
   <entry>
     <title>云签到搭建</title>

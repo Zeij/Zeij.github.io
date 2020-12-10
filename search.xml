@@ -53,4 +53,17 @@
     <content><![CDATA[<p>你好世界</p>
 ]]></content>
   </entry>
+  <entry>
+    <title>力扣680 柠檬水找零</title>
+    <url>/2020/12/10/%E5%8A%9B%E6%89%A3680-%E6%9F%A0%E6%AA%AC%E6%B0%B4%E6%89%BE%E9%9B%B6/</url>
+    <content><![CDATA[<p>#本题很简单，注意读题逻辑即可。一开始做的时候以为可以先欠着，而实际上每次都要进行判断，设置标记flag不符条件将其改为0即可（今天第一天刷力扣，尽量每天都能打卡，实在忙两天一题）</p>
+<p>```javascript<br>var lemonadeChange = function (bills) {<br>    let fivenum = 0, tennum = 0, twenum = 0;<br>    let flag = 1;<br>    for (let item in bills) {<br>        if (bills[item] == 5) {<br>            fivenum++;<br>        }<br>        else if (bills[item] == 10) {<br>            if (!fivenum) {<br>                flag = 0;<br>            }<br>            else {<br>                fivenum–;<br>                tennum++;<br>            }<br>        }<br>        else {<br>            if (tennum &amp;&amp; fivenum) {<br>                tennum–;<br>                fivenum–;<br>            }<br>            else if (fivenum &gt;= 3) {<br>                fivenum -= 3;<br>            }<br>            else {<br>                flag = 0;<br>            }<br>        }<br>    }<br>    if (flag) {<br>        return true;<br>    }<br>    else {<br>        return false;<br>    }<br>}</p>
+]]></content>
+      <categories>
+        <category>力扣</category>
+      </categories>
+      <tags>
+        <tag>顺序逻辑</tag>
+      </tags>
+  </entry>
 </search>
