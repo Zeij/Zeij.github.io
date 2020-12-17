@@ -145,6 +145,73 @@
     
     
     <article
+  id="post-力扣680-柠檬水找零"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/12/10/%E5%8A%9B%E6%89%A3680-%E6%9F%A0%E6%AA%AC%E6%B0%B4%E6%89%BE%E9%9B%B6/"
+    >力扣860 柠檬水找零</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/12/10/%E5%8A%9B%E6%89%A3680-%E6%9F%A0%E6%AA%AC%E6%B0%B4%E6%89%BE%E9%9B%B6/" class="article-date">
+  <time datetime="2020-12-10T15:48:32.000Z" itemprop="datePublished">2020-12-10</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%8A%9B%E6%89%A3/">力扣</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h2><p>在柠檬水摊上，每一杯柠檬水的售价为 5 美元。</p>
+<p>顾客排队购买你的产品，（按账单 bills 支付的顺序）一次购买一杯。</p>
+<p>每位顾客只买一杯柠檬水，然后向你付 5 美元、10 美元或 20 美元。你必须给每个顾客正确找零，也就是说净交易是每位顾客向你支付 5 美元。</p>
+<p>注意，一开始你手头没有任何零钱。</p>
+<p>如果你能给每位顾客正确找零，返回 true ，否则返回 false 。</p>
+<p>示例 1：</p>
+<p>输入：[5,5,5,10,20]<br>输出：true<br>解释：<br>前 3 位顾客那里，我们按顺序收取 3 张 5 美元的钞票。<br>第 4 位顾客那里，我们收取一张 10 美元的钞票，并返还 5 美元。<br>第 5 位顾客那里，我们找还一张 10 美元的钞票和一张 5 美元的钞票。<br>由于所有客户都得到了正确的找零，所以我们输出 true。<br>示例 2：</p>
+<p>输入：[5,5,10]<br>输出：true<br>示例 3：</p>
+<p>输入：[10,10]<br>输出：false<br>示例 4：</p>
+<p>输入：[5,5,10,10,20]<br>输出：false<br>解释：<br>前 2 位顾客那里，我们按顺序收取 2 张 5 美元的钞票。<br>对于接下来的 2 位顾客，我们收取一张 10 美元的钞票，然后返还 5 美元。<br>对于最后一位顾客，我们无法退回 15 美元，因为我们现在只有两张 10 美元的钞票。<br>由于不是每位顾客都得到了正确的找零，所以答案是 false。
+ </p>
+<p>提示：</p>
+<p>0 &lt;= bills.length &lt;= 10000<br>bills[i] 不是 5 就是 10 或是 20 </p>
+<p>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/lemonade-change">https://leetcode-cn.com/problems/lemonade-change</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>本题很简单，注意读题逻辑即可。一开始做的时候以为可以先欠着，而实际上每次找零都要进行判断，设置标记flag不符条件将其改为0即可（今天第一天刷力扣，尽量每天都能打卡，实在忙两天一题）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> lemonadeChange = <span class="function"><span class="keyword">function</span> (<span class="params">bills</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> fivenum = <span class="number">0</span>, tennum = <span class="number">0</span>, twenum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">let</span> flag = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> item <span class="keyword">in</span> bills) &#123;</span><br><span class="line">        <span class="keyword">if</span> (bills[item] == <span class="number">5</span>) &#123;</span><br><span class="line">            fivenum++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (bills[item] == <span class="number">10</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (!fivenum) &#123;</span><br><span class="line">                flag = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                fivenum--;</span><br><span class="line">                tennum++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (tennum &amp;&amp; fivenum) &#123;</span><br><span class="line">                tennum--;</span><br><span class="line">                fivenum--;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (fivenum &gt;= <span class="number">3</span>) &#123;</span><br><span class="line">                fivenum -= <span class="number">3</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                flag = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (flag) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%A1%BA%E5%BA%8F%E9%80%BB%E8%BE%91/" rel="tag">顺序逻辑</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+   
+</article>
+
+    
+    <article
   id="post-云签到搭建"
   class="article article-type-post"
   itemscope
