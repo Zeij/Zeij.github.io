@@ -1,0 +1,489 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.ico">
+  <link rel="icon" href="/img/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <meta name="description" content="题目给定一个 n × n 的二维矩阵表示一个图像。 将图像顺时针旋转 90 度。 说明： 你必须在原地旋转图像，这意味着你需要直接修改输入的二维矩阵。请不要使用另一个矩阵来旋转图像。 示例 1: 给定 matrix &#x3D;[  [1,2,3],  [4,5,6],  [7,8,9]],   原地旋转输入矩阵，使其变为:[  [7,4,1],  [8,5,2],  [9,6,3]]   示例 2:给定">
+<meta property="og:type" content="article">
+<meta property="og:title" content="力扣48 旋转图像">
+<meta property="og:url" content="http://example.com/2020/12/19/%E5%8A%9B%E6%89%A348-%E6%97%8B%E8%BD%AC%E5%9B%BE%E5%83%8F/index.html">
+<meta property="og:site_name" content="Zeij&#39;s blog">
+<meta property="og:description" content="题目给定一个 n × n 的二维矩阵表示一个图像。 将图像顺时针旋转 90 度。 说明： 你必须在原地旋转图像，这意味着你需要直接修改输入的二维矩阵。请不要使用另一个矩阵来旋转图像。 示例 1: 给定 matrix &#x3D;[  [1,2,3],  [4,5,6],  [7,8,9]],   原地旋转输入矩阵，使其变为:[  [7,4,1],  [8,5,2],  [9,6,3]]   示例 2:给定">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s3.ax1x.com/2020/12/20/radpLR.png">
+<meta property="og:image" content="https://s3.ax1x.com/2020/12/20/radMwt.png">
+<meta property="og:image" content="https://s3.ax1x.com/2020/12/20/radDYT.png">
+<meta property="og:image" content="https://s3.ax1x.com/2020/12/20/radJSg.png">
+<meta property="article:published_time" content="2020-12-18T16:23:31.000Z">
+<meta property="article:modified_time" content="2021-11-04T08:14:08.544Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="队列">
+<meta property="article:tag" content="深拷贝">
+<meta property="article:tag" content="螺旋">
+<meta property="article:tag" content="旋转">
+<meta property="article:tag" content="翻转">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://s3.ax1x.com/2020/12/20/radpLR.png">
+  
+  <title>力扣48 旋转图像 - Zeij&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Zeij</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default1.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="力扣48 旋转图像">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-12-19 00:23" pubdate>
+        2020年12月19日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      5.3k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      16 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">力扣48 旋转图像</h1>
+            
+            <div class="markdown-body">
+              <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>给定一个 n × n 的二维矩阵表示一个图像。</p>
+<p>将图像顺时针旋转 90 度。</p>
+<p>说明：</p>
+<p>你必须在原地旋转图像，这意味着你需要直接修改输入的二维矩阵。请不要使用另一个矩阵来旋转图像。</p>
+<p>示例 1:</p>
+<p>给定 matrix =<br>[<br>  [1,2,3],<br>  [4,5,6],<br>  [7,8,9]<br>],  </p>
+<p>原地旋转输入矩阵，使其变为:<br>[<br>  [7,4,1],<br>  [8,5,2],<br>  [9,6,3]<br>]  </p>
+<p>示例 2:<br>给定 matrix =<br>[<br>  [ 5, 1, 9,11],<br>  [ 2, 4, 8,10],<br>  [13, 3, 6, 7],<br>  [15,14,12,16]<br>], </p>
+<p>原地旋转输入矩阵，使其变为:<br>[<br>  [15,13, 2, 5],<br>  [14, 3, 4, 1],<br>  [12, 6, 8, 9],<br>  [16, 7,10,11]<br>]</p>
+<p>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/rotate-image">https://leetcode-cn.com/problems/rotate-image</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><h3 id="本人题解"><a href="#本人题解" class="headerlink" title="本人题解"></a>本人题解</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><br></code></pre></td></tr></table></figure>
+<h3 id="他人题解"><a href="#他人题解" class="headerlink" title="他人题解"></a>他人题解</h3><h4 id="一-倒序遍历-·-深拷贝：新-→-原"><a href="#一-倒序遍历-·-深拷贝：新-→-原" class="headerlink" title="一 倒序遍历 · 深拷贝：新 → 原"></a>一 倒序遍历 · 深拷贝：新 → 原</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-built_in">Array</span>.from + slice：<br><span class="hljs-keyword">var</span> rotate = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">matrix</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> n = matrix.length, m = <span class="hljs-built_in">Array</span>.from(&#123;<span class="hljs-attr">length</span>: n&#125;, <span class="hljs-function">(<span class="hljs-params">_, i</span>) =&gt;</span> matrix[i].slice())<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = n; i--;) <br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> j = n; j--;) <br>            matrix[i][j] = m[n - <span class="hljs-number">1</span> - j][i]<br>&#125;;<br><br><span class="hljs-built_in">JSON</span>.stringify + <span class="hljs-built_in">JSON</span>.parse：<br><span class="hljs-keyword">var</span> rotate = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">matrix</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> n = matrix.length, m = <span class="hljs-built_in">JSON</span>.parse(<span class="hljs-built_in">JSON</span>.stringify(matrix))<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = n; i--;) <br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> j = n; j--;) <br>            matrix[i][j] = m[n - <span class="hljs-number">1</span> - j][i]<br>&#125;;<br><br>作者：mantoufan<br>链接：https:<span class="hljs-comment">//leetcode-cn.com/problems/rotate-image/solution/luo-xuan-kao-bei-xuan-zhuan-fan-zhuan-7x-5v91/</span><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。<br></code></pre></td></tr></table></figure>
+
+<h4 id="二-顺序遍历-·-拷贝：原-→-新-→-原"><a href="#二-顺序遍历-·-拷贝：原-→-新-→-原" class="headerlink" title="二 顺序遍历 · 拷贝：原 → 新 → 原"></a>二 顺序遍历 · 拷贝：原 → 新 → 原</h4><p>解题思路<br>任意顺序遍历矩阵，新矩阵[j, n - 1 - j] = 原矩阵坐标[i, j]值</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> rotate = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">matrix</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> n = matrix.length, m = <span class="hljs-built_in">Array</span>.from(&#123;<span class="hljs-attr">length</span>: n&#125;, <span class="hljs-function"><span class="hljs-params">_</span> =&gt;</span> <span class="hljs-built_in">Array</span>(n))<br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; n; i++)<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> j = <span class="hljs-number">0</span>; j &lt; n; j++)<br>            m[j][n - <span class="hljs-number">1</span> - i] = matrix[i][j]<br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; n; i++)<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> j = <span class="hljs-number">0</span>; j &lt; n; j++)<br>            matrix[i][j] = m[i][j]<br>&#125;;<br><br>作者：mantoufan<br>链接：https:<span class="hljs-comment">//leetcode-cn.com/problems/rotate-image/solution/luo-xuan-kao-bei-xuan-zhuan-fan-zhuan-7x-5v91/</span><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。<br></code></pre></td></tr></table></figure>
+
+<h4 id="三-倒序垂直扫描-·-队列"><a href="#三-倒序垂直扫描-·-队列" class="headerlink" title="三 倒序垂直扫描 · 队列"></a>三 倒序垂直扫描 · 队列</h4><p><a target="_blank" rel="noopener" href="https://imgchr.com/i/radpLR"><img src="https://s3.ax1x.com/2020/12/20/radpLR.png" srcset="/img/loading.gif" lazyload alt="radpLR.png"></a></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> rotate = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">matrix</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> n = matrix.length, queue = []<br>   <span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) <br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> j = <span class="hljs-number">0</span>; j &lt; n; j++) <br>            queue.push(matrix[i][j])<br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> j = n; j--;) <br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) <br>            matrix[i][j] = queue.shift()<br>&#125;;<br><br>作者：mantoufan<br>链接：https:<span class="hljs-comment">//leetcode-cn.com/problems/rotate-image/solution/luo-xuan-kao-bei-xuan-zhuan-fan-zhuan-7x-5v91/</span><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。<br></code></pre></td></tr></table></figure>
+
+<h4 id="四-层次遍历-·-旋转"><a href="#四-层次遍历-·-旋转" class="headerlink" title="四 层次遍历 · 旋转"></a>四 层次遍历 · 旋转</h4><p>每旋转1格，上 右 下 左四格值，存1换4<br>第0层：0 ~ n - 1<br>第1层：1 ~ n - 1 - 1<br>…<br>直到第n / 2取整层：i ~ n - 1 - i<br><a target="_blank" rel="noopener" href="https://imgchr.com/i/radMwt"><img src="https://s3.ax1x.com/2020/12/20/radMwt.png" srcset="/img/loading.gif" lazyload alt="radMwt.png"></a></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> rotate = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">matrix</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> n = matrix.length<br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; n &gt;&gt; <span class="hljs-number">1</span>; i++)<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> j = i; j &lt; n - <span class="hljs-number">1</span> - i; j++) &#123;<br>            <span class="hljs-keyword">let</span> tmp = matrix[i][j]<br>            matrix[i][j] = matrix[n - <span class="hljs-number">1</span> - j][i]<br>            matrix[n - <span class="hljs-number">1</span> - j][i] = matrix[n - <span class="hljs-number">1</span> - i][n - <span class="hljs-number">1</span> - j]<br>            matrix[n - <span class="hljs-number">1</span> - i][n - <span class="hljs-number">1</span> -j] = matrix[j][n - <span class="hljs-number">1</span> - i]<br>            matrix[j][n - <span class="hljs-number">1</span> - i] = tmp<br>        &#125;<br>&#125;;<br><br>作者：mantoufan<br>链接：https:<span class="hljs-comment">//leetcode-cn.com/problems/rotate-image/solution/luo-xuan-kao-bei-xuan-zhuan-fan-zhuan-7x-5v91/</span><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。<br></code></pre></td></tr></table></figure>
+
+<h4 id="五-翻转"><a href="#五-翻转" class="headerlink" title="五 翻转"></a>五 翻转</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> rotate = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">matrix</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> n = matrix.length<br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; n; i++)<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> j = <span class="hljs-number">0</span>; j &lt; n &gt;&gt; <span class="hljs-number">1</span>; j++) <br>            [matrix[i][n - <span class="hljs-number">1</span> - j], matrix[i][j]] = [matrix[i][j], matrix[i][n - <span class="hljs-number">1</span> - j]]<br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; n - <span class="hljs-number">1</span>; i++)<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> j = <span class="hljs-number">0</span>; j &lt; n - <span class="hljs-number">1</span> - i; j++)<br>            [matrix[n - <span class="hljs-number">1</span> - j][n - <span class="hljs-number">1</span> - i], matrix[i][j]] = [matrix[i][j], matrix[n - <span class="hljs-number">1</span> - j][n - <span class="hljs-number">1</span> - i]]<br>&#125;;<br><br>中间变量：<br><span class="hljs-keyword">var</span> rotate = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">matrix</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> n = matrix.length, tmp, i, j<br>    <span class="hljs-keyword">for</span>(i = <span class="hljs-number">0</span>; i &lt; n; i++)<br>        <span class="hljs-keyword">for</span>(j = <span class="hljs-number">0</span>; j &lt; n &gt;&gt; <span class="hljs-number">1</span>; j++) &#123;<br>            tmp = matrix[i][j]<br>            matrix[i][j] = matrix[i][n - <span class="hljs-number">1</span> - j]<br>            matrix[i][n - <span class="hljs-number">1</span> - j] = tmp<br>        &#125;<br>    <span class="hljs-keyword">for</span>(i = <span class="hljs-number">0</span>; i &lt; n - <span class="hljs-number">1</span>; i++)<br>        <span class="hljs-keyword">for</span>(j = <span class="hljs-number">0</span>; j &lt; n - <span class="hljs-number">1</span> - i; j++) &#123;<br>            tmp = matrix[i][j]<br>            matrix[i][j] = matrix[n - <span class="hljs-number">1</span> - j][n - <span class="hljs-number">1</span> - i]<br>            matrix[n - <span class="hljs-number">1</span> - j][n - <span class="hljs-number">1</span> - i] = tmp<br>        &#125;<br>&#125;;<br><br>作者：mantoufan<br>链接：https:<span class="hljs-comment">//leetcode-cn.com/problems/rotate-image/solution/luo-xuan-kao-bei-xuan-zhuan-fan-zhuan-7x-5v91/</span><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。<br></code></pre></td></tr></table></figure>
+
+<h4 id="六-螺旋遍历-·-队列"><a href="#六-螺旋遍历-·-队列" class="headerlink" title="六 螺旋遍历 · 队列"></a>六 螺旋遍历 · 队列</h4><p>解题思路<br>螺旋遍历矩阵，方向d → ↓ ← ↑循环<br>初始边界b[上，右，左，下] = [1, n - 1, 0, n - 1]<br>初始位置i = 0 j = 0，遍历格数k = 0，直到k = n * n - 1所有格遍历完<br>→ j++ 到右边界转↓，i++，右边界收缩-1<br>↓ i++ 到下边界转←，j–，下边界收缩-1<br>← j– 到左边界转↑，i–，左边界收缩+1<br>↑ i– 到上边界转→，j++，上边界收缩+1<br>队列queue 放入遍历过的值<br>→ 留空。到右边界时，弹出赋值<br>↑ 弹出赋值<br>← 弹出赋值 到左边界，如[[1, 2], [3, 4]]，判断到3已到头，填空<br>↑ 弹出赋值 到上边界，如[[1, 2, 3],[4, 5, 6],[7, 8, 9]]，到5已到头，填空  </p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/radDYT"><img src="https://s3.ax1x.com/2020/12/20/radDYT.png" srcset="/img/loading.gif" lazyload alt="radDYT.png"></a><br><a target="_blank" rel="noopener" href="https://imgchr.com/i/radJSg"><img src="https://s3.ax1x.com/2020/12/20/radJSg.png" srcset="/img/loading.gif" lazyload alt="radJSg.png"></a></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><code class="hljs javascript">碰撞转向:<br><span class="hljs-keyword">var</span> rotate = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">matrix</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> n = matrix.length, queue = []<br>    <span class="hljs-keyword">let</span> k = -<span class="hljs-number">1</span>, i = <span class="hljs-number">0</span>, j = <span class="hljs-number">0</span>, b = [<span class="hljs-number">1</span>, n - <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, n - <span class="hljs-number">1</span>], d = <span class="hljs-string">&#x27;→&#x27;</span><br>    <span class="hljs-keyword">while</span>(++k &lt; n * n) &#123;<br>        queue.push(matrix[i][j])<br>        <span class="hljs-keyword">switch</span>(d) &#123;<br>            <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;→&#x27;</span>:<br>                <span class="hljs-keyword">if</span> (j &lt; b[<span class="hljs-number">1</span>]) j++<br>                <span class="hljs-keyword">else</span> &#123;<br>                    matrix[i][j] = queue.shift()<br>                    i++<br>                    d = <span class="hljs-string">&#x27;↓&#x27;</span><br>                    b[<span class="hljs-number">1</span>]--<br>                &#125;<br>            <span class="hljs-keyword">break</span><br>            <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;↓&#x27;</span>:<br>                matrix[i][j] = queue.shift()<br>                <span class="hljs-keyword">if</span> (i &lt; b[<span class="hljs-number">3</span>]) i++<br>                <span class="hljs-keyword">else</span> &#123;<br>                    j--<br>                    d = <span class="hljs-string">&#x27;←&#x27;</span><br>                    b[<span class="hljs-number">3</span>]--<br>                &#125;<br>            <span class="hljs-keyword">break</span><br>            <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;←&#x27;</span>:<br>                matrix[i][j] = queue.shift()<br>                <span class="hljs-keyword">if</span> (j &gt; b[<span class="hljs-number">2</span>]) j--<br>                <span class="hljs-keyword">else</span> &#123;<br>                    <span class="hljs-keyword">if</span> (k + <span class="hljs-number">1</span> === n * n) &#123;<br>                        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> p = j; p &lt;= b[<span class="hljs-number">1</span>]; p++) <br>                            matrix[b[<span class="hljs-number">0</span>] - <span class="hljs-number">1</span>][p] = queue.shift()<br>                    &#125;<br>                    i--<br>                    d = <span class="hljs-string">&#x27;↑&#x27;</span><br>                    b[<span class="hljs-number">2</span>]++<br>                &#125;<br>            <span class="hljs-keyword">break</span><br>            <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;↑&#x27;</span>:<br>                matrix[i][j] = queue.shift()<br>                <span class="hljs-keyword">if</span> (i &gt; b[<span class="hljs-number">0</span>]) i--<br>                <span class="hljs-keyword">else</span> &#123;<br>                    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> p = j; p &lt;= b[<span class="hljs-number">1</span>]; p++) <br>                        matrix[b[<span class="hljs-number">0</span>] - <span class="hljs-number">1</span>][p] = queue.shift()<br>                    j++<br>                    d = <span class="hljs-string">&#x27;→&#x27;</span><br>                    b[<span class="hljs-number">0</span>]++<br>                &#125;<br>        &#125;<br>    &#125;<br>&#125;;<br><br>循环:<br><span class="hljs-keyword">var</span> rotate = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">matrix</span>) </span>&#123;<br>    <span class="hljs-keyword">const</span> n = matrix.length, queue = []<br>    <span class="hljs-keyword">let</span> t = <span class="hljs-number">0</span>, r = n - <span class="hljs-number">1</span>, l = <span class="hljs-number">0</span>, b = n - <span class="hljs-number">1</span>, k = <span class="hljs-number">0</span>, i <span class="hljs-comment">// 边界：t上 r右 l左 b下</span><br>    <span class="hljs-keyword">while</span>(k &lt; n * n)&#123;<br>        <span class="hljs-keyword">for</span>(i = l; i &lt;= r; i++) &#123; <span class="hljs-comment">// →</span><br>            k++<br>            queue.push(matrix[t][i])<br>            <span class="hljs-keyword">if</span> (i === r) matrix[t][i] = queue.shift()<br>        &#125;<br>        t++<br>        <span class="hljs-keyword">for</span>(i = t; i &lt;= b; i++) &#123; <span class="hljs-comment">// ↓</span><br>            k++<br>            queue.push(matrix[i][r])<br>            matrix[i][r] = queue.shift()<br>        &#125;<br>        r--<br>        <span class="hljs-keyword">for</span>(i = r; i &gt;= l; i--) &#123; <span class="hljs-comment">// ←</span><br>            k++<br>            queue.push(matrix[b][i])<br>            matrix[b][i] = queue.shift()<br>            <span class="hljs-keyword">if</span> (i === l &amp;&amp; k === n * n) <br>                <span class="hljs-keyword">while</span>(queue.length) <br>                    matrix[t - <span class="hljs-number">1</span>][l++] = queue.shift()<br>        &#125;<br>        b--<br>        <span class="hljs-keyword">for</span>(i = b; i &gt;= t; i--) &#123; <span class="hljs-comment">// ↑</span><br>            k++<br>            queue.push(matrix[i][l])<br>            matrix[i][l] = queue.shift()<br>            <span class="hljs-keyword">if</span> (i === t) &#123;<br>                <span class="hljs-keyword">let</span> _l = l<br>                <span class="hljs-keyword">while</span>(queue.length) <br>                    matrix[t - <span class="hljs-number">1</span>][_l++] = queue.shift()<br>            &#125;<br>        &#125;<br>        l++<br>    &#125;<br>    <span class="hljs-keyword">return</span> queue<br>&#125;<br><br>作者：mantoufan<br>链接：https:<span class="hljs-comment">//leetcode-cn.com/problems/rotate-image/solution/luo-xuan-kao-bei-xuan-zhuan-fan-zhuan-7x-5v91/</span><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。<br></code></pre></td></tr></table></figure>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%8A%9B%E6%89%A3/">力扣</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E9%98%9F%E5%88%97/">队列</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%B7%B1%E6%8B%B7%E8%B4%9D/">深拷贝</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E8%9E%BA%E6%97%8B/">螺旋</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%97%8B%E8%BD%AC/">旋转</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%BF%BB%E8%BD%AC/">翻转</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/12/20/%E5%8A%9B%E6%89%A3316-%E5%8E%BB%E9%99%A4%E9%87%8D%E5%A4%8D%E5%AD%97%E6%AF%8D/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">力扣316 去除重复字母</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/12/18/%E5%8A%9B%E6%89%A3389-%E6%89%BE%E4%B8%8D%E5%90%8C/">
+                        <span class="hidden-mobile">力扣389 找不同</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <div>@2020-2021  Zeij</div> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

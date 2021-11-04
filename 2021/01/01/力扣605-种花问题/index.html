@@ -1,0 +1,483 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.ico">
+  <link rel="icon" href="/img/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <meta name="description" content="题目假设有一个很长的花坛，一部分地块种植了花，另一部分却没有。可是，花不能种植在相邻的地块上，它们会争夺水源，两者都会死去。 给你一个整数数组  flowerbed 表示花坛，由若干 0 和 1 组成，其中 0 表示没种植花，1 表示种植了花。另有一个数 n ，能否在不打破种植规则的情况下种入 n 朵花？能则返回 true ，不能则返回 false。   示例 1：输入：flowerbed &#x3D; [">
+<meta property="og:type" content="article">
+<meta property="og:title" content="力扣605 种花问题">
+<meta property="og:url" content="http://example.com/2021/01/01/%E5%8A%9B%E6%89%A3605-%E7%A7%8D%E8%8A%B1%E9%97%AE%E9%A2%98/index.html">
+<meta property="og:site_name" content="Zeij&#39;s blog">
+<meta property="og:description" content="题目假设有一个很长的花坛，一部分地块种植了花，另一部分却没有。可是，花不能种植在相邻的地块上，它们会争夺水源，两者都会死去。 给你一个整数数组  flowerbed 表示花坛，由若干 0 和 1 组成，其中 0 表示没种植花，1 表示种植了花。另有一个数 n ，能否在不打破种植规则的情况下种入 n 朵花？能则返回 true ，不能则返回 false。   示例 1：输入：flowerbed &#x3D; [">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-12-31T17:11:12.000Z">
+<meta property="article:modified_time" content="2021-11-04T08:16:34.924Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="贪心算法">
+<meta property="article:tag" content="正则">
+<meta property="article:tag" content="扫描">
+<meta name="twitter:card" content="summary_large_image">
+  
+  <title>力扣605 种花问题 - Zeij&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Zeij</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default1.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="力扣605 种花问题">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-01-01 01:11" pubdate>
+        2021年1月1日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4.1k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      13 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">力扣605 种花问题</h1>
+            
+            <div class="markdown-body">
+              <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>假设有一个很长的花坛，一部分地块种植了花，另一部分却没有。可是，花不能种植在相邻的地块上，它们会争夺水源，两者都会死去。</p>
+<p>给你一个整数数组  flowerbed 表示花坛，由若干 0 和 1 组成，其中 0 表示没种植花，1 表示种植了花。另有一个数 n ，能否在不打破种植规则的情况下种入 n 朵花？能则返回 true ，不能则返回 false。</p>
+<p> </p>
+<p>示例 1：<br>输入：flowerbed = [1,0,0,0,1], n = 1<br>输出：true</p>
+<p>示例 2：<br>输入：flowerbed = [1,0,0,0,1], n = 2<br>输出：false
+ </p>
+<p>提示：</p>
+<p>1 &lt;= flowerbed.length &lt;= 2 * 104<br>flowerbed[i] 为 0 或 1<br>flowerbed 中不存在相邻的两朵花<br>0 &lt;= n &lt;= flowerbed.length</p>
+<p>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/can-place-flowers">https://leetcode-cn.com/problems/can-place-flowers</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><h3 id="本人题解"><a href="#本人题解" class="headerlink" title="本人题解"></a>本人题解</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><br></code></pre></td></tr></table></figure>
+
+
+<h3 id="他人题解"><a href="#他人题解" class="headerlink" title="他人题解"></a>他人题解</h3><h4 id="一-正则"><a href="#一-正则" class="headerlink" title="一 正则"></a>一 正则</h4><p>数组转字符串，分6种情况一次匹配出所有可种花位置。本文拓展中将详解每种情况</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> canPlaceFlowers = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">flowerbed, n</span>) </span>&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Array</span>.from(flowerbed.join(<span class="hljs-string">&#x27;&#x27;</span>).matchAll(<span class="hljs-regexp">/(^0(?=00)|^00|00$|00(?=00)|000|^0$)/g</span>)).length &gt;= n <br>&#125;;<br><br>作者：mantoufan<br>链接：https:<span class="hljs-comment">//leetcode-cn.com/problems/can-place-flowers/solution/zheng-ze-sao-miao-tan-xin-1xing-dai-ma-3-e6p8/</span><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。<br></code></pre></td></tr></table></figure>
+
+<h4 id="二-扫描"><a href="#二-扫描" class="headerlink" title="二 扫描"></a>二 扫描</h4><p>遍历，找 前（最前为undefined） + 当前 + 后（最后为undefined） 都不为1的位置<br>找到后，不真正种花flowerbed[i] = 1。下个位置一定不能种，直接i++即可</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> canPlaceFlowers = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">flowerbed, n</span>) </span>&#123;<br>    <span class="hljs-keyword">if</span> (n === <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; flowerbed.length; i++) <br>        <span class="hljs-keyword">if</span> (flowerbed[i - <span class="hljs-number">1</span>] !== <span class="hljs-number">1</span> &amp;&amp; flowerbed[i] !== <span class="hljs-number">1</span> &amp;&amp; flowerbed[i + <span class="hljs-number">1</span>] !== <span class="hljs-number">1</span>) &#123;<br>            <span class="hljs-keyword">if</span> (--n === <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br>            i++<br>        &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span><br>&#125;;<br><br>作者：mantoufan<br>链接：https:<span class="hljs-comment">//leetcode-cn.com/problems/can-place-flowers/solution/zheng-ze-sao-miao-tan-xin-1xing-dai-ma-3-e6p8/</span><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。<br></code></pre></td></tr></table></figure>
+
+
+<h4 id="三-贪心"><a href="#三-贪心" class="headerlink" title="三 贪心"></a>三 贪心</h4><p>遍历，最多经历无花 开始 → 花 花 → 花 花 → 结束4种情况<br>上一有花索引 当前索引与种花数量的关系如图<br>[url=<a target="_blank" rel="noopener" href="https://imgchr.com/i/sS5M1f][img]https://s3.ax1x.com/2021/01/02/sS5M1f.md.png[/img][/url]">https://imgchr.com/i/sS5M1f][img]https://s3.ax1x.com/2021/01/02/sS5M1f.md.png[/img][/url]</a></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> canPlaceFlowers = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">flowerbed, n</span>) </span>&#123;<br>    <span class="hljs-keyword">if</span> (n === <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br>    <span class="hljs-keyword">let</span> i = -<span class="hljs-number">1</span>, p = -<span class="hljs-number">1</span>, r = <span class="hljs-number">0</span>, l = flowerbed.length - <span class="hljs-number">1</span><br>    <span class="hljs-keyword">while</span> (i++ &lt; l) <br>        <span class="hljs-keyword">if</span> (flowerbed[i] === <span class="hljs-number">1</span>) &#123;<br>            <span class="hljs-keyword">if</span> (p === -<span class="hljs-number">1</span>)  <span class="hljs-comment">// 开始 → 花</span><br>                r = i - <span class="hljs-number">0</span> &gt;&gt; <span class="hljs-number">1</span><br>            <span class="hljs-keyword">else</span> <span class="hljs-comment">// 花 → 花</span><br>                r += i - p - <span class="hljs-number">2</span> &gt;&gt; <span class="hljs-number">1</span><br>            p = i<br>            <span class="hljs-keyword">if</span> (r &gt;= n) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br>        &#125;<br>    <span class="hljs-keyword">if</span> (p === -<span class="hljs-number">1</span>)  <span class="hljs-comment">// 无花</span><br>        r = l - <span class="hljs-number">0</span> + <span class="hljs-number">2</span> &gt;&gt; <span class="hljs-number">1</span><br>    <span class="hljs-keyword">else</span> <span class="hljs-comment">// 花 → 结束</span><br>        r += l - p &gt;&gt; <span class="hljs-number">1</span><br>    <span class="hljs-keyword">return</span> r &gt;= n<br>&#125;;<br><br>作者：mantoufan<br>链接：https:<span class="hljs-comment">//leetcode-cn.com/problems/can-place-flowers/solution/zheng-ze-sao-miao-tan-xin-1xing-dai-ma-3-e6p8/</span><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。<br></code></pre></td></tr></table></figure>
+
+
+<h4 id="四-贪心-·-优化"><a href="#四-贪心-·-优化" class="headerlink" title="四 贪心 · 优化"></a>四 贪心 · 优化</h4><p>原数组前后，即-2位和length + 1位种花 → 1 0 原数组 0 1<br>既不影响结果，又将贪心经历的情况减少为一种 花 → 花</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> canPlaceFlowers = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">flowerbed, n</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> p = -<span class="hljs-number">2</span>, i = -<span class="hljs-number">1</span>, r = <span class="hljs-number">0</span><br>    <span class="hljs-keyword">while</span> (++i &lt; flowerbed.length)<br>        <span class="hljs-keyword">if</span> (flowerbed[i]) &#123;<br>            <span class="hljs-keyword">if</span> ((r += (i - p - <span class="hljs-number">2</span>) &gt;&gt; <span class="hljs-number">1</span>) &gt;= n) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br>            p = i<br>        &#125;<br>    r += (i + <span class="hljs-number">1</span> - p - <span class="hljs-number">2</span>) &gt;&gt; <span class="hljs-number">1</span><br>    <span class="hljs-keyword">return</span> r &gt;= n<br>&#125;;<br><br>作者：mantoufan<br>链接：https:<span class="hljs-comment">//leetcode-cn.com/problems/can-place-flowers/solution/zheng-ze-sao-miao-tan-xin-1xing-dai-ma-3-e6p8/</span><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。<br></code></pre></td></tr></table></figure>
+
+<h4 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h4><p>正则概述<br>1940年，Warren McCulloch与Walter Pitts将神经系统中的神经元描述成小而简单的自动控制元<br>1950年，数学家Stephen Kleene利用称之为“正则集合”的数学符号来描述此模型<br>随后，Ken Thompson将此符号系统引入编辑器QED，成为Unix上的编辑器ed，最终引入grep<br>此后，正则表达式被广泛应用于各种 Unix 或类 Unix 系统工具中，POSIX规范正则表达式出现<br>1986年1月19日，Perl正则表达式发布<br>1997年夏天，Philip Hazel开始用C语言编写PCRE，后被多种编程语言、服务器环境集成</p>
+<p>PCRE，即Perl 兼容正则表达式，Perl Compatible Regular Expressions，强大而灵活<br>JavaScript部分实现了PCRE<br>分组，匹配（贪婪，惰性），引用（反），捕获，正向前瞻，负向前瞻，正向后顾，负向后顾等  </p>
+<p>正则解题  </p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">/(^0(?=00)|^00|00$|00(?=00)|000|^0$)/g</span>匹配所有可种<span class="hljs-number">1</span>花的位置区间 <br> <br>只要有连续<span class="hljs-number">3</span>个<span class="hljs-number">0</span>，至少可种<span class="hljs-number">1</span>花。能不能种<span class="hljs-number">2</span>花，要看左侧和右侧情况  <br><span class="hljs-regexp">/000/</span> 要看其它情况，优先级较低 <br>[<span class="hljs-number">0</span>] 只有<span class="hljs-number">1</span>个<span class="hljs-number">0</span>，只能种<span class="hljs-number">1</span>花  <br><span class="hljs-regexp">/^0$/</span>　^开始位置，$结束位置。特殊情况，优先级最低  <br>[<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>] [<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>] 开始位置起<span class="hljs-number">2</span>个<span class="hljs-number">0</span>，无论第<span class="hljs-number">3</span>个是<span class="hljs-number">0</span>还是<span class="hljs-number">1</span>，开始位置一定种<span class="hljs-number">1</span>花  <br><span class="hljs-regexp">/^00/</span>  <br>[<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>] [<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>] 结束位置前<span class="hljs-number">2</span>个<span class="hljs-number">0</span>，无论倒数第<span class="hljs-number">3</span>个是<span class="hljs-number">0</span>还是<span class="hljs-number">1</span>，结束位置一定种<span class="hljs-number">1</span>花  <br><span class="hljs-regexp">/00$/</span>  <br>[<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>] 开始位置起<span class="hljs-number">3</span>个<span class="hljs-number">0</span>，如果被<span class="hljs-regexp">/000/</span>匹配，只能种<span class="hljs-number">1</span>花。应[<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>]这样种 <br><span class="hljs-regexp">/^0(?=00)/</span>　?=正向前瞻，匹配后面有<span class="hljs-number">2</span>个<span class="hljs-number">0</span>的<span class="hljs-number">0</span>  <br>匹配到第<span class="hljs-number">1</span>个<span class="hljs-number">0</span>种花，后面<span class="hljs-number">2</span>个<span class="hljs-number">0</span>交给<span class="hljs-regexp">/00$/</span>匹配种花 <br>[<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>] 开始位置起，<span class="hljs-number">5</span>个<span class="hljs-number">0</span>，如果被上面的<span class="hljs-number">5</span>和<span class="hljs-number">1</span>匹配，结果<span class="hljs-number">0</span> <span class="hljs-number">000</span>，剩<span class="hljs-number">1</span>个<span class="hljs-number">0</span> <br><span class="hljs-regexp">/00(?=00)/</span>　?=正向前瞻，匹配后面有<span class="hljs-number">2</span>个<span class="hljs-number">0</span>的<span class="hljs-number">00</span>  <br>匹配到第<span class="hljs-number">1</span>个<span class="hljs-number">0</span>种花，后面<span class="hljs-number">2</span>个<span class="hljs-number">0</span>被<span class="hljs-regexp">/00(?=00)/</span>匹配种花，剩下<span class="hljs-number">2</span>个<span class="hljs-number">0</span>被<span class="hljs-regexp">/00$/</span>匹配种花  <br>以上正则表达式优先级：匹配个数 小 → 大。个数相同，条件宽泛的放后。特殊情况最后  <br></code></pre></td></tr></table></figure>
+<p>matchAlll<br>区别于match，使用matchAll传入正则时，修饰符flag一定要为g全局<br>即使结果为null，matchAll也会返回RegExpStringIterator。用Array.from转数组获取长度<br>新版Chrome中，该对象可以直接forEach，返回每个匹配位置的值，索引和捕获<br>在不支持forEach的运行环境里，可以用.next迭代地访问每个匹配<br>这里用matchAll找到所有1的索引，重写本题的贪心解法 </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> canPlaceFlowers = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">flowerbed, n</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> p = -<span class="hljs-number">1</span>, r = <span class="hljs-number">0</span>, l = flowerbed.length - <span class="hljs-number">1</span>, v<br>    <span class="hljs-keyword">const</span> i = flowerbed.join(<span class="hljs-string">&#x27;&#x27;</span>).matchAll(<span class="hljs-regexp">/1/g</span>)<br>    <span class="hljs-keyword">while</span> (v = i.next().value) &#123;<br>        <span class="hljs-keyword">if</span> (p === -<span class="hljs-number">1</span>)  <span class="hljs-comment">// 开始 → 花</span><br>            r = v.index - <span class="hljs-number">0</span> &gt;&gt; <span class="hljs-number">1</span><br>        <span class="hljs-keyword">else</span> <span class="hljs-comment">// 花 → 花</span><br>            r += v.index - p - <span class="hljs-number">2</span> &gt;&gt; <span class="hljs-number">1</span><br>        <span class="hljs-keyword">if</span> (r &gt;= n) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br>        p = v.index<br>    &#125;<br>    <span class="hljs-keyword">if</span> (p === -<span class="hljs-number">1</span>) <span class="hljs-comment">// 无花</span><br>        r = l - <span class="hljs-number">0</span> + <span class="hljs-number">2</span> &gt;&gt; <span class="hljs-number">1</span><br>    <span class="hljs-keyword">else</span> <span class="hljs-comment">// 花 → 结束</span><br>        r += l - p &gt;&gt; <span class="hljs-number">1</span><br>    <span class="hljs-keyword">return</span> r &gt;= n<br>&#125;;<br><br>作者：mantoufan<br>链接：https:<span class="hljs-comment">//leetcode-cn.com/problems/can-place-flowers/solution/zheng-ze-sao-miao-tan-xin-1xing-dai-ma-3-e6p8/</span><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。<br></code></pre></td></tr></table></figure>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%8A%9B%E6%89%A3/">力扣</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/">贪心算法</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%AD%A3%E5%88%99/">正则</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%89%AB%E6%8F%8F/">扫描</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/01/02/%E5%8A%9B%E6%89%A3239-%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E6%9C%80%E5%A4%A7%E5%80%BC/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">力扣239 滑动窗口最大值</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/12/31/%E5%8A%9B%E6%89%A3435-%E6%97%A0%E9%87%8D%E5%8F%A0%E5%8C%BA%E9%97%B4/">
+                        <span class="hidden-mobile">力扣435 无重叠区间</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <div>@2020-2021  Zeij</div> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

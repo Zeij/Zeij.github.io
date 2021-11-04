@@ -1,0 +1,481 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.ico">
+  <link rel="icon" href="/img/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <meta name="description" content="题目在一个由小写字母构成的字符串 s 中，包含由一些连续的相同字符所构成的分组。 例如，在字符串 s &#x3D; “abbxxxxzyy” 中，就含有 “a”, “bb”, “xxxx”, “z” 和 “yy” 这样的一些分组。 分组可以用区间 [start, end] 表示，其中 start 和 end 分别表示该分组的起始和终止位置的下标。上例中的 “xxxx” 分组用区间表示为 [3,6] 。 我们">
+<meta property="og:type" content="article">
+<meta property="og:title" content="力扣830 较大分组的位置">
+<meta property="og:url" content="http://example.com/2021/01/05/%E5%8A%9B%E6%89%A3830-%E8%BE%83%E5%A4%A7%E5%88%86%E7%BB%84%E7%9A%84%E4%BD%8D%E7%BD%AE/index.html">
+<meta property="og:site_name" content="Zeij&#39;s blog">
+<meta property="og:description" content="题目在一个由小写字母构成的字符串 s 中，包含由一些连续的相同字符所构成的分组。 例如，在字符串 s &#x3D; “abbxxxxzyy” 中，就含有 “a”, “bb”, “xxxx”, “z” 和 “yy” 这样的一些分组。 分组可以用区间 [start, end] 表示，其中 start 和 end 分别表示该分组的起始和终止位置的下标。上例中的 “xxxx” 分组用区间表示为 [3,6] 。 我们">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-01-05T10:48:39.000Z">
+<meta property="article:modified_time" content="2021-11-04T08:17:19.191Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="栈">
+<meta property="article:tag" content="正则">
+<meta property="article:tag" content="位">
+<meta name="twitter:card" content="summary_large_image">
+  
+  <title>力扣830 较大分组的位置 - Zeij&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Zeij</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default1.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="力扣830 较大分组的位置">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-01-05 18:48" pubdate>
+        2021年1月5日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4.3k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      13 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">力扣830 较大分组的位置</h1>
+            
+            <div class="markdown-body">
+              <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>在一个由小写字母构成的字符串 s 中，包含由一些连续的相同字符所构成的分组。</p>
+<p>例如，在字符串 s = “abbxxxxzyy” 中，就含有 “a”, “bb”, “xxxx”, “z” 和 “yy” 这样的一些分组。</p>
+<p>分组可以用区间 [start, end] 表示，其中 start 和 end 分别表示该分组的起始和终止位置的下标。上例中的 “xxxx” 分组用区间表示为 [3,6] 。</p>
+<p>我们称所有包含大于或等于三个连续字符的分组为 较大分组 。</p>
+<p>找到每一个 较大分组 的区间，按起始位置下标递增顺序排序后，返回结果。</p>
+<p> </p>
+<p>示例 1：<br>输入：s = “abbxxxxzzy”<br>输出：[[3,6]]<br>解释：”xxxx” 是一个起始于 3 且终止于 6 的较大分组。</p>
+<p>示例 2：<br>输入：s = “abc”<br>输出：[]<br>解释：”a”,”b” 和 “c” 均不是符合要求的较大分组。</p>
+<p>示例 3：<br>输入：s = “abcdddeeeeaabbbcd”<br>输出：[[3,5],[6,9],[12,14]]<br>解释：较大分组为 “ddd”, “eeee” 和 “bbb”</p>
+<p>示例 4：<br>输入：s = “aba”<br>输出：[]<br> <br>提示：</p>
+<p>1 &lt;= s.length &lt;= 1000<br>s 仅含小写英文字母</p>
+<p>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/positions-of-large-groups">https://leetcode-cn.com/problems/positions-of-large-groups</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><h3 id="本人题解"><a href="#本人题解" class="headerlink" title="本人题解"></a>本人题解</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><br></code></pre></td></tr></table></figure>
+
+
+<h3 id="他人题解"><a href="#他人题解" class="headerlink" title="他人题解"></a>他人题解</h3><h4 id="一-正则"><a href="#一-正则" class="headerlink" title="一 正则"></a>一 正则</h4><p>([a-z])捕获小写字母，\1反向引用刚才捕获的字母，{2,}该字母又出现&gt;=2次  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs javascript">matchAll<br><span class="hljs-keyword">var</span> largeGroupPositions = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">s</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> g = s.matchAll(<span class="hljs-regexp">/([a-z])\1&#123;2,&#125;/g</span>), r = [], t<br>    <span class="hljs-keyword">while</span> (t = g.next().value) r.push([t.index, t.index + t[<span class="hljs-number">0</span>].length - <span class="hljs-number">1</span>])<br>    <span class="hljs-keyword">return</span> r<br>&#125;;<br><br><br><br><br><br>matchAll · <span class="hljs-number">1</span>行代码<br><span class="hljs-keyword">var</span> largeGroupPositions = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">s</span>) </span>&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Array</span>.from(s.matchAll(<span class="hljs-regexp">/(.)\1\1+/g</span>), <span class="hljs-function"><span class="hljs-params">v</span> =&gt;</span> [v.index, v.index + v[<span class="hljs-number">0</span>].length - <span class="hljs-number">1</span>])<br>&#125;;<br><br><br><br>replace：.匹配除换行符以外的任意字符<br><span class="hljs-keyword">var</span> largeGroupPositions = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">s</span>) </span>&#123;<br>    <span class="hljs-keyword">const</span> r = []<br>    s.replace(<span class="hljs-regexp">/(.)\1&#123;2,&#125;/g</span>, <span class="hljs-function">(<span class="hljs-params">a, _, i</span>)=&gt;</span> r.push([i, i + a.length - <span class="hljs-number">1</span>]))<br>    <span class="hljs-keyword">return</span> r<br>&#125;;<br><br><br>作者：mantoufan<br>链接：https:<span class="hljs-comment">//leetcode-cn.com/problems/positions-of-large-groups/solution/zheng-ze-wei-zhan-3jie-fa-chao-100-by-ma-r0vy/</span><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。<br></code></pre></td></tr></table></figure>
+
+<h4 id="二-扫描"><a href="#二-扫描" class="headerlink" title="二 扫描"></a>二 扫描</h4><p>start不同字母首次出现索引，初始0。遍历遇下个不同字母，更新start</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><code class="hljs javascript">字母<br><span class="hljs-keyword">var</span> largeGroupPositions = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">s</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>, start = <span class="hljs-number">0</span>, r = []<br>    <span class="hljs-keyword">while</span> (++i &lt;= s.length) <br>        <span class="hljs-keyword">if</span> (s[start] !== s[i]) &#123;<br>            <span class="hljs-keyword">if</span> (i - start &gt; <span class="hljs-number">2</span>) r.push([start, i - <span class="hljs-number">1</span>])<br>            start = i<br>        &#125;<br>    <span class="hljs-keyword">return</span> r<br>&#125;;<br><br><br><br>位运算 · 异或：字母转Unicode编码，相同^为<span class="hljs-number">0</span><br><br><br><span class="hljs-keyword">var</span> largeGroupPositions = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">s</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>, start = <span class="hljs-number">0</span>, r = []<br>    <span class="hljs-keyword">while</span> (++i &lt;= s.length) <br>        <span class="hljs-keyword">if</span> (s.charCodeAt(start) ^ s.charCodeAt(i)) &#123;<br>            <span class="hljs-keyword">if</span> (i - start &gt; <span class="hljs-number">2</span>) r.push([start, i - <span class="hljs-number">1</span>])<br>            start = i<br>        &#125;<br>    <span class="hljs-keyword">return</span> r<br>&#125;;<br><br><br><br><br><span class="hljs-built_in">Proxy</span>：拦截数组push方法，不满足连续出现次数&gt;=<span class="hljs-number">3</span>不真正push<br><span class="hljs-keyword">var</span> largeGroupPositions = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">s</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>, start = <span class="hljs-number">0</span>, r = [], p = proxy(r)<br>    <span class="hljs-keyword">while</span> (++i &lt;= s.length) <br>        <span class="hljs-keyword">if</span> (s[start] !== s[i]) &#123;<br>            p.push([start, i - <span class="hljs-number">1</span>])<br>            start = i<br>        &#125;<br>    <span class="hljs-keyword">return</span> r<br>&#125;;<br><span class="hljs-keyword">const</span> proxy = <span class="hljs-function"><span class="hljs-params">r</span> =&gt;</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Proxy</span>(r, &#123;<br>    set (t, p, v) &#123;         <br>        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> v === <span class="hljs-string">&#x27;object&#x27;</span> &amp;&amp; v[<span class="hljs-number">1</span>] - v[<span class="hljs-number">0</span>] &gt; <span class="hljs-number">1</span>) t[p] = v<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br>    &#125;<br>&#125;)<br><br>作者：mantoufan<br>链接：https:<span class="hljs-comment">//leetcode-cn.com/problems/positions-of-large-groups/solution/zheng-ze-wei-zhan-3jie-fa-chao-100-by-ma-r0vy/</span><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。<br></code></pre></td></tr></table></figure>
+
+
+<h4 id="三-位"><a href="#三-位" class="headerlink" title="三 位"></a>三 位</h4><p>小写字母转Unicode编码-97，范围[0, 25]。二进制的32位从左到右[1, 26]位可表示[a, z]</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Bit</span> </span>&#123; <span class="hljs-comment">// 构造Bit类，模仿Set，当Set用</span><br>    <span class="hljs-title">constructor</span> (<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-built_in">this</span>.clear()<br>    &#125;<br>    add (v) &#123; <span class="hljs-comment">// 遇 a 转97，再-97 = 0，1左移0位 = 1。或 运算，占第1位</span><br>        <span class="hljs-built_in">this</span>.bit |= <span class="hljs-number">1</span> &lt;&lt; v<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span><br>    &#125;<br>    has (v) &#123; <span class="hljs-comment">// 再遇 a，同上，1左移0位 = 1。且 运算，第1位已被占，找到连续 a</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.bit &amp; <span class="hljs-number">1</span> &lt;&lt; v<br>    &#125;<br>    clear () &#123;<br>        <span class="hljs-built_in">this</span>.bit = <span class="hljs-number">0</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span><br>    &#125;<br>&#125;<br><br><br><br><br>构造Bit类，遇不同字母(has返回<span class="hljs-number">0</span>)，清空Bit并放入。相当于用!Bit.has代替上解法的!==<br><span class="hljs-keyword">var</span> largeGroupPositions = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">s</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>, start = <span class="hljs-number">0</span>, b = <span class="hljs-keyword">new</span> Bit, r = [], t<br>    b.add(s.charCodeAt(<span class="hljs-number">0</span>) - <span class="hljs-number">97</span>)<br>    <span class="hljs-keyword">while</span> (++i &lt; s.length) &#123;<br>        <span class="hljs-keyword">if</span> (!b.has(t = s.charCodeAt(i) - <span class="hljs-number">97</span>)) &#123;<br>            <span class="hljs-keyword">if</span> (i - start &gt; <span class="hljs-number">2</span>) r.push([start, i - <span class="hljs-number">1</span>])<br>            start = i<br>            b.clear().add(t)<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">if</span> (i - start &gt; <span class="hljs-number">2</span>) r.push([start, i - <span class="hljs-number">1</span>])<br>    <span class="hljs-keyword">return</span> r<br>&#125;;<br><br><br><br><br>提示<br>Bit作用与<span class="hljs-built_in">Set</span>一致，即判断字母是否重复出现。只是!<span class="hljs-built_in">Set</span>.has字母不如直接!==快<br><span class="hljs-keyword">var</span> largeGroupPositions = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">s</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>, start = <span class="hljs-number">0</span>, b = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Set</span>(s[<span class="hljs-number">0</span>]), r = [], t<br>    <span class="hljs-keyword">while</span> (++i &lt;= s.length) <br>        <span class="hljs-keyword">if</span> (!b.has(s[i])) &#123;<br>            <span class="hljs-keyword">if</span> (i - start &gt; <span class="hljs-number">2</span>) r.push([start, i - <span class="hljs-number">1</span>])<br>            start = i<br>            b.clear()<br>            b.add(s[i])<br>        &#125;<br>    <span class="hljs-keyword">return</span> r<br>&#125;;<br><br>作者：mantoufan<br>链接：https:<span class="hljs-comment">//leetcode-cn.com/problems/positions-of-large-groups/solution/zheng-ze-wei-zhan-3jie-fa-chao-100-by-ma-r0vy/</span><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。<br></code></pre></td></tr></table></figure>
+
+
+<h4 id="四-栈"><a href="#四-栈" class="headerlink" title="四 栈"></a>四 栈</h4><p>构造特殊栈：push时，遇不同元素，清空栈 并 返回清空前的长度，该长度即相同元素个数</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Stack</span> </span>&#123;<br>    <span class="hljs-title">constructor</span> (<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-built_in">this</span>.q = []<br>    &#125; <br>    length () &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.q.length<br>    &#125;<br>    top () &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.q[<span class="hljs-built_in">this</span>.length() - <span class="hljs-number">1</span>]<br>    &#125;<br>    clear () &#123;<br>        <span class="hljs-built_in">this</span>.q.length = <span class="hljs-number">0</span><br>    &#125;<br>    push (v) &#123;<br>        <span class="hljs-keyword">let</span> len = <span class="hljs-number">0</span><br>        <span class="hljs-keyword">if</span> (v !== <span class="hljs-built_in">this</span>.top()) &#123;<br>            len = <span class="hljs-built_in">this</span>.length()<br>            <span class="hljs-built_in">this</span>.clear()<br>        &#125;<br>        <span class="hljs-built_in">this</span>.q.push(v)<br>        <span class="hljs-keyword">return</span> len<br>    &#125;<br>&#125;<br><br><br><br>遍历将元素放入栈，找 相同元素个数&gt;=<span class="hljs-number">3</span> 即可<br><span class="hljs-keyword">var</span> largeGroupPositions = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">s</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> i = -<span class="hljs-number">1</span>, q = <span class="hljs-keyword">new</span> Stack, r = []<br>    <span class="hljs-keyword">while</span> (++i &lt;= s.length) &#123;<br>        <span class="hljs-keyword">const</span> n = q.push(s[i])<br>        <span class="hljs-keyword">if</span> (n &gt; <span class="hljs-number">2</span>) r.push([i - n, i - <span class="hljs-number">1</span>])<br>    &#125;<br>    <span class="hljs-keyword">return</span> r<br>&#125;;<br><br><br>作者：mantoufan<br>链接：https:<span class="hljs-comment">//leetcode-cn.com/problems/positions-of-large-groups/solution/zheng-ze-wei-zhan-3jie-fa-chao-100-by-ma-r0vy/</span><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。<br></code></pre></td></tr></table></figure>
+
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%8A%9B%E6%89%A3/">力扣</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%A0%88/">栈</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%AD%A3%E5%88%99/">正则</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E4%BD%8D/">位</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/01/21/%E5%8A%9B%E6%89%A3628-%E4%B8%89%E4%B8%AA%E6%95%B0%E7%9A%84%E6%9C%80%E5%A4%A7%E4%B9%98%E7%A7%AF/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">力扣628 三个数的最大乘积</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/01/04/%E5%8A%9B%E6%89%A3509-%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0/">
+                        <span class="hidden-mobile">力扣509 斐波那契数</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <div>@2020-2021  Zeij</div> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

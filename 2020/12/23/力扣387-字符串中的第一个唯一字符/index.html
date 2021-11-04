@@ -1,0 +1,494 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.ico">
+  <link rel="icon" href="/img/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <meta name="description" content="题目给定一个字符串，找到它的第一个不重复的字符，并返回它的索引。如果不存在，则返回 -1。   示例：s &#x3D; “leetcode”返回 0 s &#x3D; “loveleetcode”返回 2 来源：力扣（LeetCode）链接：https:&#x2F;&#x2F;leetcode-cn.com&#x2F;problems&#x2F;first-unique-character-in-a-string著作权归领扣网络所有。商业转载请联系官方授权">
+<meta property="og:type" content="article">
+<meta property="og:title" content="力扣387 字符串中的第一个唯一字符">
+<meta property="og:url" content="http://example.com/2020/12/23/%E5%8A%9B%E6%89%A3387-%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%94%AF%E4%B8%80%E5%AD%97%E7%AC%A6/index.html">
+<meta property="og:site_name" content="Zeij&#39;s blog">
+<meta property="og:description" content="题目给定一个字符串，找到它的第一个不重复的字符，并返回它的索引。如果不存在，则返回 -1。   示例：s &#x3D; “leetcode”返回 0 s &#x3D; “loveleetcode”返回 2 来源：力扣（LeetCode）链接：https:&#x2F;&#x2F;leetcode-cn.com&#x2F;problems&#x2F;first-unique-character-in-a-string著作权归领扣网络所有。商业转载请联系官方授权">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s3.ax1x.com/2020/12/23/r6Tczn.png">
+<meta property="article:published_time" content="2020-12-22T16:18:30.000Z">
+<meta property="article:modified_time" content="2021-11-04T08:15:33.858Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="队列">
+<meta property="article:tag" content="哈希">
+<meta property="article:tag" content="集合">
+<meta property="article:tag" content="位运算">
+<meta property="article:tag" content="正则">
+<meta property="article:tag" content="原生">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://s3.ax1x.com/2020/12/23/r6Tczn.png">
+  
+  <title>力扣387 字符串中的第一个唯一字符 - Zeij&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Zeij</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default1.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="力扣387 字符串中的第一个唯一字符">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-12-23 00:18" pubdate>
+        2020年12月23日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      7.3k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      23 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">力扣387 字符串中的第一个唯一字符</h1>
+            
+            <div class="markdown-body">
+              <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>给定一个字符串，找到它的第一个不重复的字符，并返回它的索引。如果不存在，则返回 -1。</p>
+<p> </p>
+<p>示例：<br>s = “leetcode”<br>返回 0</p>
+<p>s = “loveleetcode”<br>返回 2</p>
+<p>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/first-unique-character-in-a-string">https://leetcode-cn.com/problems/first-unique-character-in-a-string</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>一开始用字符串删改后indexOf判断后面还有没有后面发现还要直接把此类元素全都删除了比较麻烦，就用了对象，同时写了一个通过value找key的函数即可</p>
+<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><h3 id="本人题解"><a href="#本人题解" class="headerlink" title="本人题解"></a>本人题解</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param <span class="hljs-type">&#123;string&#125;</span> <span class="hljs-variable">s</span></span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return <span class="hljs-type">&#123;number&#125;</span></span></span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">var</span> firstUniqChar = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">s</span>)</span>&#123;<br>    <span class="hljs-keyword">let</span> a=&#123;&#125;;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> i=<span class="hljs-number">0</span>;i&lt;s.length;i++)&#123;<br>        <span class="hljs-keyword">if</span>(a[s[i]])&#123;<br>            a[s[i]]++;<br>        &#125;<br>        <span class="hljs-keyword">else</span>&#123;<br>            a[s[i]]=<span class="hljs-number">1</span>;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> s.indexOf(findKey(a,<span class="hljs-number">1</span>));<br>&#125;;<br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">findKey</span>(<span class="hljs-params">obj, value, compare = (a, b) =&gt; a === b</span>) </span>&#123;<br>  <span class="hljs-keyword">return</span> <span class="hljs-built_in">Object</span>.keys(obj).find(<span class="hljs-function"><span class="hljs-params">k</span> =&gt;</span> compare(obj[k], value))<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="他人题解"><a href="#他人题解" class="headerlink" title="他人题解"></a>他人题解</h3><h4 id="一-哈希表"><a href="#一-哈希表" class="headerlink" title="一 哈希表"></a>一 哈希表</h4><p>解题思路<br>遍历字符串，哈希表统计字符出现次数。再遍历字符串，找出现次数为1的字符</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-built_in">Array</span>：Uint16值[<span class="hljs-number">0</span>, <span class="hljs-number">65535</span>]过测试用例足够，实际应大一些，下同<br><br><br><span class="hljs-keyword">var</span> firstUniqChar = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">s</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> h = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Uint16Array</span>(<span class="hljs-number">26</span>), i = s.length<br>    <span class="hljs-keyword">while</span> (i--) h[s.charCodeAt(i) - <span class="hljs-number">97</span>]++<br>    i = -<span class="hljs-number">1</span><br>    <span class="hljs-keyword">while</span> (++i &lt; s.length) <br>        <span class="hljs-keyword">if</span> (h[s.charCodeAt(i) - <span class="hljs-number">97</span>] === <span class="hljs-number">1</span>)<br>            <span class="hljs-keyword">return</span> i<br>    <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span><br>&#125;;<br><br><br><br><br><span class="hljs-built_in">Object</span><br><span class="hljs-keyword">var</span> firstUniqChar = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">s</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> h = <span class="hljs-built_in">Object</span>.create(<span class="hljs-literal">null</span>), i = s.length<br>    <span class="hljs-keyword">while</span> (i--) h[s[i]] ? h[s[i]]++ : h[s[i]] = <span class="hljs-number">1</span><br>    i = -<span class="hljs-number">1</span><br>    <span class="hljs-keyword">while</span> (++i &lt; s.length) <br>        <span class="hljs-keyword">if</span> (h[s[i]] === <span class="hljs-number">1</span>)<br>            <span class="hljs-keyword">return</span> i<br>    <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span><br>&#125;;<br><br><br><br><br><br><span class="hljs-built_in">Map</span><br><span class="hljs-keyword">var</span> firstUniqChar = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">s</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> h = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Map</span>, i = s.length<br>    <span class="hljs-keyword">while</span> (i--) h.set(s[i], h.has(s[i]) ? h.get(s[i]) + <span class="hljs-number">1</span> : <span class="hljs-number">1</span>)<br>    i = -<span class="hljs-number">1</span><br>    <span class="hljs-keyword">while</span> (++i &lt; s.length) <br>        <span class="hljs-keyword">if</span> (h.get(s[i]) === <span class="hljs-number">1</span>)<br>            <span class="hljs-keyword">return</span> i<br>    <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span><br>&#125;;<br><br>作者：mantoufan<br>链接：https:<span class="hljs-comment">//leetcode-cn.com/problems/first-unique-character-in-a-string/solution/wei-zheng-ze-ha-xi-ji-he-dui-lie-yuan-sh-bupy/</span><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。<br></code></pre></td></tr></table></figure>
+
+<h4 id="二-哈希映射"><a href="#二-哈希映射" class="headerlink" title="二 哈希映射"></a>二 哈希映射</h4><p>解题思路<br>遍历字符串，字符首次出现值设索引。再出现值设-1。遍历哈希表，找值!=-1字符  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-built_in">Map</span>：找到clear提前终止forEach<br><span class="hljs-keyword">var</span> firstUniqChar = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">s</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> h = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Map</span>, i = -<span class="hljs-number">1</span><br>    <span class="hljs-keyword">while</span> (++i &lt; s.length) h.set(s[i], h.has(s[i]) ? -<span class="hljs-number">1</span> : i)<br>    i = -<span class="hljs-number">1</span><br>    h.forEach(<span class="hljs-function">(<span class="hljs-params">v, _, h</span>) =&gt;</span> v !== -<span class="hljs-number">1</span> &amp;&amp; (i = v, h.clear()))<br>    <span class="hljs-keyword">return</span> i<br>&#125;;<br><br><br>作者：mantoufan<br>链接：https:<span class="hljs-comment">//leetcode-cn.com/problems/first-unique-character-in-a-string/solution/wei-zheng-ze-ha-xi-ji-he-dui-lie-yuan-sh-bupy/</span><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。<br></code></pre></td></tr></table></figure>
+
+
+<h4 id="三-原生"><a href="#三-原生" class="headerlink" title="三 原生"></a>三 原生</h4><p>解题思路<br>唯一字符 首次出现索引 = 该字符最后出现索引</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> firstUniqChar = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">s</span>) </span>&#123;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; s.length; i++) <br>        <span class="hljs-keyword">if</span> (s.indexOf(s[i]) === s.lastIndexOf(s[i]))<br>            <span class="hljs-keyword">return</span> i<br>    <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span><br>&#125;;<br><br>作者：mantoufan<br>链接：https:<span class="hljs-comment">//leetcode-cn.com/problems/first-unique-character-in-a-string/solution/wei-zheng-ze-ha-xi-ji-he-dui-lie-yuan-sh-bupy/</span><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。<br></code></pre></td></tr></table></figure>
+
+
+<h4 id="四-原生-·-集合"><a href="#四-原生-·-集合" class="headerlink" title="四 原生 · 集合"></a>四 原生 · 集合</h4><p>解题思路<br>重复字符 首次出现索引 != 该字符最后出现索引<br>重复字符 首次出现索引以后，仍可以找到该字符<br>以上都只关心首次出现索引，用集合Set记录出现过字符。字符再出现，跳过</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs javascript">astIndexOf：思路<span class="hljs-number">1</span><br><br><br><span class="hljs-keyword">var</span> firstUniqChar = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">s</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> r = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Set</span>, i = -<span class="hljs-number">1</span><br>    <span class="hljs-keyword">while</span>(++i &lt; s.length)<br>        <span class="hljs-keyword">if</span> (r.has(s[i]) === <span class="hljs-literal">false</span>)<br>            <span class="hljs-keyword">if</span> (i === s.lastIndexOf(s[i])) <span class="hljs-keyword">return</span> i<br>            <span class="hljs-keyword">else</span> r.add(s[i])<br>    <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span><br>&#125;;<br><br>indexOf：思路<span class="hljs-number">2</span>，第二参数，代表从该位置及该位置以后查找<br><span class="hljs-keyword">var</span> firstUniqChar = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">s</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> r = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Set</span>, i = -<span class="hljs-number">1</span><br>    <span class="hljs-keyword">while</span>(++i &lt; s.length)<br>        <span class="hljs-keyword">if</span> (r.has(s[i]) === <span class="hljs-literal">false</span>)<br>            <span class="hljs-keyword">if</span> (s.indexOf(s[i], i + <span class="hljs-number">1</span>) === -<span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> i<br>            <span class="hljs-keyword">else</span> r.add(s[i])<br>    <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span><br>&#125;;<br><br>includes：思路<span class="hljs-number">2</span>，第二参数，代表从该位置及该位置以后查找<br><span class="hljs-keyword">var</span> firstUniqChar = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">s</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> r = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Set</span>, i = -<span class="hljs-number">1</span><br>    <span class="hljs-keyword">while</span>(++i &lt; s.length)<br>        <span class="hljs-keyword">if</span> (r.has(s[i]) === <span class="hljs-literal">false</span>)<br>            <span class="hljs-keyword">if</span> (s.includes(s[i], i + <span class="hljs-number">1</span>) === <span class="hljs-literal">false</span>) <span class="hljs-keyword">return</span> i<br>            <span class="hljs-keyword">else</span> r.add(s[i])<br>    <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span><br>&#125;;<br><br>作者：mantoufan<br>链接：https:<span class="hljs-comment">//leetcode-cn.com/problems/first-unique-character-in-a-string/solution/wei-zheng-ze-ha-xi-ji-he-dui-lie-yuan-sh-bupy/</span><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。<br></code></pre></td></tr></table></figure>
+<h4 id="五-原生-·-位"><a href="#五-原生-·-位" class="headerlink" title="五 原生 · 位"></a>五 原生 · 位</h4><p>解题思路<br>小写字母unicode编码 - 97对应[0, 25]，再对应二进制中的位。1字母存在，0不存在<br>bit = 1即a存在bit = 101即c和a存在。从右到左，第0到25位，对应a到z<br><a target="_blank" rel="noopener" href="https://imgchr.com/i/r6Tczn"><img src="https://s3.ax1x.com/2020/12/23/r6Tczn.png" srcset="/img/loading.gif" lazyload alt="r6Tczn.png"></a></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs javascript">lastIndexOf<br><span class="hljs-keyword">var</span> firstUniqChar = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">s</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> r = <span class="hljs-keyword">new</span> Bit, i = -<span class="hljs-number">1</span><br>    <span class="hljs-keyword">while</span>(++i &lt; s.length) &#123;<br>        <span class="hljs-keyword">let</span> j = s.charCodeAt(i) - <span class="hljs-number">97</span><br>        <span class="hljs-keyword">if</span> (r.has(j) === <span class="hljs-number">0</span>)<br>            <span class="hljs-keyword">if</span> (i === s.lastIndexOf(s[i])) <span class="hljs-keyword">return</span> i<br>            <span class="hljs-keyword">else</span> r.add(j)<br>    &#125;<br>    <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span><br>&#125;;<br><br>indexOf<br><span class="hljs-keyword">var</span> firstUniqChar = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">s</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> r = <span class="hljs-keyword">new</span> Bit, i = -<span class="hljs-number">1</span><br>    <span class="hljs-keyword">while</span>(++i &lt; s.length) &#123;<br>        <span class="hljs-keyword">let</span> j = s.charCodeAt(i) - <span class="hljs-number">97</span><br>        <span class="hljs-keyword">if</span> (r.has(j) === <span class="hljs-number">0</span>)<br>            <span class="hljs-keyword">if</span> (s.indexOf(s[i], i + <span class="hljs-number">1</span>) === -<span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> i<br>            <span class="hljs-keyword">else</span> r.add(j)<br>    &#125;<br>    <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span><br>&#125;;<br><br><br>includes<br><span class="hljs-keyword">var</span> firstUniqChar = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">s</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> r = <span class="hljs-keyword">new</span> Bit, i = -<span class="hljs-number">1</span><br>    <span class="hljs-keyword">while</span>(++i &lt; s.length) &#123;<br>        <span class="hljs-keyword">let</span> j = s.charCodeAt(i) - <span class="hljs-number">97</span><br>        <span class="hljs-keyword">if</span> (r.has(j) === <span class="hljs-number">0</span>)<br>            <span class="hljs-keyword">if</span> (s.includes(s[i], i + <span class="hljs-number">1</span>) === <span class="hljs-literal">false</span>) <span class="hljs-keyword">return</span> i<br>            <span class="hljs-keyword">else</span> r.add(j)<br>    &#125;<br>    <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span><br>&#125;;<br><br>作者：mantoufan<br>链接：https:<span class="hljs-comment">//leetcode-cn.com/problems/first-unique-character-in-a-string/solution/wei-zheng-ze-ha-xi-ji-he-dui-lie-yuan-sh-bupy/</span><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。<br></code></pre></td></tr></table></figure>
+
+<h4 id="六-正则"><a href="#六-正则" class="headerlink" title="六 正则"></a>六 正则</h4><p>解题思路<br>search返回与indexOf一致。不能传参指定起始查找位置，但支持正则<br>match返回null或对象。不能传参指定起始查找位置，但支持正则<br>用正则的大括号语法，/\w{1,}a/中{1,}指定(1, end]查找a。改写上面原生解法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><code class="hljs javascript">search（超时）<br><span class="hljs-keyword">var</span> firstUniqChar = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">s</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> r = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Set</span>, i = -<span class="hljs-number">1</span><br>    <span class="hljs-keyword">while</span>(++i &lt; s.length)<br>        <span class="hljs-keyword">if</span> (r.has(s[i]) === <span class="hljs-literal">false</span>) <br>            <span class="hljs-keyword">if</span> (s.search(<span class="hljs-keyword">new</span> <span class="hljs-built_in">RegExp</span>(<span class="hljs-string">`\\w&#123;<span class="hljs-subst">$&#123;i + <span class="hljs-number">1</span>&#125;</span>,&#125;<span class="hljs-subst">$&#123;s[i]&#125;</span>`</span>)) === -<span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> i<br>            <span class="hljs-keyword">else</span> r.add(s[i])<br>    <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span><br>&#125;;<br><br><br><br>match（超时）<br><span class="hljs-keyword">var</span> firstUniqChar = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">s</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> r = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Set</span>, i = -<span class="hljs-number">1</span><br>    <span class="hljs-keyword">while</span>(++i &lt; s.length)<br>        <span class="hljs-keyword">if</span> (r.has(s[i]) === <span class="hljs-literal">false</span>) <br>            <span class="hljs-keyword">if</span> (s.match(<span class="hljs-keyword">new</span> <span class="hljs-built_in">RegExp</span>(<span class="hljs-string">`\\w&#123;<span class="hljs-subst">$&#123;i + <span class="hljs-number">1</span>&#125;</span>,&#125;<span class="hljs-subst">$&#123;s[i]&#125;</span>`</span>)) === <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span> i<br>            <span class="hljs-keyword">else</span> r.add(s[i])<br>    <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span><br>&#125;;<br><br><br><br>replace：遇到重复字符，只保留一个，后面都用占位符代替。这样不需要集合存重复字符<br><span class="hljs-keyword">var</span> firstUniqChar = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">s</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> i = -<span class="hljs-number">1</span><br>    <span class="hljs-keyword">while</span>(++i &lt; s.length) &#123;<br>        <span class="hljs-keyword">if</span>(s[i] !== <span class="hljs-string">&#x27;0&#x27;</span>)<br>            <span class="hljs-keyword">if</span> (s.indexOf(s[i], i + <span class="hljs-number">1</span>) === -<span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> i<br>            <span class="hljs-keyword">else</span> s = s.replace(<span class="hljs-keyword">new</span> <span class="hljs-built_in">RegExp</span>(s[i], <span class="hljs-string">&#x27;g&#x27;</span>), <span class="hljs-function">(<span class="hljs-params">v, j</span>) =&gt;</span> j &gt; i ? <span class="hljs-string">&#x27;0&#x27;</span> : v) <span class="hljs-comment">// 仅保留当前位</span><br>    &#125;<br>    <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span><br>&#125;;<br><br><br><br>sort：排序后，重复字符相连，/(\w)\<span class="hljs-number">1</span>+/匹配连续重复字符，全部删除，只剩下唯一字符<br><span class="hljs-keyword">var</span> firstUniqChar = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">s</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> _s = s.split(<span class="hljs-string">&#x27;&#x27;</span>).sort().join(<span class="hljs-string">&#x27;&#x27;</span>).replace(<span class="hljs-regexp">/(\w)\1+/g</span>, <span class="hljs-string">&#x27;&#x27;</span>), i = -<span class="hljs-number">1</span>, min = <span class="hljs-literal">Infinity</span><br>    <span class="hljs-keyword">while</span>(++i &lt; _s.length) min = <span class="hljs-built_in">Math</span>.min(min, s.indexOf(_s[i])) <span class="hljs-comment">// 找唯一字符中最前的</span><br>    <span class="hljs-keyword">return</span> _s.length ? min : -<span class="hljs-number">1</span><br>&#125;;<br><br>作者：mantoufan<br>链接：https:<span class="hljs-comment">//leetcode-cn.com/problems/first-unique-character-in-a-string/solution/wei-zheng-ze-ha-xi-ji-he-dui-lie-yuan-sh-bupy/</span><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。<br></code></pre></td></tr></table></figure>
+
+<h4 id="七-原生-·-贪心"><a href="#七-原生-·-贪心" class="headerlink" title="七 原生 · 贪心"></a>七 原生 · 贪心</h4><p>解题思路<br>遍历26个字母，找出所有唯一字符：即 首次出现索引 = 最后出现索引 的字符<br>贪心策略：找唯一字符最前的，即 索引最小的</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> firstUniqChar = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">s</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> i = <span class="hljs-number">96</span>, min = <span class="hljs-literal">Infinity</span><br>    <span class="hljs-keyword">while</span> (++i &lt; <span class="hljs-number">97</span> + <span class="hljs-number">26</span>) &#123;<span class="hljs-comment">// 常量运算自动编译结果，运行时已是++i &lt; 123，即 常量折叠</span><br>        <span class="hljs-keyword">let</span> a = <span class="hljs-built_in">String</span>.fromCharCode(i), j = s.indexOf(a)<br>        <span class="hljs-keyword">if</span> (j &gt; -<span class="hljs-number">1</span> &amp;&amp; j === s.lastIndexOf(a) &amp;&amp; j &lt; min) min = j<br>    &#125;<br>    <span class="hljs-keyword">return</span> min === <span class="hljs-literal">Infinity</span> ? -<span class="hljs-number">1</span> : min<br>&#125;;<br><br>作者：mantoufan<br>链接：https:<span class="hljs-comment">//leetcode-cn.com/problems/first-unique-character-in-a-string/solution/wei-zheng-ze-ha-xi-ji-he-dui-lie-yuan-sh-bupy/</span><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。<br></code></pre></td></tr></table></figure>
+
+<h4 id="八-懒队列"><a href="#八-懒队列" class="headerlink" title="八 懒队列"></a>八 懒队列</h4><p>解题思路<br>来自力扣官方思路。这里用数组实现一个懒队列<br>可以通过回调函数指定条件，不断弹出符合条件的第0项。直到第0项不符合条件<br>遍历字符<br>未出现：放入懒队列<br>出现过：清理懒队列<br>结果只关心第0项。所以懒清理，只要清理到第0项不是重复的就收工<br>是不是重复，判断结果通过回调函数传入懒队列的clear，重复返回true</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-built_in">Array</span><br><span class="hljs-keyword">var</span> firstUniqChar = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">s</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> q = <span class="hljs-keyword">new</span> LazyQueen, h = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Uint16Array</span>(<span class="hljs-number">26</span>), i = -<span class="hljs-number">1</span><br>    <span class="hljs-keyword">while</span>(++i &lt; s.length) <br>        h[s.charCodeAt(i) - <span class="hljs-number">97</span>]++ ? q.clear(<span class="hljs-function"><span class="hljs-params">first</span> =&gt;</span> h[first] &gt; <span class="hljs-number">1</span>)<br>                                  : q.add(s.charCodeAt(i) - <span class="hljs-number">97</span>, i)<br>    <span class="hljs-keyword">return</span> q.length() ? q.second() : -<span class="hljs-number">1</span><br>&#125;;<br><br><br><br><br><span class="hljs-built_in">Set</span>：用另一个<span class="hljs-built_in">Set</span>记录已出现过的字符<br><span class="hljs-keyword">var</span> firstUniqChar = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">s</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> q = <span class="hljs-keyword">new</span> LazyQueen, h = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Set</span>, r = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Set</span>, i = -<span class="hljs-number">1</span><br>    <span class="hljs-keyword">while</span>(++i &lt; s.length) <br>        <span class="hljs-keyword">if</span> (h.has(s[i])) &#123;<br>            r.add(s[i])<br>            q.clear(<span class="hljs-function"><span class="hljs-params">first</span> =&gt;</span> r.has(first))<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            h.add(s[i])<br>            q.add(s[i], i)<br>        &#125;<br>    <span class="hljs-keyword">return</span> q.length() ? q.second() : -<span class="hljs-number">1</span><br>&#125;;<br><br><br><br><br>位：用上面实现过的Bit类<br><span class="hljs-keyword">var</span> firstUniqChar = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">s</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> q = <span class="hljs-keyword">new</span> LazyQueen, h = <span class="hljs-keyword">new</span> Bit, r = <span class="hljs-keyword">new</span> Bit, i = -<span class="hljs-number">1</span><br>    <span class="hljs-keyword">while</span>(++i &lt; s.length) &#123;<br>        <span class="hljs-keyword">let</span> j = s.charCodeAt(i) - <span class="hljs-number">97</span><br>        <span class="hljs-keyword">if</span> (h.has(j)) &#123;<br>            r.add(j)<br>            q.clear(<span class="hljs-function"><span class="hljs-params">first</span> =&gt;</span> r.has(first))<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            h.add(j)<br>            q.add(j, i)<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> q.length() ? q.second() : -<span class="hljs-number">1</span><br>&#125;;<br><br><br>作者：mantoufan<br>链接：https:<span class="hljs-comment">//leetcode-cn.com/problems/first-unique-character-in-a-string/solution/wei-zheng-ze-ha-xi-ji-he-dui-lie-yuan-sh-bupy/</span><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。<br></code></pre></td></tr></table></figure>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%8A%9B%E6%89%A3/">力扣</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E9%98%9F%E5%88%97/">队列</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%93%88%E5%B8%8C/">哈希</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E9%9B%86%E5%90%88/">集合</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/">位运算</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%AD%A3%E5%88%99/">正则</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%8E%9F%E7%94%9F/">原生</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/12/24/%E5%8A%9B%E6%89%A3135-%E5%88%86%E5%8F%91%E7%B3%96%E6%9E%9C/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">力扣135 分发糖果</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/12/22/%E5%8A%9B%E6%89%A3103-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%94%AF%E9%BD%BF%E5%BD%A2%E5%B1%82%E5%BA%8F%E9%81%8D%E5%8E%86/">
+                        <span class="hidden-mobile">力扣103 二叉树的锯齿形层序遍历</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <div>@2020-2021  Zeij</div> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

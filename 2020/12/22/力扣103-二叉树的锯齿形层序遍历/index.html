@@ -1,0 +1,492 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.ico">
+  <link rel="icon" href="/img/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <meta name="description" content="题目给定一个二叉树，返回其节点值的锯齿形层序遍历。（即先从左往右，再从右往左进行下一层遍历，以此类推，层与层之间交替进行）。 例如：给定二叉树 [3,9,20,null,null,15,7],   12345  3 &#x2F; \9  20  &#x2F;  \ 15   7 返回锯齿形层序遍历如下：   [  [3],  [20,9],  [15,7]] 来源：力扣（LeetCode）链接：https:&#x2F;&#x2F;lee">
+<meta property="og:type" content="article">
+<meta property="og:title" content="力扣103 二叉树的锯齿形层序遍历">
+<meta property="og:url" content="http://example.com/2020/12/22/%E5%8A%9B%E6%89%A3103-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%94%AF%E9%BD%BF%E5%BD%A2%E5%B1%82%E5%BA%8F%E9%81%8D%E5%8E%86/index.html">
+<meta property="og:site_name" content="Zeij&#39;s blog">
+<meta property="og:description" content="题目给定一个二叉树，返回其节点值的锯齿形层序遍历。（即先从左往右，再从右往左进行下一层遍历，以此类推，层与层之间交替进行）。 例如：给定二叉树 [3,9,20,null,null,15,7],   12345  3 &#x2F; \9  20  &#x2F;  \ 15   7 返回锯齿形层序遍历如下：   [  [3],  [20,9],  [15,7]] 来源：力扣（LeetCode）链接：https:&#x2F;&#x2F;lee">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-12-22T03:29:26.000Z">
+<meta property="article:modified_time" content="2021-11-04T08:14:45.140Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="深度优先搜索">
+<meta property="article:tag" content="广度优先搜索">
+<meta property="article:tag" content="递归">
+<meta property="article:tag" content="迭代">
+<meta property="article:tag" content="前序">
+<meta property="article:tag" content="中序">
+<meta property="article:tag" content="后序">
+<meta name="twitter:card" content="summary_large_image">
+  
+  <title>力扣103 二叉树的锯齿形层序遍历 - Zeij&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Zeij</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default1.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="力扣103 二叉树的锯齿形层序遍历">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-12-22 11:29" pubdate>
+        2020年12月22日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      7k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      22 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">力扣103 二叉树的锯齿形层序遍历</h1>
+            
+            <div class="markdown-body">
+              <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>给定一个二叉树，返回其节点值的锯齿形层序遍历。（即先从左往右，再从右往左进行下一层遍历，以此类推，层与层之间交替进行）。</p>
+<p>例如：<br>给定二叉树 [3,9,20,null,null,15,7],  </p>
+<figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs livescript">  <span class="hljs-number">3</span><br> / <span class="hljs-string">\</span><br><span class="hljs-number">9</span>  <span class="hljs-number">20</span><br>  /  <span class="hljs-string">\</span><br> <span class="hljs-number">15</span>   <span class="hljs-number">7</span><br></code></pre></td></tr></table></figure>
+<p>返回锯齿形层序遍历如下：  </p>
+<p>[<br>  [3],<br>  [20,9],<br>  [15,7]<br>]</p>
+<p>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee">https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 </p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><h3 id="本人题解"><a href="#本人题解" class="headerlink" title="本人题解"></a>本人题解</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><br></code></pre></td></tr></table></figure>
+
+
+<h3 id="他人题解"><a href="#他人题解" class="headerlink" title="他人题解"></a>他人题解</h3><h4 id="一-广度优先搜索"><a href="#一-广度优先搜索" class="headerlink" title="一 广度优先搜索"></a>一 广度优先搜索</h4><p>解题思路<br>广度优先遍历二叉树，结果集长度的奇偶性判断放置顺序<br>缓存长度：l = 队列长度。提示所有代码f函数删除后即通用模版，适用遍历取值和层级<br>代码</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><code class="hljs javascript">缓存长度：l = 队列长度：<br><span class="hljs-keyword">var</span> zigzagLevelOrder = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">root</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> q = root ? [root] : [], r = []<br>    <span class="hljs-keyword">while</span> (q.length) &#123;<br>        <span class="hljs-keyword">let</span> l = q.length<br>        r.push([])<br>        <span class="hljs-keyword">while</span>(l--) &#123;<br>            <span class="hljs-keyword">let</span> n = q.shift()<br>            f(r, n.val)<br>            n.left &amp;&amp; q.push(n.left)<br>            n.right &amp;&amp; q.push(n.right)<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> r<br>&#125;;<br>f = <span class="hljs-function">(<span class="hljs-params">r, v</span>) =&gt;</span> r.length &amp; <span class="hljs-number">1</span> ? r[r.length - <span class="hljs-number">1</span>].push(v) : r[r.length - <span class="hljs-number">1</span>].unshift(v)<br><br>指针：i++代替shift，j++代替push，l--代替unshift<br><br><br><span class="hljs-keyword">var</span> zigzagLevelOrder = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">root</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> q = root ? [root] : [], r = [], i = <span class="hljs-number">0</span>, l<br>    <span class="hljs-keyword">while</span> (l = q.length - i) &#123;<br>        <span class="hljs-keyword">let</span> j = <span class="hljs-number">0</span><br>        r.push(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Int8Array</span>(l))<br>        <span class="hljs-keyword">while</span>(l--) &#123;<br>            <span class="hljs-keyword">let</span> n = q[i++]<br>            r.length &amp; <span class="hljs-number">1</span> ? r[r.length - <span class="hljs-number">1</span>][j++] = n.val <br>                         : r[r.length - <span class="hljs-number">1</span>][l] = n.val<br>            n.left &amp;&amp; q.push(n.left)<br>            n.right &amp;&amp; q.push(n.right)<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> r<br>&#125;;<br><br><br>分层标记：<span class="hljs-literal">undefined</span>作分层标记<br><br><br><span class="hljs-keyword">var</span> zigzagLevelOrder = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">root</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> q = root ? [root, <span class="hljs-keyword">void</span> <span class="hljs-number">0</span>] : [], r = []<br>    <span class="hljs-keyword">while</span> (q.length &gt; <span class="hljs-number">1</span>) &#123;<br>        r.push([])<br>        <span class="hljs-keyword">while</span>(n = q.shift()) &#123;<br>            f(r, n.val)<br>            n.left &amp;&amp; q.push(n.left)<br>            n.right &amp;&amp; q.push(n.right)<br>        &#125;<br>        q.push(<span class="hljs-keyword">void</span> <span class="hljs-number">0</span>)<br>    &#125;<br>    <span class="hljs-keyword">return</span> r<br>&#125;;<br>f = <span class="hljs-function">(<span class="hljs-params">r, v</span>) =&gt;</span> r.length &amp; <span class="hljs-number">1</span> ? r[r.length - <span class="hljs-number">1</span>].push(v) : r[r.length - <span class="hljs-number">1</span>].unshift(v)<br><br>作者：mantoufan<br>链接：https:<span class="hljs-comment">//leetcode-cn.com/problems/binary-tree-zigzag-level-order-traversal/solution/shen-du-yan-du-di-gui-die-dai-qian-zhong-nucl/</span><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。<br></code></pre></td></tr></table></figure>
+<h5 id="1-2-递归-·-伪"><a href="#1-2-递归-·-伪" class="headerlink" title="1.2 递归 · 伪"></a>1.2 递归 · 伪</h5><p>解题思路<br>递归用堆栈，不借助队列实现不限制类型的二叉树的广度优先搜索几近不可能</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs javascript">深度优先前序遍历放入数组 + 广度优先取出。无意义，测试排除本解法<br><br><br><span class="hljs-keyword">var</span> zigzagLevelOrder = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">root</span>) </span>&#123;<br>    <span class="hljs-keyword">const</span> r = [], q = []<br>    d = <span class="hljs-function">(<span class="hljs-params">n, l</span>) =&gt;</span> n &amp;&amp; (q[l] ? q[l].push(n)<br>                             : q[l] = [n],<br>                        d(n.left, l + <span class="hljs-number">1</span>),<br>                        d(n.right, l + <span class="hljs-number">1</span>))<br>    d(root, <span class="hljs-number">0</span>)<br>    <span class="hljs-keyword">return</span> q.map(<span class="hljs-function">(<span class="hljs-params">ns, i</span>) =&gt;</span> (i &amp; <span class="hljs-number">1</span> ? ns.reverse() : ns).map(<span class="hljs-function"><span class="hljs-params">n</span> =&gt;</span> n.val))<br>&#125;;<br>结果<br><br>作者：mantoufan<br>链接：https:<span class="hljs-comment">//leetcode-cn.com/problems/binary-tree-zigzag-level-order-traversal/solution/shen-du-yan-du-di-gui-die-dai-qian-zhong-nucl/</span><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。<br></code></pre></td></tr></table></figure>
+
+<h4 id="二-深度优先搜索"><a href="#二-深度优先搜索" class="headerlink" title="二 深度优先搜索"></a>二 深度优先搜索</h4><h5 id="2-1-递归"><a href="#2-1-递归" class="headerlink" title="2.1 递归"></a>2.1 递归</h5><p>解题思路<br>每次递归层次+1。根据层次的奇偶性判断放置顺序  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><code class="hljs javascript">前序遍历<br><br><br><span class="hljs-keyword">var</span> zigzagLevelOrder = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">root</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> q = root ? [[root, <span class="hljs-number">0</span>]] : [], r = []<br>    <span class="hljs-keyword">while</span> (q.length) &#123;<br>        <span class="hljs-keyword">let</span> [n, l] = q.shift()<br>        f(r, l, n.val)<br>        n.left &amp;&amp; q.push([n.left, l + <span class="hljs-number">1</span>])<br>        n.right &amp;&amp; q.push([n.right, l + <span class="hljs-number">1</span>])<br>    &#125;<br>    <span class="hljs-keyword">return</span> r<br>&#125;;<br>f = <span class="hljs-function">(<span class="hljs-params">r, l, v</span>) =&gt;</span> (r[l] || (r[l] = []), l &amp; <span class="hljs-number">1</span> ? r[l].unshift(v) : r[l].push(v))<br><br><br>前序遍历 · 浅拷贝：这样写成<span class="hljs-number">1</span>行更短<br><br><br>vvar zigzagLevelOrder = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">root</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> r = []<br>    d = <span class="hljs-function">(<span class="hljs-params">n, l</span>) =&gt;</span> n &amp;&amp; (r[l] = l &amp; <span class="hljs-number">1</span> ? [n.val].concat(r[l] || []) <br>                                     : (r[l] || []).concat(n.val),<br>                        d(n.left, l + <span class="hljs-number">1</span>),<br>                        d(n.right, l + <span class="hljs-number">1</span>))<br>    d(root, <span class="hljs-number">0</span>)<br>    <span class="hljs-keyword">return</span> r<br>&#125;;<br><span class="hljs-comment">// 1行代码</span><br><span class="hljs-keyword">var</span> zigzagLevelOrder = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">root, r = []</span>) </span>&#123;<br>    <span class="hljs-keyword">return</span> (d = <span class="hljs-function">(<span class="hljs-params">n, l</span>) =&gt;</span> n &amp;&amp; (r[l] = l &amp; <span class="hljs-number">1</span> ? [n.val].concat(r[l] || []) : (r[l] || []).concat(n.val), d(n.left, l + <span class="hljs-number">1</span>), d(n.right, l + <span class="hljs-number">1</span>)))(root, <span class="hljs-number">0</span>), r<br>&#125;;<br><br>中序遍历：<br><span class="hljs-keyword">var</span> zigzagLevelOrder = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">root</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> r = []<br>    d = <span class="hljs-function">(<span class="hljs-params">n, l</span>) =&gt;</span> n &amp;&amp; (d(n.left, l + <span class="hljs-number">1</span>),<br>                        f(r, l, n.val),<br>                        d(n.right, l + <span class="hljs-number">1</span>))<br>    d(root, <span class="hljs-number">0</span>)<br>    <span class="hljs-keyword">return</span> r<br>&#125;;<br>f = <span class="hljs-function">(<span class="hljs-params">r, l, v</span>) =&gt;</span> (r[l] || (r[l] = []), l &amp; <span class="hljs-number">1</span> ? r[l].unshift(v) : r[l].push(v))<br><br><br><br>后序遍历：<br><span class="hljs-keyword">var</span> zigzagLevelOrder = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">root</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> r = []<br>    d = <span class="hljs-function">(<span class="hljs-params">n, l</span>) =&gt;</span> n &amp;&amp; (d(n.left, l + <span class="hljs-number">1</span>),<br>                        d(n.right, l + <span class="hljs-number">1</span>),<br>                        f(r, l, n.val))<br>    d(root, <span class="hljs-number">0</span>)<br>    <span class="hljs-keyword">return</span> r<br>&#125;;<br>f = <span class="hljs-function">(<span class="hljs-params">r, l, v</span>) =&gt;</span> (r[l] || (r[l] = []), l &amp; <span class="hljs-number">1</span> ? r[l].unshift(v) : r[l].push(v))<br><br>作者：mantoufan<br>链接：https:<span class="hljs-comment">//leetcode-cn.com/problems/binary-tree-zigzag-level-order-traversal/solution/shen-du-yan-du-di-gui-die-dai-qian-zhong-nucl/</span><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。<br></code></pre></td></tr></table></figure>
+
+
+<h5 id="2-2-迭代-·-栈"><a href="#2-2-迭代-·-栈" class="headerlink" title="2.2 迭代 · 栈"></a>2.2 迭代 · 栈</h5><p>解题思路<br>队列中记录节点及节点所在层次。根据层次的奇偶性判断放置顺序</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><code class="hljs javascript">前序遍历：<br><span class="hljs-keyword">var</span> zigzagLevelOrder = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">root</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> q = root ? [[root, <span class="hljs-number">0</span>]] : [], r = []<br>    <span class="hljs-keyword">while</span> (q.length) &#123;<br>        <span class="hljs-keyword">let</span> [n, l] = q.shift()<br>        f(r, l, n.val)<br>        n.left &amp;&amp; q.push([n.left, l + <span class="hljs-number">1</span>])<br>        n.right &amp;&amp; q.push([n.right, l + <span class="hljs-number">1</span>])<br>    &#125;<br>    <span class="hljs-keyword">return</span> r<br>&#125;;<br>f = <span class="hljs-function">(<span class="hljs-params">r, l, v</span>) =&gt;</span> (r[l] || (r[l] = []), l &amp; <span class="hljs-number">1</span> ? r[l].unshift(v) : r[l].push(v))<br><br>中序遍历：<br><span class="hljs-keyword">var</span> zigzagLevelOrder = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">root</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> q = [], r = [], l = <span class="hljs-number">0</span><br>    <span class="hljs-keyword">while</span> (root || q.length) &#123;<br>        <span class="hljs-keyword">while</span>(root) &#123;<br>            q.push([root, l++])<br>            root = root.left<br>        &#125;<br>        [root, l] = q.pop()<br>        f(r, l, root.val)<br>        root = root.right<br>        l++<br>    &#125;<br>    <span class="hljs-keyword">return</span> r<br>&#125;;<br>f = <span class="hljs-function">(<span class="hljs-params">r, l, v</span>) =&gt;</span> (r[l] || (r[l] = []), l &amp; <span class="hljs-number">1</span> ? r[l].unshift(v) : r[l].push(v))<br><br><br>后序遍历；<br><span class="hljs-keyword">var</span> zigzagLevelOrder = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">root</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> q = [], r = [], l = <span class="hljs-number">0</span>, visited = <span class="hljs-literal">null</span><br>    <span class="hljs-keyword">while</span> (root || q.length) &#123;<br>        <span class="hljs-keyword">while</span>(root) &#123;<br>            q.push([root, l++])<br>            root = root.left<br>        &#125;<br>        [root, l] = q.pop()<br>        <span class="hljs-keyword">if</span>(root.right === <span class="hljs-literal">null</span> || root.right === visited) &#123;<br>            f(r, l, root.val)<br>            visited = root<br>            root = <span class="hljs-literal">null</span><br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            q.push([root, l++])<br>            root = root.right<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> r<br>&#125;;<br>f = <span class="hljs-function">(<span class="hljs-params">r, l, v</span>) =&gt;</span> (r[l] || (r[l] = []), l &amp; <span class="hljs-number">1</span> ? r[l].unshift(v) : r[l].push(v))<br><br>作者：mantoufan<br>链接：https:<span class="hljs-comment">//leetcode-cn.com/problems/binary-tree-zigzag-level-order-traversal/solution/shen-du-yan-du-di-gui-die-dai-qian-zhong-nucl/</span><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。<br></code></pre></td></tr></table></figure>
+
+<h5 id="2-3-迭代-·-Morris"><a href="#2-3-迭代-·-Morris" class="headerlink" title="2.3 迭代 · Morris"></a>2.3 迭代 · Morris</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br></pre></td><td class="code"><pre><code class="hljs javascript">Morris · 前序遍历:<br><span class="hljs-keyword">var</span> zigzagLevelOrder = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">root</span>) </span>&#123;<br>    <span class="hljs-keyword">if</span> (!root) <span class="hljs-keyword">return</span> []<br>    <span class="hljs-keyword">const</span> r = []<br>    root.l = <span class="hljs-number">0</span><br>    <span class="hljs-keyword">while</span> (root) &#123;<br>        <span class="hljs-keyword">let</span> t = root.l<br>        <span class="hljs-keyword">if</span> (root.left) &#123;<br>            <span class="hljs-keyword">var</span> p = root.left<br>            <span class="hljs-keyword">while</span> (p.right &amp;&amp; p.right !== root) p = p.right<br>            <span class="hljs-keyword">if</span> (p.right === <span class="hljs-literal">null</span>) &#123;<br>                f(r, root.l, root.val)<br>                p.right = root<br>                root = root.left<br>            &#125;<span class="hljs-keyword">else</span> &#123;<br>                root = root.right<br>                p.right = <span class="hljs-literal">null</span><br>            &#125;<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            f(r, root.l, root.val)<br>            root = root.right<br>        &#125;<br>        <span class="hljs-keyword">if</span> (root &amp;&amp; root.l === <span class="hljs-keyword">void</span> <span class="hljs-number">0</span>) root.l = t + <span class="hljs-number">1</span><br>    &#125;<br>    <span class="hljs-keyword">return</span> r<br>&#125;;<br>f = <span class="hljs-function">(<span class="hljs-params">r, l, v</span>) =&gt;</span> (r[l] || (r[l] = []), l &amp; <span class="hljs-number">1</span> ? r[l].unshift(v) : r[l].push(v))<br><br><br><br><br>Morris · 中序遍历:<br><span class="hljs-keyword">var</span> zigzagLevelOrder = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">root</span>) </span>&#123;<br>    <span class="hljs-keyword">if</span> (!root) <span class="hljs-keyword">return</span> []<br>    <span class="hljs-keyword">const</span> r = []<br>    root.l = <span class="hljs-number">0</span><br>    <span class="hljs-keyword">while</span> (root) &#123;<br>        <span class="hljs-keyword">let</span> t = root.l<br>        <span class="hljs-keyword">if</span> (root.left) &#123;<br>            <span class="hljs-keyword">var</span> p = root.left<br>            <span class="hljs-keyword">while</span> (p.right &amp;&amp; p.right !== root) p = p.right<br>            <span class="hljs-keyword">if</span> (p.right === <span class="hljs-literal">null</span>) &#123;<br>                p.right = root<br>                root = root.left<br>            &#125;<span class="hljs-keyword">else</span> &#123;<br>                f(r, root.l, root.val)<br>                root = root.right<br>                p.right = <span class="hljs-literal">null</span><br>            &#125;<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            f(r, root.l, root.val)<br>            root = root.right<br>        &#125;<br>        <span class="hljs-keyword">if</span> (root &amp;&amp; root.l === <span class="hljs-keyword">void</span> <span class="hljs-number">0</span>) root.l = t + <span class="hljs-number">1</span><br>    &#125;<br>    <span class="hljs-keyword">return</span> r<br>&#125;;<br>f = <span class="hljs-function">(<span class="hljs-params">r, l, v</span>) =&gt;</span> (r[l] || (r[l] = []), l &amp; <span class="hljs-number">1</span> ? r[l].unshift(v) : r[l].push(v))<br><br>Morris · 后序遍历<br><br><br><span class="hljs-keyword">var</span> zigzagLevelOrder = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">root</span>) </span>&#123;<br>    <span class="hljs-keyword">if</span> (!root) <span class="hljs-keyword">return</span> []<br>    <span class="hljs-keyword">let</span> r = [], n = root<br>    root.l = <span class="hljs-number">0</span><br>    <span class="hljs-keyword">while</span> (root) &#123;<br>        <span class="hljs-keyword">let</span> t = root.l<br>        <span class="hljs-keyword">if</span> (root.left) &#123;<br>            <span class="hljs-keyword">var</span> p = root.left<br>            <span class="hljs-keyword">while</span> (p.right &amp;&amp; p.right !== root) p = p.right<br>            <span class="hljs-keyword">if</span> (p.right === <span class="hljs-literal">null</span>) &#123;<br>                p.right = root<br>                root = root.left<br>            &#125;<span class="hljs-keyword">else</span> &#123;<br>                p.right = <span class="hljs-literal">null</span><br>                f1(root.left, r)<br>                root = root.right<br>            &#125;<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            root = root.right<br>        &#125;<br>        <span class="hljs-keyword">if</span> (root &amp;&amp; root.l === <span class="hljs-keyword">void</span> <span class="hljs-number">0</span>) root.l = t + <span class="hljs-number">1</span><br>    &#125;<br>    f1(n, r)<br>    <span class="hljs-keyword">return</span> r<br>&#125;;<br>f = <span class="hljs-function">(<span class="hljs-params">r, l, v</span>) =&gt;</span> (r[l] || (r[l] = []), l &amp; <span class="hljs-number">1</span> ? r[l].unshift(v) : r[l].push(v))<br>f1 = <span class="hljs-function">(<span class="hljs-params">n, r</span>) =&gt;</span> &#123;<br>    <span class="hljs-keyword">let</span> t = f2(n), root = t<br>    <span class="hljs-keyword">while</span>(root) &#123;<br>        f(r, root.l, root.val)<br>        root = root.right<br>    &#125;<br>    f2(t)<br>&#125;<br>f2 = <span class="hljs-function"><span class="hljs-params">n</span> =&gt;</span> &#123;<br>    <span class="hljs-keyword">let</span> pre = next = <span class="hljs-literal">null</span><br>    <span class="hljs-keyword">while</span>(n) &#123;<br>        next = n.right<br>        n.right = pre<br>        pre = n<br>        n = next<br>    &#125;<br>    <span class="hljs-keyword">return</span> pre<br>&#125;<br><br><br>作者：mantoufan<br>链接：https:<span class="hljs-comment">//leetcode-cn.com/problems/binary-tree-zigzag-level-order-traversal/solution/shen-du-yan-du-di-gui-die-dai-qian-zhong-nucl/</span><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%8A%9B%E6%89%A3/">力扣</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2/">深度优先搜索</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2/">广度优先搜索</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E9%80%92%E5%BD%92/">递归</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E8%BF%AD%E4%BB%A3/">迭代</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%89%8D%E5%BA%8F/">前序</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E4%B8%AD%E5%BA%8F/">中序</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%90%8E%E5%BA%8F/">后序</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/12/23/%E5%8A%9B%E6%89%A3387-%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%94%AF%E4%B8%80%E5%AD%97%E7%AC%A6/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">力扣387 字符串中的第一个唯一字符</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/12/21/%E5%8A%9B%E6%89%A3746-%E4%BD%BF%E7%94%A8%E6%9C%80%E5%B0%8F%E8%8A%B1%E8%B4%B9%E7%88%AC%E6%A5%BC%E6%A2%AF/">
+                        <span class="hidden-mobile">力扣746 使用最小花费爬楼梯</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <div>@2020-2021  Zeij</div> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

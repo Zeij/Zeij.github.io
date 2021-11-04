@@ -1,0 +1,481 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.ico">
+  <link rel="icon" href="/img/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <meta name="description" content="题目给定一个整数数组 prices ，它的第 i 个元素 prices[i] 是一支给定的股票在第 i 天的价格。 设计一个算法来计算你所能获取的最大利润。你最多可以完成 k 笔交易。 注意：你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。   示例 1：输入：k &#x3D; 2, prices &#x3D; [2,4,1]输出：2解释：在第 1 天 (股票价格 &#x3D; 2) 的时候买入，在第 2 天 (">
+<meta property="og:type" content="article">
+<meta property="og:title" content="力扣188 买卖股票的最佳时机IV">
+<meta property="og:url" content="http://example.com/2020/12/28/%E5%8A%9B%E6%89%A3188-%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BAIV/index.html">
+<meta property="og:site_name" content="Zeij&#39;s blog">
+<meta property="og:description" content="题目给定一个整数数组 prices ，它的第 i 个元素 prices[i] 是一支给定的股票在第 i 天的价格。 设计一个算法来计算你所能获取的最大利润。你最多可以完成 k 笔交易。 注意：你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。   示例 1：输入：k &#x3D; 2, prices &#x3D; [2,4,1]输出：2解释：在第 1 天 (股票价格 &#x3D; 2) 的时候买入，在第 2 天 (">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s3.ax1x.com/2020/12/29/rbHS00.png">
+<meta property="og:image" content="https://s3.ax1x.com/2020/12/29/rbH19e.png">
+<meta property="article:published_time" content="2020-12-28T05:13:28.000Z">
+<meta property="article:modified_time" content="2021-11-04T08:14:58.260Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="递归">
+<meta property="article:tag" content="动态规划">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://s3.ax1x.com/2020/12/29/rbHS00.png">
+  
+  <title>力扣188 买卖股票的最佳时机IV - Zeij&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Zeij</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default1.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="力扣188 买卖股票的最佳时机IV">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-12-28 13:13" pubdate>
+        2020年12月28日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4.3k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      14 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">力扣188 买卖股票的最佳时机IV</h1>
+            
+            <div class="markdown-body">
+              <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>给定一个整数数组 prices ，它的第 i 个元素 prices[i] 是一支给定的股票在第 i 天的价格。</p>
+<p>设计一个算法来计算你所能获取的最大利润。你最多可以完成 k 笔交易。</p>
+<p>注意：你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。</p>
+<p> </p>
+<p>示例 1：<br>输入：k = 2, prices = [2,4,1]<br>输出：2<br>解释：在第 1 天 (股票价格 = 2) 的时候买入，在第 2 天 (股票价格 = 4) 的时候卖出，这笔交易所能获得利润 = 4-2 = 2 。</p>
+<p>示例 2：<br>输入：k = 2, prices = [3,2,6,5,0,3]<br>输出：7<br>解释：在第 2 天 (股票价格 = 2) 的时候买入，在第 3 天 (股票价格 = 6) 的时候卖出, 这笔交易所能获得利润 = 6-2 = 4 。<br>     随后，在第 5 天 (股票价格 = 0) 的时候买入，在第 6 天 (股票价格 = 3) 的时候卖出, 这笔交易所能获得利润 = 3-0 = 3 。
+ </p>
+<p>提示：</p>
+<p>0 &lt;= k &lt;= 109<br>0 &lt;= prices.length &lt;= 1000<br>0 &lt;= prices[i] &lt;= 1000</p>
+<p>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iv">https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iv</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><h3 id="本人题解"><a href="#本人题解" class="headerlink" title="本人题解"></a>本人题解</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><br></code></pre></td></tr></table></figure>
+
+
+<h3 id="他人题解"><a href="#他人题解" class="headerlink" title="他人题解"></a>他人题解</h3><h4 id="一-递归"><a href="#一-递归" class="headerlink" title="一 递归"></a>一 递归</h4><h6 id="1-1-递归（超时）"><a href="#1-1-递归（超时）" class="headerlink" title="1.1 递归（超时）"></a>1.1 递归（超时）</h6><p>解题思路<br>递归模拟过程，天数i，交易次数j，有无股票s<br>无股票：max( 观望, 买入股票，现金 -= 当日股票价格 ）<br>有股票：max( 持有，卖出股票，现金 += 当日股票价格，交易次数 += 1 )<br>边界：交易次数 = k 或 数组越界</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> maxProfit = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">k, prices</span>) </span>&#123;<br>    d = <span class="hljs-function">(<span class="hljs-params">i, j, s</span>) =&gt;</span> j === k || i === prices.length ? <span class="hljs-number">0</span> : <br>                     s === <span class="hljs-literal">true</span> ? <span class="hljs-built_in">Math</span>.max(d(i + <span class="hljs-number">1</span>, j, s), d(i + <span class="hljs-number">1</span>, j + <span class="hljs-number">1</span>, <span class="hljs-literal">false</span>) + prices[i]) :<br>                                  <span class="hljs-built_in">Math</span>.max(d(i + <span class="hljs-number">1</span>, j, s), d(i + <span class="hljs-number">1</span>, j, <span class="hljs-literal">true</span>) - prices[i])<br>    <span class="hljs-keyword">return</span> d(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-literal">false</span>)<br>&#125;;<br><br>作者：mantoufan<br>链接：https:<span class="hljs-comment">//leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iv/solution/di-gui-dong-tai-gui-hua-1xing-dai-ma-2ji-th9r/</span><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。<br></code></pre></td></tr></table></figure>
+<h5 id="1-2-递归-·-剪枝-·-缓存"><a href="#1-2-递归-·-剪枝-·-缓存" class="headerlink" title="1.2 递归 · 剪枝 · 缓存"></a>1.2 递归 · 剪枝 · 缓存</h5><p>解题思路<br>递归函数变化参数为i j s，以变化参数为键值，构建缓存函数<br>本题递归是三叉树（每次3分支），递归到底后向上回溯，遇键值相同不再递归<br>多变量组合生成唯一整数键名技巧：i j s从右向左，乘以 从1 到 前数的范围<br>s布尔值，转整型，[0, 1]，范围2，j 与 s组合，键名 = j * 2 + s * 1<br>j范围是数组长度，即1000，i 与 j 组合，键名 = i * 1000 + j<br>三变量组合,键名 = i * 1000 + j + s，生成键名 唯一且是整数，可用数组</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-built_in">Array</span>:<br><span class="hljs-keyword">var</span> maxProfit = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">k, prices</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> h = [], t<br>    d = <span class="hljs-function">(<span class="hljs-params">i, j, s</span>) =&gt;</span> j === k || i === prices.length ? <span class="hljs-number">0</span> : <br>                     h[t = i * <span class="hljs-number">1000</span> + j * <span class="hljs-number">2</span> + s] ? h[t] : h[t] = <br>                     <span class="hljs-built_in">Math</span>.max(d(i + <span class="hljs-number">1</span>, j, s), <br>                     s ? d(i + <span class="hljs-number">1</span>, j + <span class="hljs-number">1</span>, <span class="hljs-number">0</span>) + prices[i] : d(i + <span class="hljs-number">1</span>, j, <span class="hljs-number">1</span>) - prices[i])<br>    <span class="hljs-keyword">return</span> d(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>)<br>&#125;;<br><br><br><br><span class="hljs-built_in">Object</span>:<br><span class="hljs-keyword">var</span> maxProfit = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">k, prices</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> h = <span class="hljs-built_in">Object</span>.create(<span class="hljs-literal">null</span>), t<br>    d = <span class="hljs-function">(<span class="hljs-params">i, j, s</span>) =&gt;</span> j === k || i === prices.length ? <span class="hljs-number">0</span> : <br>                     h[t = i * <span class="hljs-number">1000</span> + j * <span class="hljs-number">2</span> + s] ? h[t] : h[t] = <br>                     <span class="hljs-built_in">Math</span>.max(d(i + <span class="hljs-number">1</span>, j, s), <br>                     s ? d(i + <span class="hljs-number">1</span>, j + <span class="hljs-number">1</span>, <span class="hljs-number">0</span>) + prices[i] : d(i + <span class="hljs-number">1</span>, j, <span class="hljs-number">1</span>) - prices[i])<br>    <span class="hljs-keyword">return</span> d(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>)<br>&#125;;<br><br><br><br><br><span class="hljs-built_in">Map</span>:<br><span class="hljs-keyword">var</span> maxProfit = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">k, prices</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> h = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Map</span>, t, t1<br>    d = <span class="hljs-function">(<span class="hljs-params">i, j, s</span>) =&gt;</span> j === k || i === prices.length ? <span class="hljs-number">0</span> : <br>                     h.has(t = i * <span class="hljs-number">1000</span> + j * <span class="hljs-number">2</span> + s) ? h.get(t) : (h.set(t, t1 =  <br>                     <span class="hljs-built_in">Math</span>.max(d(i + <span class="hljs-number">1</span>, j, s), <br>                     s ? d(i + <span class="hljs-number">1</span>, j + <span class="hljs-number">1</span>, <span class="hljs-number">0</span>) + prices[i] : d(i + <span class="hljs-number">1</span>, j, <span class="hljs-number">1</span>) - prices[i])), t1)<br>    <span class="hljs-keyword">return</span> d(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>)<br>&#125;;<br><br><br><br><br><br><br><br><span class="hljs-built_in">Map</span> · <span class="hljs-number">1</span>行代码：卖出时，可用交易次数k - <span class="hljs-number">1</span>代替j + <span class="hljs-number">1</span>，边界相应变为k = <span class="hljs-number">0</span><br><span class="hljs-keyword">var</span> maxProfit = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">k, prices, i = <span class="hljs-number">0</span>, s = <span class="hljs-number">0</span>, h = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Map</span>, t, t1</span>) </span>&#123; <span class="hljs-comment">// 换行可删</span><br>    <span class="hljs-keyword">return</span> k === <span class="hljs-number">0</span> || i === prices.length ? <span class="hljs-number">0</span> : <br>           h.has(t = i * <span class="hljs-number">1000</span> + k * <span class="hljs-number">2</span> + s) ? h.get(t) : (h.set(t, t1 =<br>           <span class="hljs-built_in">Math</span>.max(maxProfit(k, prices, i + <span class="hljs-number">1</span>, s, h), <br>           s ? maxProfit(k - <span class="hljs-number">1</span>, prices, i + <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, h) + prices[i] : maxProfit(k, prices, i + <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, h) - prices[i])), t1)<br>&#125;;<br><br>作者：mantoufan<br>链接：https:<span class="hljs-comment">//leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iv/solution/di-gui-dong-tai-gui-hua-1xing-dai-ma-2ji-th9r/</span><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。<br></code></pre></td></tr></table></figure>
+
+
+<h4 id="二-动态规划"><a href="#二-动态规划" class="headerlink" title="二 动态规划"></a>二 动态规划</h4><h5 id="2-1-动态规划"><a href="#2-1-动态规划" class="headerlink" title="2.1 动态规划"></a>2.1 动态规划</h5><p>解题思路<br>遍历，每天可能进行第[1, k]次中的某次交易 或 不交易<br>枚举一天的所有可能，取现金最大值<br>不交易，现金 不变<br>进行[1, k]的某次交易<br>买入，现金 -= 当天股票价格<br>卖出，现金 += 当天股票价格<br>每次交易都只有两个状态dp</p>
+<p>交易前 有股票（交易前，没股票，交易不能发生）<br>交易后 无股票（交易后，股票被卖了）<br>dp[0]表示第1次交易前，有股票<br>dp[1]表示第1次交易后，无股票<br>dp[2]表示第2次交易前，有股票<br>dp[3]表示第2次交易后，无股票<br>…<br>dp[k]表示第k / 2 取整次交易，k次交易，就有k * 2交易状态<br>　　　 k为偶，交易前，有股票<br>　　　 k为奇，交易后，无股票  </p>
+<p>dp索引与交易次数关系，推导状态转化方程<br><a target="_blank" rel="noopener" href="https://imgchr.com/i/rbHS00"><img src="https://s3.ax1x.com/2020/12/29/rbHS00.png" srcset="/img/loading.gif" lazyload alt="rbHS00.png"></a></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> maxProfit = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">k, prices</span>) </span>&#123;<br>    <span class="hljs-keyword">const</span> dp = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Int16Array</span>(k &lt;&lt; <span class="hljs-number">1</span>).fill(-prices[<span class="hljs-number">0</span>])<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; prices.length; i++) <br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> j = <span class="hljs-number">0</span>; j &lt; dp.length; j++) <br>            dp[j] = <span class="hljs-built_in">Math</span>.max(dp[j], (dp[j - <span class="hljs-number">1</span>] || <span class="hljs-number">0</span>) + (j &amp; <span class="hljs-number">1</span> ? prices[i] : -prices[i]))<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Math</span>.max(<span class="hljs-number">0</span>, ...dp) <br>&#125;;<br><br>作者：mantoufan<br>链接：https:<span class="hljs-comment">//leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iv/solution/di-gui-dong-tai-gui-hua-1xing-dai-ma-2ji-th9r/</span><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。<br></code></pre></td></tr></table></figure>
+<h5 id="2-2-动态规划-·-优化"><a href="#2-2-动态规划-·-优化" class="headerlink" title="2.2 动态规划 · 优化"></a>2.2 动态规划 · 优化</h5><p>第0天，最多完成第1次交易1个状态，第1天，最多能完成第1次交易2个状态<br>第2天，最多完成第1次交易2个状态 + 第2次交易1个状态…<br>第i天，最多完成i + 1个交易状态，根据当天天数，动态缩小枚举范围</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> maxProfit = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">k, prices</span>) </span>&#123;<br>    <span class="hljs-keyword">const</span> dp = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Int16Array</span>(k &lt;&lt; <span class="hljs-number">1</span>).fill(-prices[<span class="hljs-number">0</span>])<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; prices.length; i++) <br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> j = <span class="hljs-built_in">Math</span>.min(dp.length, i + <span class="hljs-number">1</span>); j--;) <span class="hljs-comment">// 顺序遍历也可</span><br>            dp[j] = <span class="hljs-built_in">Math</span>.max(dp[j], (dp[j - <span class="hljs-number">1</span>] || <span class="hljs-number">0</span>) + (j &amp; <span class="hljs-number">1</span> ? prices[i] : -prices[i]))<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Math</span>.max(<span class="hljs-number">0</span>, ...dp) <br>&#125;;<br><br>作者：mantoufan<br>链接：https:<span class="hljs-comment">//leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iv/solution/di-gui-dong-tai-gui-hua-1xing-dai-ma-2ji-th9r/</span><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。<br></code></pre></td></tr></table></figure>
+
+<h5 id="2-3-动态规划-·-另一种DP方程"><a href="#2-3-动态规划-·-另一种DP方程" class="headerlink" title="2.3 动态规划 · 另一种DP方程"></a>2.3 动态规划 · 另一种DP方程</h5><p>Reudce 示例的dp方程有变化，颠倒有无股票前后顺序，思路一样，推导过程<br><a target="_blank" rel="noopener" href="https://imgchr.com/i/rbH19e"><img src="https://s3.ax1x.com/2020/12/29/rbH19e.png" srcset="/img/loading.gif" lazyload alt="rbH19e.png"></a></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> maxProfit = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">k, prices</span>) </span>&#123; <span class="hljs-comment">// 换行可删</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Math</span>.max(<span class="hljs-number">0</span>, ...prices.reduce(<span class="hljs-function">(<span class="hljs-params">dp, price</span>) =&gt;</span> dp.map(<span class="hljs-function">(<span class="hljs-params">v, j, dp</span>) =&gt;</span> <br>        <span class="hljs-built_in">Math</span>.max(v, j &amp; <span class="hljs-number">1</span> ? (dp[j - <span class="hljs-number">3</span>] || <span class="hljs-number">0</span>) - price : dp[j + <span class="hljs-number">1</span>] + price)<br>    ), <span class="hljs-keyword">new</span> <span class="hljs-built_in">Int16Array</span>(k &lt;&lt; <span class="hljs-number">1</span>).fill(-prices[<span class="hljs-number">0</span>])))<br>&#125;;<br><br>作者：mantoufan<br>链接：https:<span class="hljs-comment">//leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iv/solution/di-gui-dong-tai-gui-hua-1xing-dai-ma-2ji-th9r/</span><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。<br></code></pre></td></tr></table></figure>
+
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%8A%9B%E6%89%A3/">力扣</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E9%80%92%E5%BD%92/">递归</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">动态规划</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/12/29/%E5%8A%9B%E6%89%A3330-%E6%8C%89%E8%A6%81%E6%B1%82%E8%A1%A5%E9%BD%90%E6%95%B0%E7%BB%84/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">力扣330 按要求补齐数组</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/12/27/%E5%8A%9B%E6%89%A3205-%E5%90%8C%E6%9E%84%E5%AD%97%E7%AC%A6%E4%B8%B2/">
+                        <span class="hidden-mobile">力扣205 同构字符串</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <div>@2020-2021  Zeij</div> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

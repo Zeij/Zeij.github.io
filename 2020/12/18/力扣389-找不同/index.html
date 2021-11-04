@@ -1,0 +1,498 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.ico">
+  <link rel="icon" href="/img/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <meta name="description" content="题目给定两个字符串 s 和 t，它们只包含小写字母。 字符串 t 由字符串 s 随机重排，然后在随机位置添加一个字母。 请找出在 t 中被添加的字母。   示例 1： 输入：s &#x3D; “abcd”, t &#x3D; “abcde”输出：”e”解释：’e’ 是那个被添加的字母。 示例 2：输入：s &#x3D; “”, t &#x3D; “y”输出：”y”   示例 3：输入：s &#x3D; “a”, t &#x3D; “aa”输出：”a”">
+<meta property="og:type" content="article">
+<meta property="og:title" content="力扣389 找不同">
+<meta property="og:url" content="http://example.com/2020/12/18/%E5%8A%9B%E6%89%A3389-%E6%89%BE%E4%B8%8D%E5%90%8C/index.html">
+<meta property="og:site_name" content="Zeij&#39;s blog">
+<meta property="og:description" content="题目给定两个字符串 s 和 t，它们只包含小写字母。 字符串 t 由字符串 s 随机重排，然后在随机位置添加一个字母。 请找出在 t 中被添加的字母。   示例 1： 输入：s &#x3D; “abcd”, t &#x3D; “abcde”输出：”e”解释：’e’ 是那个被添加的字母。 示例 2：输入：s &#x3D; “”, t &#x3D; “y”输出：”y”   示例 3：输入：s &#x3D; “a”, t &#x3D; “aa”输出：”a”">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-12-17T16:16:43.000Z">
+<meta property="article:modified_time" content="2021-11-04T08:15:38.475Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="计数">
+<meta property="article:tag" content="位运算">
+<meta property="article:tag" content="字符串">
+<meta property="article:tag" content="唯一">
+<meta property="article:tag" content="累加">
+<meta property="article:tag" content="替换">
+<meta property="article:tag" content="Sort">
+<meta name="twitter:card" content="summary_large_image">
+  
+  <title>力扣389 找不同 - Zeij&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Zeij</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default1.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="力扣389 找不同">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-12-18 00:16" pubdate>
+        2020年12月18日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      5k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      16 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">力扣389 找不同</h1>
+            
+            <div class="markdown-body">
+              <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>给定两个字符串 s 和 t，它们只包含小写字母。</p>
+<p>字符串 t 由字符串 s 随机重排，然后在随机位置添加一个字母。</p>
+<p>请找出在 t 中被添加的字母。</p>
+<p> </p>
+<p>示例 1：</p>
+<p>输入：s = “abcd”, t = “abcde”<br>输出：”e”<br>解释：’e’ 是那个被添加的字母。</p>
+<p>示例 2：<br>输入：s = “”, t = “y”<br>输出：”y”  </p>
+<p>示例 3：<br>输入：s = “a”, t = “aa”<br>输出：”a”  </p>
+<p>示例 4：<br>输入：s = “ae”, t = “aea”<br>输出：”a”
+ </p>
+<p>提示：</p>
+<p>0 &lt;= s.length &lt;= 1000<br>t.length == s.length + 1<br>s 和 t 只包含小写字母  </p>
+<p>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/find-the-difference">https://leetcode-cn.com/problems/find-the-difference</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>直接两个字符串转为数组然后排序遍历比较即可（今天被宇哥拒绝转载了挺失望的只能设密码自己看了）</p>
+<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><h3 id="个人题解"><a href="#个人题解" class="headerlink" title="个人题解"></a>个人题解</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param <span class="hljs-type">&#123;string&#125;</span> <span class="hljs-variable">s</span></span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param <span class="hljs-type">&#123;string&#125;</span> <span class="hljs-variable">t</span></span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return <span class="hljs-type">&#123;character&#125;</span></span></span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">var</span> findTheDifference = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">s, t</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> a=s.split(<span class="hljs-string">&quot;&quot;</span>).sort(),b=t.split(<span class="hljs-string">&quot;&quot;</span>).sort();<br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> i=<span class="hljs-number">0</span>;i&lt;a.length;i++)&#123;<br>        <span class="hljs-keyword">if</span>(a[i]!==b[i])&#123;<br>            <span class="hljs-keyword">return</span> b[i];<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> b[b.length-<span class="hljs-number">1</span>];<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+
+<h3 id="他人题解"><a href="#他人题解" class="headerlink" title="他人题解"></a>他人题解</h3><h4 id="位运算"><a href="#位运算" class="headerlink" title="位运算"></a>位运算</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> findTheDifference = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">s, t</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> i = -<span class="hljs-number">1</span>, r = <span class="hljs-number">0</span><br>    <span class="hljs-keyword">while</span>(++i &lt; s.length) r ^= s.charCodeAt(i) ^ t.charCodeAt(i)<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">String</span>.fromCharCode(r ^ t.charCodeAt(i))<br>&#125;;<br><br>Reduce:<br><span class="hljs-keyword">var</span> findTheDifference = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">s, t</span>) </span>&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">String</span>.fromCharCode((s + t).split(<span class="hljs-string">&#x27;&#x27;</span>).reduce(<span class="hljs-function">(<span class="hljs-params">p, v</span>) =&gt;</span> p ^ v.charCodeAt(), <span class="hljs-number">0</span>))<br>&#125;;<br><br><br>左移<span class="hljs-number">1</span>：<br>每次bit = bit ^ <span class="hljs-number">1</span>左移字符Unicode编码 - <span class="hljs-number">97</span>位。剩余<span class="hljs-number">1</span>在第几位，+ <span class="hljs-number">97</span>还原字符<br><span class="hljs-keyword">var</span> findTheDifference = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">s, t</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> bit = <span class="hljs-number">0</span>, i = -<span class="hljs-number">1</span><br>    <span class="hljs-keyword">while</span> (++i &lt; s.length) bit ^= <span class="hljs-number">1</span> &lt;&lt; (s.charCodeAt(i) - <span class="hljs-number">97</span>)<br>    i++<br>    <span class="hljs-keyword">while</span> (i--) bit ^= <span class="hljs-number">1</span> &lt;&lt; (t.charCodeAt(i) - <span class="hljs-number">97</span>)<br>    <span class="hljs-keyword">while</span> (bit &gt;&gt;= <span class="hljs-number">1</span>) i++<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">String</span>.fromCharCode(i + <span class="hljs-number">98</span>)<br>&#125;;<br><br><br>作者：mantoufan<br>链接：https:<span class="hljs-comment">//leetcode-cn.com/problems/find-the-difference/solution/wei-ji-shu-wei-yi-lei-jia-ti-huan-sort1x-s0li/</span><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。<br></code></pre></td></tr></table></figure>
+
+<h4 id="计数"><a href="#计数" class="headerlink" title="计数"></a>计数</h4><p>解题思路<br>遍历字符串，统计出现次数。一轮+，一轮-。先谁，顺序，增减规则随意，开心就好<br>第二轮遍历，返回出现次数不能回到0的字符（示例增减绝对值相同为1）  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-built_in">Array</span>:<br><span class="hljs-keyword">var</span> findTheDifference = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">s, t</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> i = -<span class="hljs-number">1</span>, h = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Int16Array</span>(<span class="hljs-number">26</span>) <span class="hljs-comment">// Init8Array(26)可过测试用例</span><br>    <span class="hljs-keyword">while</span>(++i &lt; s.length) h[s.charCodeAt(i) - <span class="hljs-number">97</span>]++<br>    i++<br>    <span class="hljs-keyword">while</span>(i--) <span class="hljs-keyword">if</span> (--h[t.charCodeAt(i) - <span class="hljs-number">97</span>] &lt; <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> t[i]<br>&#125;;<br><br><span class="hljs-built_in">Object</span>:<br><span class="hljs-keyword">var</span> findTheDifference = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">s, t</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> i = -<span class="hljs-number">1</span>, h = <span class="hljs-built_in">Object</span>.create(<span class="hljs-literal">null</span>)<br>    <span class="hljs-keyword">while</span>(++i &lt; s.length) h[s[i]] ? h[s[i]]++ : h[s[i]] = <span class="hljs-number">1</span><br>    i++<br>    <span class="hljs-keyword">while</span>(i--) <span class="hljs-keyword">if</span> (h[t[i]] === <span class="hljs-keyword">void</span> <span class="hljs-number">0</span> || --h[t[i]] &lt; <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> t[i]<br>&#125;;<br><br><span class="hljs-built_in">Map</span>:<br><span class="hljs-keyword">var</span> findTheDifference = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">s, t</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> i = -<span class="hljs-number">1</span>, h = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Map</span>, tmp<br>    <span class="hljs-keyword">while</span>(++i &lt; s.length) h.set(s[i], h.has(s[i]) ? h.get(s[i]) + <span class="hljs-number">1</span> : <span class="hljs-number">1</span>)<br>    i++<br>    <span class="hljs-keyword">while</span>(i--) <span class="hljs-keyword">if</span> (!h.has(t[i]) || (h.set(t[i], tmp = h.get(t[i]) - <span class="hljs-number">1</span>), tmp &lt; <span class="hljs-number">0</span>)) <span class="hljs-keyword">return</span> t[i]<br>&#125;;<br><br>作者：mantoufan<br>链接：https:<span class="hljs-comment">//leetcode-cn.com/problems/find-the-difference/solution/wei-ji-shu-wei-yi-lei-jia-ti-huan-sort1x-s0li/</span><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。<br></code></pre></td></tr></table></figure>
+
+<h4 id="唯一"><a href="#唯一" class="headerlink" title="唯一"></a>唯一</h4><p>解题思路<br>找一个容器，不能同时放两个相同元素。遇已有，删已有。没有放。只有解留在容器</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-built_in">Array</span>:值最多<span class="hljs-number">1</span>。遇字符Unicode编码 - <span class="hljs-number">97</span>对应值已= <span class="hljs-number">1</span>时，值<span class="hljs-number">0</span>。没有+<span class="hljs-number">1</span><br><span class="hljs-keyword">var</span> findTheDifference = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">s, t</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> i = -<span class="hljs-number">1</span>, h = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Uint8Array</span>(<span class="hljs-number">26</span>)<br>    <span class="hljs-keyword">while</span>(++i &lt; t.length) d(h, t.charCodeAt(i) - <span class="hljs-number">97</span>)<br>    i--<br>    <span class="hljs-keyword">while</span>(i--) d(h, s.charCodeAt(i) - <span class="hljs-number">97</span>)<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">String</span>.fromCharCode(h.findIndex(<span class="hljs-function"><span class="hljs-params">v</span> =&gt;</span> v === <span class="hljs-number">1</span>) + <span class="hljs-number">97</span>)<br>&#125;;<br><span class="hljs-keyword">var</span> d = <span class="hljs-function">(<span class="hljs-params">h, k</span>) =&gt;</span> h[k] ? h[k]-- : h[k]++<br><br><span class="hljs-built_in">Set</span>:<br><span class="hljs-keyword">var</span> findTheDifference = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">s, t</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> i = -<span class="hljs-number">1</span>, h = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Set</span><br>    <span class="hljs-keyword">while</span>(++i &lt; t.length) d(h, t[i])<br>    i--<br>    <span class="hljs-keyword">while</span>(i--) d(h, s[i])<br>    <span class="hljs-keyword">return</span> h.values().next().value<br>&#125;;<br><span class="hljs-keyword">var</span> d = <span class="hljs-function">(<span class="hljs-params">h, k</span>) =&gt;</span> h.has(k) ? h.delete(k) : h.add(k)<br><br><span class="hljs-attr">Object</span>:<br><span class="hljs-keyword">var</span> findTheDifference = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">s, t</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> i = -<span class="hljs-number">1</span>, h = <span class="hljs-built_in">Object</span>.create(<span class="hljs-literal">null</span>)<br>    <span class="hljs-keyword">while</span>(++i &lt; t.length) d(h, t[i])<br>    i--<br>    <span class="hljs-keyword">while</span>(i--) d(h, s[i])<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Object</span>.keys(h)[<span class="hljs-number">0</span>]<br>&#125;;<br><span class="hljs-keyword">var</span> d = <span class="hljs-function">(<span class="hljs-params">h, k</span>) =&gt;</span> h[k] ? <span class="hljs-keyword">delete</span> h[k] : h[k] = <span class="hljs-number">1</span><br><br><span class="hljs-attr">Map</span>:<br><span class="hljs-keyword">var</span> findTheDifference = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">s, t</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> i = -<span class="hljs-number">1</span>, h = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Map</span><br>    <span class="hljs-keyword">while</span>(++i &lt; t.length) d(h, t[i])<br>    i--<br>    <span class="hljs-keyword">while</span>(i--) d(h, s[i])<br>    <span class="hljs-keyword">return</span> h.keys().next().value<br>&#125;;<br><span class="hljs-keyword">var</span> d = <span class="hljs-function">(<span class="hljs-params">h, k</span>) =&gt;</span> h.has(k) ? h.delete(k) : h.set(k, <span class="hljs-number">1</span>)<br><br>作者：mantoufan<br>链接：https:<span class="hljs-comment">//leetcode-cn.com/problems/find-the-difference/solution/wei-ji-shu-wei-yi-lei-jia-ti-huan-sort1x-s0li/</span><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。<br></code></pre></td></tr></table></figure>
+
+
+<h4 id="累加"><a href="#累加" class="headerlink" title="累加"></a>累加</h4><p>解题思路<br>遍历字符串，先累加字符的Unicode编码，再累减。差值绝对值即解的Unicode编码</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> findTheDifference = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">s, t</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> i = -<span class="hljs-number">1</span>, r = <span class="hljs-number">0</span><br>    <span class="hljs-keyword">while</span>(++i &lt; t.length) r += t.charCodeAt(i)<br>    i--<br>    <span class="hljs-keyword">while</span>(i--) r -= s.charCodeAt(i)<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">String</span>.fromCharCode(r)<br>&#125;;<br><br>作者：mantoufan<br>链接：https:<span class="hljs-comment">//leetcode-cn.com/problems/find-the-difference/solution/wei-ji-shu-wei-yi-lei-jia-ti-huan-sort1x-s0li/</span><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。<br></code></pre></td></tr></table></figure>
+
+<h4 id="替换"><a href="#替换" class="headerlink" title="替换"></a>替换</h4><p>解题思路<br>遍历短字符串，将长字符串的对应字符替换为空。返回长字符串剩余字符</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> findTheDifference = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">s, t</span>) </span>&#123;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i&lt; s.length; i++) t = t.replace(s[i], <span class="hljs-string">&#x27;&#x27;</span>)<br>    <span class="hljs-keyword">return</span> t<br>&#125;;<br><br>作者：mantoufan<br>链接：https:<span class="hljs-comment">//leetcode-cn.com/problems/find-the-difference/solution/wei-ji-shu-wei-yi-lei-jia-ti-huan-sort1x-s0li/</span><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。<br></code></pre></td></tr></table></figure>
+
+<h4 id="Sort"><a href="#Sort" class="headerlink" title="Sort"></a>Sort</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> findTheDifference = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">s, t</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> a, n = <span class="hljs-number">0</span>, tmp = (s + t).split(<span class="hljs-string">&#x27;&#x27;</span>).sort(), i = -<span class="hljs-number">1</span><br>    <span class="hljs-keyword">while</span>(++i &lt; tmp.length) <br>        <span class="hljs-keyword">if</span> (a) <br>            <span class="hljs-keyword">if</span> (a === tmp[i]) n++<br>            <span class="hljs-keyword">else</span> <br>                <span class="hljs-keyword">if</span> ((n &amp; <span class="hljs-number">1</span>) === <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> a<br>                <span class="hljs-keyword">else</span> &#123;<br>                    a = tmp[i]<br>                    n = <span class="hljs-number">0</span><br>                &#125;<br>        <span class="hljs-keyword">else</span> a = tmp[i]<br>    <span class="hljs-keyword">return</span> a<br>&#125;;<br><br><br>作者：mantoufan<br>链接：https:<span class="hljs-comment">//leetcode-cn.com/problems/find-the-difference/solution/wei-ji-shu-wei-yi-lei-jia-ti-huan-sort1x-s0li/</span><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。<br></code></pre></td></tr></table></figure>
+<p>直接异或最快，Redcue等需字符串转数组影响性能<br>左移1解法中^改为&amp;可用于[0, 32)位数字及数字表示的小写字母，大写字母验重<br>计数排序首选包含默认值的数组，短路h[key] = (h[key] || 0) + 1这样写简洁，但是<br>影响性能<br>h[key]为+0 -0 false null NaN等非undefined假值时，也会短路<br>ES2020提供的空值合并运算符 ??将返回第一个已定义值是未来的更佳选择<br>唯一解法频繁增删，影响性能。相比之下，计数的赋值操作稍快<br>累加解法中，还可用质数累乘，甚至自建字符对应哈希表来求差或商<br>对于短字符串，replace原生优势 &gt; Object和Map哈希表开销  </p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%8A%9B%E6%89%A3/">力扣</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E8%AE%A1%E6%95%B0/">计数</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/">位运算</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/">字符串</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%94%AF%E4%B8%80/">唯一</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%B4%AF%E5%8A%A0/">累加</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%9B%BF%E6%8D%A2/">替换</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Sort/">Sort</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/12/19/%E5%8A%9B%E6%89%A348-%E6%97%8B%E8%BD%AC%E5%9B%BE%E5%83%8F/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">力扣48 旋转图像</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/12/17/%E5%8A%9B%E6%89%A3714-%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA%E5%90%AB%E6%89%8B%E7%BB%AD%E8%B4%B9/">
+                        <span class="hidden-mobile">力扣714 买卖股票的最佳时机含手续费</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <div>@2020-2021  Zeij</div> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

@@ -1,0 +1,519 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.ico">
+  <link rel="icon" href="/img/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <meta name="description" content="题目斐波那契数，通常用 F(n) 表示，形成的序列称为 斐波那契数列 。该数列由 0 和 1 开始，后面的每一项数字都是前面两项数字的和。也就是： F(0) &#x3D; 0，F(1) &#x3D; 1F(n) &#x3D; F(n - 1) + F(n - 2)，其中 n &gt; 1给你 n ，请计算 F(n) 。   示例 1：输入：2输出：1解释：F(2) &#x3D; F(1) + F(0) &#x3D; 1 + 0 &#x3D; 1 示例 2：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="力扣509 斐波那契数">
+<meta property="og:url" content="http://example.com/2021/01/04/%E5%8A%9B%E6%89%A3509-%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0/index.html">
+<meta property="og:site_name" content="Zeij&#39;s blog">
+<meta property="og:description" content="题目斐波那契数，通常用 F(n) 表示，形成的序列称为 斐波那契数列 。该数列由 0 和 1 开始，后面的每一项数字都是前面两项数字的和。也就是： F(0) &#x3D; 0，F(1) &#x3D; 1F(n) &#x3D; F(n - 1) + F(n - 2)，其中 n &gt; 1给你 n ，请计算 F(n) 。   示例 1：输入：2输出：1解释：F(2) &#x3D; F(1) + F(0) &#x3D; 1 + 0 &#x3D; 1 示例 2：">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s3.ax1x.com/2021/01/04/si8dhR.png">
+<meta property="og:image" content="https://s3.ax1x.com/2021/01/04/si8UAJ.png">
+<meta property="og:image" content="https://s3.ax1x.com/2021/01/04/si8aN9.png">
+<meta property="article:published_time" content="2021-01-04T11:24:32.000Z">
+<meta property="article:modified_time" content="2021-11-04T08:16:30.136Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="递归">
+<meta property="article:tag" content="动态规划">
+<meta property="article:tag" content="杨辉三角">
+<meta property="article:tag" content="比内">
+<meta property="article:tag" content="矩阵">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://s3.ax1x.com/2021/01/04/si8dhR.png">
+  
+  <title>力扣509 斐波那契数 - Zeij&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Zeij</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default1.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="力扣509 斐波那契数">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-01-04 19:24" pubdate>
+        2021年1月4日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      5.5k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      17 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">力扣509 斐波那契数</h1>
+            
+            <div class="markdown-body">
+              <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>斐波那契数，通常用 F(n) 表示，形成的序列称为 斐波那契数列 。该数列由 0 和 1 开始，后面的每一项数字都是前面两项数字的和。也就是：</p>
+<p>F(0) = 0，F(1) = 1<br>F(n) = F(n - 1) + F(n - 2)，其中 n &gt; 1<br>给你 n ，请计算 F(n) 。</p>
+<p> </p>
+<p>示例 1：<br>输入：2<br>输出：1<br>解释：F(2) = F(1) + F(0) = 1 + 0 = 1</p>
+<p>示例 2：<br>输入：3<br>输出：2<br>解释：F(3) = F(2) + F(1) = 1 + 1 = 2</p>
+<p>示例 3：<br>输入：4<br>输出：3<br>解释：F(4) = F(3) + F(2) = 2 + 1 = 3
+ </p>
+<p>提示：</p>
+<p>0 &lt;= n &lt;= 30</p>
+<p>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/fibonacci-number">https://leetcode-cn.com/problems/fibonacci-number</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><h3 id="他人题解"><a href="#他人题解" class="headerlink" title="他人题解"></a>他人题解</h3><h4 id="一-递归"><a href="#一-递归" class="headerlink" title="一 递归"></a>一 递归</h4><h5 id="1-1-递归"><a href="#1-1-递归" class="headerlink" title="1.1 递归"></a>1.1 递归</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><br><span class="hljs-keyword">var</span> fib = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">N</span>) </span>&#123;<br>    <span class="hljs-keyword">return</span> N === <span class="hljs-number">0</span> ? <span class="hljs-number">0</span> : N &lt; <span class="hljs-number">3</span> ? <span class="hljs-number">1</span> : fib(N - <span class="hljs-number">1</span>) + fib(N - <span class="hljs-number">2</span>)<br>&#125;;<br><br>作者：mantoufan<br>链接：https:<span class="hljs-comment">//leetcode-cn.com/problems/fibonacci-number/solution/yang-hui-san-jiao-bi-nei-ju-zhen-di-gui-0cbrm/</span><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。<br></code></pre></td></tr></table></figure>
+
+<h5 id="1-2-记忆化递归"><a href="#1-2-记忆化递归" class="headerlink" title="1.2 记忆化递归"></a>1.2 记忆化递归</h5><p>递归函数变化参数为N，作为哈希表键名，缓存结果。递归到底，回溯遇相同N不再递归</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs javascript">数组<br><span class="hljs-keyword">var</span> fib = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">N, h = <span class="hljs-built_in">Array</span>(N)</span>) </span>&#123;<br>    <span class="hljs-keyword">return</span> N === <span class="hljs-number">0</span> ? <span class="hljs-number">0</span> : N &lt; <span class="hljs-number">3</span> ? <span class="hljs-number">1</span> : h[N] ? h[N] : h[N] = fib(N - <span class="hljs-number">1</span>, h) + fib(N - <span class="hljs-number">2</span>, h)<br>&#125;;<br><br><br><br><br><span class="hljs-built_in">Object</span><br><span class="hljs-keyword">var</span> fib = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">N, h = <span class="hljs-built_in">Object</span>.create(<span class="hljs-literal">null</span>)</span>) </span>&#123;<br>    <span class="hljs-keyword">return</span> N === <span class="hljs-number">0</span> ? <span class="hljs-number">0</span> : N &lt; <span class="hljs-number">3</span> ? <span class="hljs-number">1</span> : h[N] ? h[N] : h[N] = fib(N - <span class="hljs-number">1</span>, h) + fib(N - <span class="hljs-number">2</span>, h)<br>&#125;;<br><br><br><br><br><span class="hljs-built_in">Map</span><br><span class="hljs-keyword">var</span> fib = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">N, h = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Map</span></span>) </span>&#123;<br>    <span class="hljs-keyword">return</span> N === <span class="hljs-number">0</span> ? <span class="hljs-number">0</span> : N &lt; <span class="hljs-number">3</span> ? <span class="hljs-number">1</span> : (!h.has(N) &amp;&amp; h.set(N, fib(N - <span class="hljs-number">1</span>, h) + fib(N - <span class="hljs-number">2</span>, h)), h.get(N))<br>&#125;;<br><br>作者：mantoufan<br>链接：https:<span class="hljs-comment">//leetcode-cn.com/problems/fibonacci-number/solution/yang-hui-san-jiao-bi-nei-ju-zhen-di-gui-0cbrm/</span><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。<br></code></pre></td></tr></table></figure>
+
+
+<h4 id="二-动态规划"><a href="#二-动态规划" class="headerlink" title="二 动态规划"></a>二 动态规划</h4><h5 id="2-1-动态规划"><a href="#2-1-动态规划" class="headerlink" title="2.1 动态规划"></a>2.1 动态规划</h5><p>dp[i]表示F(i) 已知dp[0] = 0 dp[1] = 1 状态转换方程即递推方程</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> fib = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">N</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> dp = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Uint32Array</span>(N + <span class="hljs-number">1</span>), i = <span class="hljs-number">1</span><br>    dp[<span class="hljs-number">1</span>] = <span class="hljs-number">1</span><br>    <span class="hljs-keyword">while</span> (i++ &lt; N) dp[i] = dp[i - <span class="hljs-number">1</span>] + dp[i - <span class="hljs-number">2</span>]<br>    <span class="hljs-keyword">return</span> N ? dp[N] : <span class="hljs-number">0</span><br>&#125;;<br><br>作者：mantoufan<br>链接：https:<span class="hljs-comment">//leetcode-cn.com/problems/fibonacci-number/solution/yang-hui-san-jiao-bi-nei-ju-zhen-di-gui-0cbrm/</span><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。<br></code></pre></td></tr></table></figure>
+
+
+<h5 id="2-2-滚动数组"><a href="#2-2-滚动数组" class="headerlink" title="2.2 滚动数组"></a>2.2 滚动数组</h5><p>dp[1]代替dp[i] 上轮dp[1]代替dp[i - 1] dp[0]代替dp[i - 2] 滚动：dp[0] = 上轮dp[1]<br>中间变量：暂存上轮dp[1]</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> fib = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">N</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> dp = [<span class="hljs-number">0</span>, <span class="hljs-number">1</span>], i = <span class="hljs-number">1</span><br>    <span class="hljs-keyword">while</span> (i++ &lt; N) &#123;<br>        <span class="hljs-keyword">const</span> tmp = dp[<span class="hljs-number">1</span>]<br>        dp[<span class="hljs-number">1</span>] = dp[<span class="hljs-number">0</span>] + dp[<span class="hljs-number">1</span>]<br>        dp[<span class="hljs-number">0</span>] = tmp<br>    &#125;<br>    <span class="hljs-keyword">return</span> N ? dp[<span class="hljs-number">1</span>] : <span class="hljs-number">0</span><br>&#125;;<br><br><br><br>运算顺序：先读取+号左边dp[<span class="hljs-number">0</span>]，再赋值扣号内dp[<span class="hljs-number">0</span>]，省去中间变量<br><span class="hljs-keyword">var</span> fib = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">N</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> dp = [<span class="hljs-number">0</span>, <span class="hljs-number">1</span>], i = <span class="hljs-number">1</span><br>    <span class="hljs-keyword">while</span> (i++ &lt; N) dp[<span class="hljs-number">1</span>] = dp[<span class="hljs-number">0</span>] + (dp[<span class="hljs-number">0</span>] = dp[<span class="hljs-number">1</span>])<br>    <span class="hljs-keyword">return</span> N ? dp[<span class="hljs-number">1</span>] : <span class="hljs-number">0</span><br>&#125;;<br><br><br>作者：mantoufan<br>链接：https:<span class="hljs-comment">//leetcode-cn.com/problems/fibonacci-number/solution/yang-hui-san-jiao-bi-nei-ju-zhen-di-gui-0cbrm/</span><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。<br></code></pre></td></tr></table></figure>
+
+<h5 id="2-3-状态机"><a href="#2-3-状态机" class="headerlink" title="2.3 状态机"></a>2.3 状态机</h5><p>用两个变量，分别代替dp[1]和dp[0]</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> fib = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">N</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> s0 = <span class="hljs-number">0</span>, s1 = <span class="hljs-number">1</span>, i = <span class="hljs-number">1</span><br>    <span class="hljs-keyword">while</span> (i++ &lt; N) s1 = s0 + (s0 = s1)<br>    <span class="hljs-keyword">return</span> N ? s1 : <span class="hljs-number">0</span><br>&#125;;<br><br>作者：mantoufan<br>链接：https:<span class="hljs-comment">//leetcode-cn.com/problems/fibonacci-number/solution/yang-hui-san-jiao-bi-nei-ju-zhen-di-gui-0cbrm/</span><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。<br></code></pre></td></tr></table></figure>
+
+<h4 id="三-哈希表"><a href="#三-哈希表" class="headerlink" title="三 哈希表"></a>三 哈希表</h4><p>通过5.1动态规划得到[0,30]所有解，存到哈希表中，面向测试用例编程</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> fib = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">N</span>) </span>&#123;<br>    <span class="hljs-keyword">return</span> [<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">5</span>,<span class="hljs-number">8</span>,<span class="hljs-number">13</span>,<span class="hljs-number">21</span>,<span class="hljs-number">34</span>,<span class="hljs-number">55</span>,<span class="hljs-number">89</span>,<span class="hljs-number">144</span>,<span class="hljs-number">233</span>,<span class="hljs-number">377</span>,<span class="hljs-number">610</span>,<span class="hljs-number">987</span>,<span class="hljs-number">1597</span>,<span class="hljs-number">2584</span>,<span class="hljs-number">4181</span>,<span class="hljs-number">6765</span>,<span class="hljs-number">10946</span>,<span class="hljs-number">17711</span>,<span class="hljs-number">28657</span>,<span class="hljs-number">46368</span>,<span class="hljs-number">75025</span>,<span class="hljs-number">121393</span>,<span class="hljs-number">196418</span>,<span class="hljs-number">317811</span>,<span class="hljs-number">514229</span>,<span class="hljs-number">832040</span>][N]<br>&#125;;<br><br>作者：mantoufan<br>链接：https:<span class="hljs-comment">//leetcode-cn.com/problems/fibonacci-number/solution/yang-hui-san-jiao-bi-nei-ju-zhen-di-gui-0cbrm/</span><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="四-杨辉三角"><a href="#四-杨辉三角" class="headerlink" title="四 杨辉三角"></a>四 杨辉三角</h4><p>杨辉三角左对齐后的对角线累加和即斐波那契数列。<br><a target="_blank" rel="noopener" href="https://imgchr.com/i/si8dhR"><img src="https://s3.ax1x.com/2021/01/04/si8dhR.png" srcset="/img/loading.gif" lazyload alt="si8dhR.png"></a></p>
+<h5 id="4-1-相邻"><a href="#4-1-相邻" class="headerlink" title="4.1 相邻"></a>4.1 相邻</h5><p>生成杨辉三角：中间位 = 上一行相邻元素和</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> fib = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">N</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> M = generate(N), r = <span class="hljs-number">0</span>, i = N, j = -<span class="hljs-number">1</span><br>    <span class="hljs-keyword">while</span> (i-- &amp;&amp; ++j &lt; M[i].length) r += M[i][j]<br>    <span class="hljs-keyword">return</span> r<br>&#125;;<br><span class="hljs-keyword">var</span> generate = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">numRows</span>) </span>&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Array</span>(numRows).fill().map(<span class="hljs-function">(<span class="hljs-params">_, i, r</span>) =&gt;</span> r[i] = <span class="hljs-built_in">Array</span>(i + <span class="hljs-number">1</span>).fill(<span class="hljs-number">1</span>).map(<span class="hljs-function">(<span class="hljs-params">v, j</span>) =&gt;</span> j &gt; <span class="hljs-number">0</span> &amp;&amp; j &lt; i ? r[i - <span class="hljs-number">1</span>][j - <span class="hljs-number">1</span>] + r[i - <span class="hljs-number">1</span>][j] : v))<br>&#125;;<br><br>作者：mantoufan<br>链接：https:<span class="hljs-comment">//leetcode-cn.com/problems/fibonacci-number/solution/yang-hui-san-jiao-bi-nei-ju-zhen-di-gui-0cbrm/</span><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。<br></code></pre></td></tr></table></figure>
+
+
+
+
+<h5 id="4-2-对称性"><a href="#4-2-对称性" class="headerlink" title="4.2 对称性"></a>4.2 对称性</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs javascript">生成杨辉三角：用对称性，从两端到中间，同时赋值j和i - j<br><span class="hljs-keyword">var</span> fib = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">N</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> M = generate(N), r = <span class="hljs-number">0</span>, i = N, j = -<span class="hljs-number">1</span><br>    <span class="hljs-keyword">while</span> (i-- &amp;&amp; ++j &lt; M[i].length) r += M[i][j]<br>    <span class="hljs-keyword">return</span> r<br>&#125;;<br><span class="hljs-keyword">var</span> generate = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">numRows</span>) </span>&#123;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>, r = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Array</span>(numRows); i &lt; numRows; i++) &#123;<br>        r[i] = i &lt; <span class="hljs-number">10</span> ? <span class="hljs-keyword">new</span> <span class="hljs-built_in">Uint8Array</span>(i + <span class="hljs-number">1</span>) : i &lt; <span class="hljs-number">19</span> ? <span class="hljs-keyword">new</span> <span class="hljs-built_in">Uint16Array</span>(i + <span class="hljs-number">1</span>) : <span class="hljs-keyword">new</span> <span class="hljs-built_in">Uint32Array</span>(i + <span class="hljs-number">1</span>)<br>        r[i][<span class="hljs-number">0</span>] = r[i][i] = <span class="hljs-number">1</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> j = <span class="hljs-number">1</span>; j &lt;= i &gt;&gt; <span class="hljs-number">1</span>; j++) <br>            r[i][j] = r[i][i - j] = r[i - <span class="hljs-number">1</span>][j - <span class="hljs-number">1</span>] + r[i - <span class="hljs-number">1</span>][j]<br>    &#125;<br>    <span class="hljs-keyword">return</span> r<br>&#125;;<br><br>作者：mantoufan<br>链接：https:<span class="hljs-comment">//leetcode-cn.com/problems/fibonacci-number/solution/yang-hui-san-jiao-bi-nei-ju-zhen-di-gui-0cbrm/</span><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。<br></code></pre></td></tr></table></figure>
+
+
+
+
+<h4 id="五-比内公式"><a href="#五-比内公式" class="headerlink" title="五 比内公式"></a>五 比内公式</h4><p><a target="_blank" rel="noopener" href="https://imgchr.com/i/si8UAJ"><img src="https://s3.ax1x.com/2021/01/04/si8UAJ.png" srcset="/img/loading.gif" lazyload alt="si8UAJ.png"></a></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> fib = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">N</span>) </span>&#123;<br>    <span class="hljs-keyword">const</span> s5 = <span class="hljs-built_in">Math</span>.sqrt(<span class="hljs-number">5</span>)<br>    <span class="hljs-keyword">return</span> (<span class="hljs-built_in">Math</span>.pow(<span class="hljs-number">.5</span> + s5 / <span class="hljs-number">2</span>, N) - <span class="hljs-built_in">Math</span>.pow(<span class="hljs-number">.5</span> - s5 / <span class="hljs-number">2</span>, N)) / s5<br>&#125;;<br><br>作者：mantoufan<br>链接：https:<span class="hljs-comment">//leetcode-cn.com/problems/fibonacci-number/solution/yang-hui-san-jiao-bi-nei-ju-zhen-di-gui-0cbrm/</span><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。<br></code></pre></td></tr></table></figure>
+
+
+<h4 id="六-矩阵快速幂"><a href="#六-矩阵快速幂" class="headerlink" title="六 矩阵快速幂"></a>六 矩阵快速幂</h4><p>6.1 整数快速幂</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> pow = <span class="hljs-function">(<span class="hljs-params">M, N</span>) =&gt;</span> &#123;<br>    <span class="hljs-keyword">let</span> r = <span class="hljs-number">1</span><br>    <span class="hljs-keyword">while</span>(N) &#123;<br>        <span class="hljs-keyword">if</span> (N &amp; <span class="hljs-number">1</span>) r *= M<br>        M *= M<br>        N &gt;&gt;= <span class="hljs-number">1</span><br>    &#125;<br>    <span class="hljs-keyword">return</span> r<br>&#125;<br><br>作者：mantoufan<br>链接：https:<span class="hljs-comment">//leetcode-cn.com/problems/fibonacci-number/solution/yang-hui-san-jiao-bi-nei-ju-zhen-di-gui-0cbrm/</span><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="6-2-矩阵快速幂"><a href="#6-2-矩阵快速幂" class="headerlink" title="6.2 矩阵快速幂"></a>6.2 矩阵快速幂</h4><p>整数换成矩阵</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> pow = <span class="hljs-function">(<span class="hljs-params">M, N</span>) =&gt;</span> &#123;<br>    <span class="hljs-keyword">const</span> r = [[<span class="hljs-number">1</span>, <span class="hljs-number">0</span>], [<span class="hljs-number">0</span>, <span class="hljs-number">1</span>]]<br>    <span class="hljs-keyword">while</span>(N) &#123;<br>        <span class="hljs-keyword">if</span> (N &amp; <span class="hljs-number">1</span>) r = multiply(r, M)<br>        M = multiply(M, M)<br>        N &gt;&gt;= <span class="hljs-number">1</span><br>    &#125;<br>    <span class="hljs-keyword">return</span> r<br>&#125;<br><br><br><br>矩阵乘法<br><span class="hljs-keyword">const</span> multiply = <span class="hljs-function">(<span class="hljs-params">M1, M2</span>) =&gt;</span> &#123;<br>    <span class="hljs-keyword">const</span> r = <span class="hljs-built_in">Array</span>.from(&#123;<span class="hljs-attr">length</span>: M1.length&#125;, <span class="hljs-function"><span class="hljs-params">_</span> =&gt;</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Uint32Array</span>(M2[<span class="hljs-number">0</span>].length))<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; M1.length; i++) <span class="hljs-comment">// 遍历矩阵，水平扫描 缓存命中率 &gt; 垂直扫描</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> j = <span class="hljs-number">0</span>; j &lt; M1[<span class="hljs-number">0</span>].length; j++)<br>            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> k = <span class="hljs-number">0</span>; k &lt; M2[<span class="hljs-number">0</span>].length; k++) <br>                r[i][k] += M1[i][j] * M2[j][k]<br>    <span class="hljs-keyword">return</span> r<br>&#125;<br><br>作者：mantoufan<br>链接：https:<span class="hljs-comment">//leetcode-cn.com/problems/fibonacci-number/solution/yang-hui-san-jiao-bi-nei-ju-zhen-di-gui-0cbrm/</span><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。<br></code></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/si8aN9"><img src="https://s3.ax1x.com/2021/01/04/si8aN9.png" srcset="/img/loading.gif" lazyload alt="si8aN9.png"></a><br>求解：M = [[1, 1], [1, 0]] F(N) = M的N - 1次方[0][0]项</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> fib = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">N</span>) </span>&#123;<br>    <span class="hljs-keyword">const</span> M = [[<span class="hljs-number">1</span>, <span class="hljs-number">1</span>], [<span class="hljs-number">1</span>, <span class="hljs-number">0</span>]]<br>    <span class="hljs-keyword">return</span> N ? pow(M, N - <span class="hljs-number">1</span>)[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] : <span class="hljs-number">0</span><br>&#125;;<br><br>作者：mantoufan<br>链接：https:<span class="hljs-comment">//leetcode-cn.com/problems/fibonacci-number/solution/yang-hui-san-jiao-bi-nei-ju-zhen-di-gui-0cbrm/</span><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。<br></code></pre></td></tr></table></figure>
+
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%8A%9B%E6%89%A3/">力扣</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E9%80%92%E5%BD%92/">递归</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">动态规划</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%9D%A8%E8%BE%89%E4%B8%89%E8%A7%92/">杨辉三角</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%AF%94%E5%86%85/">比内</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%9F%A9%E9%98%B5/">矩阵</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/01/05/%E5%8A%9B%E6%89%A3830-%E8%BE%83%E5%A4%A7%E5%88%86%E7%BB%84%E7%9A%84%E4%BD%8D%E7%BD%AE/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">力扣830 较大分组的位置</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/01/03/%E5%8A%9B%E6%89%A386-%E5%88%86%E9%9A%94%E9%93%BE%E8%A1%A8/">
+                        <span class="hidden-mobile">力扣86 分隔链表</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <div>@2020-2021  Zeij</div> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

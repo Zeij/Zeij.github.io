@@ -1,0 +1,483 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.ico">
+  <link rel="icon" href="/img/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <meta name="description" content="题目一个机器人位于一个 m x n 网格的左上角 （起始点在下图中标记为 “Start” ）。 机器人每次只能向下或者向右移动一步。机器人试图达到网格的右下角（在下图中标记为 “Finish” ）。 问总共有多少条不同的路径？ 示例 1： 输入：m &#x3D; 3, n &#x3D; 7输出：28示例 2： 输入：m &#x3D; 3, n &#x3D; 2输出：3解释：从左上角开始，总共有 3 条路径可以到达右下角。  向右 -&amp;g">
+<meta property="og:type" content="article">
+<meta property="og:title" content="力扣62 不同路径">
+<meta property="og:url" content="http://example.com/2020/12/15/%E5%8A%9B%E6%89%A362-%E4%B8%8D%E5%90%8C%E8%B7%AF%E5%BE%84/index.html">
+<meta property="og:site_name" content="Zeij&#39;s blog">
+<meta property="og:description" content="题目一个机器人位于一个 m x n 网格的左上角 （起始点在下图中标记为 “Start” ）。 机器人每次只能向下或者向右移动一步。机器人试图达到网格的右下角（在下图中标记为 “Finish” ）。 问总共有多少条不同的路径？ 示例 1： 输入：m &#x3D; 3, n &#x3D; 7输出：28示例 2： 输入：m &#x3D; 3, n &#x3D; 2输出：3解释：从左上角开始，总共有 3 条路径可以到达右下角。  向右 -&amp;g">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-12-15T13:06:05.000Z">
+<meta property="article:modified_time" content="2021-11-04T08:14:21.661Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="递归">
+<meta property="article:tag" content="动态规划">
+<meta property="article:tag" content="记忆化">
+<meta property="article:tag" content="组合">
+<meta property="article:tag" content="降维">
+<meta name="twitter:card" content="summary_large_image">
+  
+  <title>力扣62 不同路径 - Zeij&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Zeij</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default1.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="力扣62 不同路径">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-12-15 21:06" pubdate>
+        2020年12月15日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.9k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      12 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">力扣62 不同路径</h1>
+            
+            <div class="markdown-body">
+              <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>一个机器人位于一个 m x n 网格的左上角 （起始点在下图中标记为 “Start” ）。</p>
+<p>机器人每次只能向下或者向右移动一步。机器人试图达到网格的右下角（在下图中标记为 “Finish” ）。</p>
+<p>问总共有多少条不同的路径？</p>
+<p>示例 1：</p>
+<p>输入：m = 3, n = 7<br>输出：28<br>示例 2：</p>
+<p>输入：m = 3, n = 2<br>输出：3<br>解释：<br>从左上角开始，总共有 3 条路径可以到达右下角。</p>
+<ol>
+<li>向右 -&gt; 向右 -&gt; 向下</li>
+<li>向右 -&gt; 向下 -&gt; 向右</li>
+<li>向下 -&gt; 向右 -&gt; 向右<br>示例 3：</li>
+</ol>
+<p>输入：m = 7, n = 3<br>输出：28<br>示例 4：</p>
+<p>输入：m = 3, n = 3<br>输出：6
+ </p>
+<p>提示：</p>
+<p>1 &lt;= m, n &lt;= 100<br>题目数据保证答案小于等于 2 * 109</p>
+<p>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/unique-paths">https://leetcode-cn.com/problems/unique-paths</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>今天课设源码做完了多做了一题，思路直接想到dp很快就能做出来，主要是JS的二元数组初始化问题，照例学习小宇的代码和思路，JS算法冲冲冲</p>
+<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><h3 id="本人题解"><a href="#本人题解" class="headerlink" title="本人题解"></a>本人题解</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param <span class="hljs-type">&#123;number&#125;</span> <span class="hljs-variable">m</span></span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param <span class="hljs-type">&#123;number&#125;</span> <span class="hljs-variable">n</span></span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return <span class="hljs-type">&#123;number&#125;</span></span></span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">var</span> uniquePaths = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">m, n</span>) </span>&#123;<br>    <span class="hljs-keyword">var</span> dp = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Array</span>();<br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> k=<span class="hljs-number">0</span>;k&lt;m;k++)&#123; <br>     dp[k]=<span class="hljs-keyword">new</span> <span class="hljs-built_in">Array</span>();<br>    &#125;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; m; i++) dp[i][<span class="hljs-number">0</span>] = <span class="hljs-number">1</span><br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> j = <span class="hljs-number">0</span>; j &lt; n; j++) dp[<span class="hljs-number">0</span>][j] = <span class="hljs-number">1</span><br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> i = <span class="hljs-number">1</span>; i &lt; m; i++)<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> j = <span class="hljs-number">1</span>; j &lt; n; j++)<br>            dp[i][j] = dp[i - <span class="hljs-number">1</span>][j] + dp[i][j - <span class="hljs-number">1</span>]<br>    <span class="hljs-keyword">return</span> dp[m - <span class="hljs-number">1</span>][n - <span class="hljs-number">1</span>]<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<h3 id="他人题解"><a href="#他人题解" class="headerlink" title="他人题解"></a>他人题解</h3><h4 id="递归-·-深度优先搜索"><a href="#递归-·-深度优先搜索" class="headerlink" title="递归 · 深度优先搜索"></a>递归 · 深度优先搜索</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs javascript">无记忆化（超时）：<br>从[<span class="hljs-number">0</span>, <span class="hljs-number">0</span>]到[m - <span class="hljs-number">1</span>, n - <span class="hljs-number">1</span>]，每次i + <span class="hljs-number">1</span>或j + <span class="hljs-number">1</span>。直到越界或到达，到达路线数+<span class="hljs-number">1</span><br><span class="hljs-keyword">var</span> uniquePaths = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">m, n, i = <span class="hljs-number">0</span>, j = <span class="hljs-number">0</span></span>) </span>&#123;<br>    <span class="hljs-keyword">return</span> i === m - <span class="hljs-number">1</span> &amp;&amp; j === n - <span class="hljs-number">1</span> ? <span class="hljs-number">1</span> : i === m || j === n ? <span class="hljs-number">0</span> : uniquePaths(m, n, i + <span class="hljs-number">1</span>, j) + uniquePaths(m, n, i, j + <span class="hljs-number">1</span>)<br>&#125;;<br><br>记忆化：<br><span class="hljs-keyword">var</span> uniquePaths = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">m, n, i = <span class="hljs-number">0</span>, j = <span class="hljs-number">0</span>, h = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Map</span>, t, t1</span>) </span>&#123;<br>    <span class="hljs-keyword">return</span> i === m - <span class="hljs-number">1</span> &amp;&amp; j === n - <span class="hljs-number">1</span> ? <span class="hljs-number">1</span> : i === m || j === n ? <span class="hljs-number">0</span> : h.has(t = i * <span class="hljs-number">100</span> + j) ? h.get(t) : (h.set(t, (t1 = uniquePaths(m, n, i + <span class="hljs-number">1</span>, j, h) + uniquePaths(m, n, i, j + <span class="hljs-number">1</span>, h))), t1)<br>&#125;;<br>作者：mantoufan<br>链接：https:<span class="hljs-comment">//leetcode-cn.com/problems/unique-paths/solution/di-gui-dong-tai-gui-hua-jiang-wei-zu-he-xlwrx/</span><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。<br></code></pre></td></tr></table></figure>
+
+<h4 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs javascript">dp[i][j]到达点[i, j]路径数，dp[i][j] = dp[i - <span class="hljs-number">1</span>][j] + dp[i][j - <span class="hljs-number">1</span>]<br>已知到i === <span class="hljs-number">0</span>首行，j === <span class="hljs-number">0</span>首列上的点路径数都为<span class="hljs-number">1</span><br><span class="hljs-keyword">var</span> uniquePaths = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">m, n, dp = <span class="hljs-built_in">Array</span>.<span class="hljs-keyword">from</span>(&#123;length: m&#125;, _ =&gt; <span class="hljs-keyword">new</span> <span class="hljs-built_in">Uint32Array</span>(n))</span>) </span>&#123;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; m; i++) dp[i][<span class="hljs-number">0</span>] = <span class="hljs-number">1</span><br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> j = <span class="hljs-number">0</span>; j &lt; n; j++) dp[<span class="hljs-number">0</span>][j] = <span class="hljs-number">1</span><br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> i = <span class="hljs-number">1</span>; i &lt; m; i++)<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> j = <span class="hljs-number">1</span>; j &lt; n; j++)<br>            dp[i][j] = dp[i - <span class="hljs-number">1</span>][j] + dp[i][j - <span class="hljs-number">1</span>]<br>    <span class="hljs-keyword">return</span> dp[m - <span class="hljs-number">1</span>][n - <span class="hljs-number">1</span>]<br>&#125;;<br>三元判断：<br><span class="hljs-keyword">var</span> uniquePaths = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">m, n, dp = <span class="hljs-built_in">Array</span>.<span class="hljs-keyword">from</span>(&#123;length: m&#125;, _ =&gt; <span class="hljs-keyword">new</span> <span class="hljs-built_in">Uint32Array</span>(n))</span>) </span>&#123;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; m; i++)<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> j = <span class="hljs-number">0</span>; j &lt; n; j++)<br>            dp[i][j] = i === <span class="hljs-number">0</span> || j === <span class="hljs-number">0</span> ? <span class="hljs-number">1</span> : dp[i - <span class="hljs-number">1</span>][j] + dp[i][j - <span class="hljs-number">1</span>]<br>    <span class="hljs-keyword">return</span> dp[m - <span class="hljs-number">1</span>][n - <span class="hljs-number">1</span>]<br>&#125;;<br>作者：mantoufan<br>链接：https:<span class="hljs-comment">//leetcode-cn.com/problems/unique-paths/solution/di-gui-dong-tai-gui-hua-jiang-wei-zu-he-xlwrx/</span><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。<br></code></pre></td></tr></table></figure>
+<h4 id="动态规划-·-降维"><a href="#动态规划-·-降维" class="headerlink" title="动态规划 · 降维"></a>动态规划 · 降维</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs javascript">解题思路<br>遍历行，dp[j]到列j路径数。扫描列：本行dp[j] = 上行dp[j] ↓ + 左列dp[j - <span class="hljs-number">1</span>]→<br>遍历列，dp[i]到行i路径数。扫描行：本列dp[i] = 左列dp[i]→ + 上行dp[i - <span class="hljs-number">1</span>]↓<br>代码<br>遍历行，扫描列，直到第m - <span class="hljs-number">1</span>行的第n - <span class="hljs-number">1</span>列，即点[m - <span class="hljs-number">1</span>, n - <span class="hljs-number">1</span>]<br><br><span class="hljs-keyword">var</span> uniquePaths = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">m, n, dp = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Uint32Array</span>(n).fill(<span class="hljs-number">1</span>)</span>) </span>&#123;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> i = <span class="hljs-number">1</span>; i &lt; m; i++) <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> j = <span class="hljs-number">1</span>; j &lt; n; j++) dp[j] = dp[j] + dp[j-<span class="hljs-number">1</span>]<br>    <span class="hljs-keyword">return</span> dp[n - <span class="hljs-number">1</span>] <span class="hljs-comment">// 即 dp[dp.length - 1]</span><br>&#125;;<br><span class="hljs-keyword">var</span> uniquePaths = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">m, n, dp = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Uint32Array</span>(n).fill(<span class="hljs-number">1</span>), i = <span class="hljs-number">0</span></span>) </span>&#123;<br>    <span class="hljs-keyword">while</span>(j = <span class="hljs-number">0</span>, ++i &lt; m) <span class="hljs-keyword">while</span>(++j &lt; n) dp[j] += dp[j - <span class="hljs-number">1</span>]<br>    <span class="hljs-keyword">return</span> dp[n - <span class="hljs-number">1</span>]<br>&#125;;<br>遍历列，扫描行，直到第n - <span class="hljs-number">1</span>列的第m - <span class="hljs-number">1</span>行，即点[m - <span class="hljs-number">1</span>, n - <span class="hljs-number">1</span>]<br><span class="hljs-keyword">var</span> uniquePaths = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">m, n, dp = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Uint32Array</span>(m).fill(<span class="hljs-number">1</span>)</span>) </span>&#123;<br>   <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> j = <span class="hljs-number">1</span>; j &lt; n; j++) <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> i = <span class="hljs-number">1</span>; i &lt; m; i++) dp[i] = dp[i] + dp[i-<span class="hljs-number">1</span>]<br>   <span class="hljs-keyword">return</span> dp[m - <span class="hljs-number">1</span>] <span class="hljs-comment">// 即 dp[dp.length - 1]</span><br>&#125;;<br><span class="hljs-keyword">var</span> uniquePaths = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">m, n, dp = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Uint32Array</span>(m).fill(<span class="hljs-number">1</span>), j = <span class="hljs-number">0</span></span>) </span>&#123;<br>    <span class="hljs-keyword">while</span>(i = <span class="hljs-number">0</span>, ++j &lt; n) <span class="hljs-keyword">while</span>(++i &lt; m) dp[i] += dp[i - <span class="hljs-number">1</span>]<br>    <span class="hljs-keyword">return</span> dp[m - <span class="hljs-number">1</span>]<br>&#125;;<br><br>作者：mantoufan<br>链接：https:<span class="hljs-comment">//leetcode-cn.com/problems/unique-paths/solution/di-gui-dong-tai-gui-hua-jiang-wei-zu-he-xlwrx/</span><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。<br></code></pre></td></tr></table></figure>
+
+<h4 id="组合"><a href="#组合" class="headerlink" title="组合"></a>组合</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs javascript">解题思路<br>从[<span class="hljs-number">0</span>, <span class="hljs-number">0</span>]走到[m, n]，只能向右或向下，总步数 m - <span class="hljs-number">1</span> + n - <span class="hljs-number">1</span> = m + n - <span class="hljs-number">2</span>步<br>向右走m - <span class="hljs-number">1</span>步时，一定向下走n - <span class="hljs-number">1</span>步。从总步数选m - <span class="hljs-number">1</span>或n - <span class="hljs-number">1</span>种组合都行<br>以选m - <span class="hljs-number">1</span>为例：<br>C(m + n - <span class="hljs-number">2</span>, m - <span class="hljs-number">1</span>) = (m + n - <span class="hljs-number">2</span>)! / (m - <span class="hljs-number">1</span>)! * (n - <span class="hljs-number">1</span>)! =<br>(m + n - <span class="hljs-number">2</span>) * (m + n - <span class="hljs-number">1</span>) ... m * （m - <span class="hljs-number">1</span> * m - <span class="hljs-number">2</span> ... <span class="hljs-number">1</span>）<br>—————————————————————— =<br>　　　　　(m - <span class="hljs-number">1</span> * m - <span class="hljs-number">2</span> ... <span class="hljs-number">1</span>) * (n - <span class="hljs-number">1</span>)!<br>　　　　　(m + n - <span class="hljs-number">2</span>) * (m + n - <span class="hljs-number">1</span>) ... m<br>—————————————————————— =<br>　　　　　　　　　　(n - <span class="hljs-number">1</span>)!<br>　　ｍ起，每次加<span class="hljs-number">1</span> 到 m + n - <span class="hljs-number">2</span>，累乘n - <span class="hljs-number">1</span>次<br>—————————————————————— =<br>　　　<span class="hljs-number">1</span>起，每次加<span class="hljs-number">1</span> 到 n - <span class="hljs-number">1</span>， 累乘n - <span class="hljs-number">1</span>次<br>代码<br>选m - <span class="hljs-number">1</span><br><span class="hljs-keyword">var</span> uniquePaths = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">m, n, r = <span class="hljs-number">1</span>, i = m, j = <span class="hljs-number">1</span></span>) </span>&#123;<br>    <span class="hljs-keyword">while</span>(j &lt; n) r = r * i++ / j++ | <span class="hljs-number">0</span><br>    <span class="hljs-keyword">return</span> r<br>&#125;;<br>选n - <span class="hljs-number">1</span><br><span class="hljs-keyword">var</span> uniquePaths = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">m, n, r = <span class="hljs-number">1</span>, i = n, j = <span class="hljs-number">1</span></span>) </span>&#123;<br>    <span class="hljs-keyword">while</span>(j &lt; m) r = r * i++ / j++ | <span class="hljs-number">0</span><br>    <span class="hljs-keyword">return</span> r<br>&#125;;<br><br>作者：mantoufan<br>链接：https:<span class="hljs-comment">//leetcode-cn.com/problems/unique-paths/solution/di-gui-dong-tai-gui-hua-jiang-wei-zu-he-xlwrx/</span><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。<br></code></pre></td></tr></table></figure>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%8A%9B%E6%89%A3/">力扣</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E9%80%92%E5%BD%92/">递归</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">动态规划</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E8%AE%B0%E5%BF%86%E5%8C%96/">记忆化</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%BB%84%E5%90%88/">组合</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E9%99%8D%E7%BB%B4/">降维</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/12/16/%E5%8A%9B%E6%89%A3290-%E5%8D%95%E8%AF%8D%E8%A7%84%E5%BE%8B/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">力扣290 单词规律</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/12/15/%E5%8A%9B%E6%89%A3738-%E5%8D%95%E8%B0%83%E9%80%92%E5%A2%9E%E7%9A%84%E6%95%B0%E5%AD%97/">
+                        <span class="hidden-mobile">力扣738 单调递增的数字</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <div>@2020-2021  Zeij</div> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

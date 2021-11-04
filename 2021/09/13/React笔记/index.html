@@ -1,0 +1,541 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.ico">
+  <link rel="icon" href="/img/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <meta name="description" content="四大文件 React.js引入核心库 React-dom.js 用于支持React操作Dom babel.js用于将jsx转为js12345678JSX语法规则虚拟Dom不要单引号（不再是文本) 标签中引入JS表达式要用&amp;#123;&amp;#125;，样式的类名指定不用class而用className，内联样式要用style&#x3D;&amp;#123;&amp;#123;key:value&amp;#125;&amp;#125;的形式写，多">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React笔记">
+<meta property="og:url" content="http://example.com/2021/09/13/React%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="Zeij&#39;s blog">
+<meta property="og:description" content="四大文件 React.js引入核心库 React-dom.js 用于支持React操作Dom babel.js用于将jsx转为js12345678JSX语法规则虚拟Dom不要单引号（不再是文本) 标签中引入JS表达式要用&amp;#123;&amp;#125;，样式的类名指定不用class而用className，内联样式要用style&#x3D;&amp;#123;&amp;#123;key:value&amp;#125;&amp;#125;的形式写，多">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-09-13T12:40:26.000Z">
+<meta property="article:modified_time" content="2021-11-04T08:17:55.491Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="React">
+<meta property="article:tag" content="笔记">
+<meta name="twitter:card" content="summary_large_image">
+  
+  <title>React笔记 - Zeij&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Zeij</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default1.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="React笔记">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-09-13 20:40" pubdate>
+        2021年9月13日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      6.7k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      21 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">React笔记</h1>
+            
+            <div class="markdown-body">
+              <h2 id="四大文件"><a href="#四大文件" class="headerlink" title="四大文件"></a>四大文件</h2><ul>
+<li>React.js引入核心库</li>
+<li>React-dom.js 用于支持React操作Dom</li>
+<li>babel.js用于将jsx转为js<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs angelscript">JSX语法规则虚拟Dom不要单引号（不再是文本) 标签中引入JS表达式要用&#123;&#125;，样式的类名指定不用<span class="hljs-keyword">class</span>而用<span class="hljs-symbol">className</span>，内联样式要用<span class="hljs-symbol">style</span>=&#123;&#123;key:value&#125;&#125;的形式写，多单词记得驼峰。虚拟DOM必须只有一个根标签，标签必须闭合    <br>虚拟Dom渲染ReactDOM.render<br><br>虚拟Dom为Object对象，属性相比真实Dom较少<br><br>XML早期用于存储和传输数据，后改用JSON<br><br>组件自定义方法用箭头函数和赋值语句<br></code></pre></td></tr></table></figure>
+<h2 id="props属性"><a href="#props属性" class="headerlink" title="props属性"></a>props属性</h2><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs scala"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">React</span>.<span class="hljs-title">Component</span></span>&#123;<br>    constructor(props)&#123;<br>        <span class="hljs-comment">//构造器是否接收props，是否传递给super取决于是否希望在构造器中通过this访问props，若要则要接要传</span><br>        <span class="hljs-keyword">super</span>(props)<br>        console.log(<span class="hljs-symbol">&#x27;constructo</span>r&#x27;,<span class="hljs-keyword">this</span>.props);<br>    &#125;<br>    static propTypes=&#123;<br>        name:<span class="hljs-type">PropTypes</span>.string.isRequired,<br>        ...<span class="hljs-comment">//对标签属性进行类型必要性的限制</span><br>    &#125;<br>    static defaultProps=&#123;<br>        ...<span class="hljs-comment">//指定默认标签属性值</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h1 id="生命钩子函数"><a href="#生命钩子函数" class="headerlink" title="生命钩子函数"></a>生命钩子函数</h1><figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs delphi">生命周期的三个阶段（旧）<br>一. 初始化阶段: 由ReactDOM.render()触发---初次渲染<br><span class="hljs-number">1</span>. <span class="hljs-function"><span class="hljs-keyword">constructor</span><span class="hljs-params">()</span></span><br><span class="hljs-function">2. <span class="hljs-title">componentWillMount</span><span class="hljs-params">()</span></span><br><span class="hljs-function">3. <span class="hljs-title">render</span><span class="hljs-params">()</span> 常用</span><br><span class="hljs-function">4. <span class="hljs-title">componentDidMount</span><span class="hljs-params">()</span> 常用，开启监听, 发送<span class="hljs-title">ajax</span>请求</span><br><span class="hljs-function">二. 更新阶段:</span> 由组件内部this.setSate()或父组件重新render触发<br><span class="hljs-number">1</span>. shouldComponentUpdate()<br><span class="hljs-number">2</span>. componentWillUpdate()<br><span class="hljs-number">3</span>. render()<br><span class="hljs-number">4</span>. componentDidUpdate()<br>三. 卸载组件: 由ReactDOM.unmountComponentAtNode()触发<br><span class="hljs-number">1</span>.componentWillUnmount() 常用,做一些收尾工作, 如: 清理定时器<br></code></pre></td></tr></table></figure>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs stylus">生命周期的三个阶段（新）<br>一. 初始化阶段: 由ReactDOM<span class="hljs-selector-class">.render</span>()触发---初次渲染<br><span class="hljs-number">1</span><span class="hljs-selector-class">.constructor</span>()<br><span class="hljs-number">2</span><span class="hljs-selector-class">.getDerivedStateFromProps</span> <br><span class="hljs-number">3</span><span class="hljs-selector-class">.render</span>()<br><span class="hljs-number">4</span><span class="hljs-selector-class">.componentDidMount</span>()<br>二. 更新阶段: 由组件内部this<span class="hljs-selector-class">.setSate</span>()或父组件重新render触发<br><span class="hljs-number">1</span><span class="hljs-selector-class">.getDerivedStateFromProps</span><br><span class="hljs-number">2</span><span class="hljs-selector-class">.shouldComponentUpdate</span>()<br><span class="hljs-number">3</span><span class="hljs-selector-class">.render</span>()<br><span class="hljs-number">4</span><span class="hljs-selector-class">.getSnapshotBeforeUpdate</span><br><span class="hljs-number">5</span><span class="hljs-selector-class">.componentDidUpdate</span>()<br>三. 卸载组件: 由ReactDOM<span class="hljs-selector-class">.unmountComponentAtNode</span>()触发<br></code></pre></td></tr></table></figure>
+<h2 id="案例总结"><a href="#案例总结" class="headerlink" title="案例总结"></a>案例总结</h2></li>
+</ul>
+<ol>
+<li>拆分组件、实现静态组件，注意: className、 sty1e的写法</li>
+<li>动态初始化列表，如何确定将数据放在哪个组件的state中?<br> 某个组件使用:放在其自身的state中<br> 某些组件使用:放在他们共同的父组件state中(官方称此操作为:状态提升)</li>
+<li>关于父子之问通信:<br>一. [父组件]给[子组件]传递数据:通过props传递<br>二. [子组件]给[父组件]传递数据:通过props传递，要求父提前给子传递一一个函 数</li>
+<li>注意defaultChecked和checked的区 别，类似的还有: defaultValue 和value</li>
+<li>状态在哪里，操作状态的方法就在哪里</li>
+</ol>
+<h2 id="github搜索案例相关知识点"><a href="#github搜索案例相关知识点" class="headerlink" title="github搜索案例相关知识点"></a>github搜索案例相关知识点</h2><ol>
+<li>设计状态时要考虑全面，例如带有网络请求的组件，要考虑请求失败怎么办。</li>
+<li>ES6小知识点：解构赋值+重命名<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> obj = &#123;<span class="hljs-attr">a</span>:&#123;<span class="hljs-attr">b</span>:<span class="hljs-number">1</span>&#125;&#125;<br><span class="hljs-keyword">const</span> &#123;a&#125; = obj; <span class="hljs-comment">//传统解构赋值</span><br><span class="hljs-keyword">const</span> &#123;<span class="hljs-attr">a</span>:&#123;b&#125;&#125; = obj; <span class="hljs-comment">//连续解构赋值</span><br><span class="hljs-keyword">const</span> &#123;<span class="hljs-attr">a</span>:&#123;<span class="hljs-attr">b</span>:value&#125;&#125; = obj; <span class="hljs-comment">//连续解构赋值+重命名</span><br></code></pre></td></tr></table></figure></li>
+<li>消息订阅与发布机制<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-number">1.</span>先订阅，再发布（理解：有一种隔空对话的感觉）<br><span class="hljs-number">2.</span>适用于任意组件间通信<br><span class="hljs-number">3.</span>要在组件的componentWillUnmount中取消订阅<br></code></pre></td></tr></table></figure></li>
+<li>fetch发送请求（关注分离的设计思想）<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">try</span> &#123;<br><span class="hljs-keyword">const</span> response= <span class="hljs-keyword">await</span> fetch(<span class="hljs-string">`/api1/search/users2?q=<span class="hljs-subst">$&#123;keyWord&#125;</span>`</span>)<br><span class="hljs-keyword">const</span> data = <span class="hljs-keyword">await</span> response.json()<br><span class="hljs-built_in">console</span>.log(data);<br>&#125; <span class="hljs-keyword">catch</span> (error) &#123;<br><span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;请求出错&#x27;</span>,error);<br>&#125;<br><span class="hljs-string">``</span><span class="hljs-string">`		</span><br><span class="hljs-string">## 路由</span><br><span class="hljs-string">路由的原理是对浏览器的history进行操作</span><br><span class="hljs-string">### 路由的基本使用</span><br><span class="hljs-string">1. 明确好界面中的导航区、展示区</span><br><span class="hljs-string">2. 导航区的a标签改为ink标签</span><br></code></pre></td></tr></table></figure>
+<Link to=" / xxxxx" >Demo</Link>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-bullet">3.</span> 展示区写Route标签进行路径的匹配<br></code></pre></td></tr></table></figure>
+<Route path= ' /xxxx ' component= {Demo}/ >
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs xml">4. <span class="hljs-tag">&lt;<span class="hljs-name">App</span>&gt;</span>的最外侧包裹了一-个<span class="hljs-tag">&lt;<span class="hljs-name">BrowserRouter</span>&gt;</span>或<span class="hljs-tag">&lt;<span class="hljs-name">HashRouter</span>&gt;</span><br>### 四、路由组件与一般组件<br>1. 写法不同:<br>一般组件: <span class="hljs-tag">&lt;<span class="hljs-name">Demo</span>/&gt;</span><br>路由组件: <span class="hljs-tag">&lt;<span class="hljs-name">Route</span> <span class="hljs-attr">path</span>=<span class="hljs-string">&quot; /demo&quot;</span> <span class="hljs-attr">component</span>=<span class="hljs-string">&#123;Demo&#125;/</span>&gt;</span><br>2. 存放位置不同:    <br>一般组件: components     <br>路由组件: pages   <br>3. 接收到的props不同: <br>一般组件:写组件标签时传递了什么，就能收到什么    <br>路由组件:接收到三个固定的属性<br></code></pre></td></tr></table></figure>
+      history:   
+      go: f go(n)
+      goBack: f goBack()
+      goForward: f goForward()
+      push: f push(path, state)
+      replace: f replace(path, state)
+      location:
+      pathname: "/about"
+      search :
+      state: undefined
+      match :
+      params :
+      {}
+      path:
+      "/ about"
+      url: "/about"
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-section">### 五、NavLink与封装NavLink</span><br><span class="hljs-bullet">1.</span> NavLink可以实现路由链接的高亮，通过activeClassName 指定样式名<br><span class="hljs-bullet">2.</span> 标签体内容是一个特殊的标签属性<br><span class="hljs-bullet">3.</span> 通过this. props . children可以获取标签体内容<br><br><span class="hljs-section">### 六、Switch的使用</span><br><span class="hljs-bullet">1.</span> 通常情况下，path和component是一一对应的关 系。<br><span class="hljs-bullet">2.</span> Switch可以提高路由匹配效率(单-匹配)。<br><span class="hljs-section">### 七、解决多级路径刷新页面样式丢失的问题</span><br><span class="hljs-bullet">1.</span> public/index.html中引入样式时不写./写/ (常用)<br><span class="hljs-bullet">2.</span> public/index.html中引入样式时不写./写%PUBLIC<span class="hljs-emphasis">_ _</span>URL% (常用)<br><span class="hljs-bullet">3.</span> 使用HashRouter<br><span class="hljs-section">### 八、路由的严格匹配与模糊匹配</span><br><span class="hljs-bullet">1.</span> 默认使用的是模糊匹配(简单记: [ 输入的路径]必须包含要[匹配的路径]，且顺序要一致)<br><span class="hljs-bullet">2.</span> 开启严格匹配:<br></code></pre></td></tr></table></figure>
+<Route exact={true} path=" /about" component={About}/>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs xml">3. 严格匹配不要随便开启，需要再开，有些时候开启会导致无法继续匹配二级路由<br><br>### 九、Redirect的使用<br>1. 一般写在所有路由注册的最下方，当所有路由都无法匹配时， 跳转到Redirect指定 的路由<br>2. 具体编码:<br>```javascript<br>&lt; Switch&gt;<br><span class="hljs-tag">&lt;<span class="hljs-name">Route</span> <span class="hljs-attr">path</span>=<span class="hljs-string">&quot; /about&quot;</span> <span class="hljs-attr">component</span>=<span class="hljs-string">&#123;About&#125;/</span>&gt;</span><br>I<br><span class="hljs-tag">&lt;<span class="hljs-name">Route</span> <span class="hljs-attr">path</span>=<span class="hljs-string">&quot; /home&quot;</span> <span class="hljs-attr">component</span>=<span class="hljs-string">&#123;Home&#125;/</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">Redirect</span> <span class="hljs-attr">to</span>=<span class="hljs-string">&quot;/about&quot;</span>/&gt;</span><br>&lt; /Switch&gt;<br></code></pre></td></tr></table></figure>
+### 十、嵌套路由</li>
+<li>注册子路由时要写上父路由的path值</li>
+<li>路由的匹配是按照注册路由的顺序进行的</li>
+</ol>
+<h3 id="十一、向路由组件传递参数"><a href="#十一、向路由组件传递参数" class="headerlink" title="十一、向路由组件传递参数"></a>十一、向路由组件传递参数</h3><ol>
+<li>params参数<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs javascript"> &lt;Link to= <span class="hljs-string">&#x27; /demo/test/tom/18&#x27;</span>&gt;详情&lt;<span class="hljs-regexp">/Link&gt; /</span><span class="hljs-regexp">/路由链接(携带参数)</span><br><span class="hljs-regexp"> &lt;Route path=&quot; /</span>demo/test/:name/:age<span class="hljs-string">&quot; component=&#123;Test&#125;/&gt;//注册路由(声明接收)</span><br><span class="hljs-string">const &#123;name,age&#125; = this.props.match.params//接收参数:</span><br></code></pre></td></tr></table></figure></li>
+<li>search参数<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&lt;Link to=<span class="hljs-string">&#x27;/demo/test/?name=tom&amp;age=18&#x27;</span>&gt;详情&lt;<span class="hljs-regexp">/Link&gt;/</span><span class="hljs-regexp">/路由链接(携带参数)</span><br><span class="hljs-regexp">&lt;Route path=&quot; /</span>demo/test<span class="hljs-string">&quot; component=&#123;Test&#125;/&gt;//注册路由(无需声明，正常注册即可):</span><br><span class="hljs-string"> const &#123;search&#125; = this.props.location//接收参数</span><br><span class="hljs-string">//获取到的search是urlencoded编码字符串，需要借助querystring解析:parse方法</span><br></code></pre></td></tr></table></figure></li>
+<li>state参数<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&lt;Link to=&#123;&#123;<span class="hljs-attr">path</span>: <span class="hljs-string">&#x27; /demo/test&#x27;</span> ,<span class="hljs-attr">state</span>: &#123;<span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;tom&#x27;</span> ,<span class="hljs-attr">age</span>:<span class="hljs-number">18</span>&#125;&#125;&#125;&gt;详情&lt;<span class="hljs-regexp">/Link&gt;/</span><span class="hljs-regexp">/路由链接(携带参数)</span><br><span class="hljs-regexp">&lt;Route path=&quot; demo/</span>test<span class="hljs-string">&quot; component=&#123;Test&#125;/&gt;//注册路由(无需声明，正常注册即可)</span><br><span class="hljs-string">const &#123;name,age&#125; = this.props.location.state//接收参数</span><br><span class="hljs-string">//刷新也可以保留住参数(地址栏路由链接没了)</span><br></code></pre></td></tr></table></figure>
+<h3 id="十二、编程式路由导肮"><a href="#十二、编程式路由导肮" class="headerlink" title="十二、编程式路由导肮"></a>十二、编程式路由导肮</h3>借助this . prosp. history对象上的API对操作路由跳转、前进、后退<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs kotlin">-<span class="hljs-keyword">this</span>. prosp. history. push( )<br>-<span class="hljs-keyword">this</span>. prosp. history. replace( )<br>-<span class="hljs-keyword">this</span> . prosp. history goBack()<br>-<span class="hljs-keyword">this</span>. prosp. history. goForward()<br>-<span class="hljs-keyword">this</span> . prosp. history.go()<br></code></pre></td></tr></table></figure>
+<h3 id="十三、withRouter使用"><a href="#十三、withRouter使用" class="headerlink" title="十三、withRouter使用"></a>十三、withRouter使用</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs scala"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Header</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>&#123;<br>    ...<br>&#125;<br>export <span class="hljs-keyword">default</span> withRouter(<span class="hljs-type">Header</span>)<br><span class="hljs-comment">//withRouter可以加工一般组件，让一般组件具备路由组件所特有的API</span><br><span class="hljs-comment">//withRouter的返回值是一个新组件</span><br></code></pre></td></tr></table></figure>
+<h3 id="十三、BrowserRouter-与HashRouter的区别"><a href="#十三、BrowserRouter-与HashRouter的区别" class="headerlink" title="十三、BrowserRouter 与HashRouter的区别"></a>十三、BrowserRouter 与HashRouter的区别</h3></li>
+<li>底层原理不一样<br>BrowserRouter使用的是H5的history API，不兼容IE9及以下版本。<br>HashRouter使用的是URL的哈希值。</li>
+<li>path表现形式不一样<br>BrowserRouter的路径中没有#,例如: localhost:3000/demo/test<br>HashRouter的路径包含#,例如: localhost:3000/#/demo/test    </li>
+<li>刷新后对路由state参数的影响<br>(1) . BrowserRouter没有任何影响，因为state保存在history对象中。<br>(2) . HashRouter刷新后会导致路由state参数的丢失。   </li>
+<li>备注:HashRouter可以用于解决–些路径错误相关的问题。   </li>
+</ol>
+<h3 id="十四、antd的按需引入-自定主题"><a href="#十四、antd的按需引入-自定主题" class="headerlink" title="十四、antd的按需引入+自定主题"></a>十四、antd的按需引入+自定主题</h3><pre><code>        1.安装依赖：yarn add react-app-rewired customize-cra babel-plugin-import less less-loader
+        2.修改package.json
+                ....
+                    &quot;scripts&quot;: &#123;
+                        &quot;start&quot;: &quot;react-app-rewired start&quot;,
+                        &quot;build&quot;: &quot;react-app-rewired build&quot;,
+                        &quot;test&quot;: &quot;react-app-rewired test&quot;,
+                        &quot;eject&quot;: &quot;react-scripts eject&quot;
+                    &#125;,
+                ....
+        3.根目录下创建config-overrides.js
+                //配置具体的修改规则
+                const &#123; override, fixBabelImports,addLessLoader&#125; = require(&#39;customize-cra&#39;);
+                module.exports = override(
+                    fixBabelImports(&#39;import&#39;, &#123;
+                        libraryName: &#39;antd&#39;,
+                        libraryDirectory: &#39;es&#39;,
+                        style: true,
+                    &#125;),
+                    addLessLoader(&#123;
+                        lessOptions:&#123;
+                            javascriptEnabled: true,
+                            modifyVars: &#123; &#39;@primary-color&#39;: &#39;green&#39; &#125;,
+                        &#125;
+                    &#125;),
+                );
+            4.备注：不用在组件里亲自引入样式了，即：import &#39;antd/dist/antd.css&#39;应该删掉
+</code></pre>
+<h2 id="Redux"><a href="#Redux" class="headerlink" title="Redux"></a>Redux</h2><h3 id="1-求和案例-redux精简版"><a href="#1-求和案例-redux精简版" class="headerlink" title="1.求和案例_redux精简版"></a>1.求和案例_redux精简版</h3><figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs llvm">(<span class="hljs-number">1</span>).去除Count组件自身的状态<br>(<span class="hljs-number">2</span>).src下建立:<br>				-redux<br>					-<span class="hljs-keyword">store</span>.js<br>					-count_reducer.js<br><br>(<span class="hljs-number">3</span>).<span class="hljs-keyword">store</span>.js：<br>			<span class="hljs-number">1</span>).引入redux中的createStore函数，创建一个<span class="hljs-keyword">store</span><br>			<span class="hljs-number">2</span>).createStore调用时要传入一个为其服务的reducer<br>			<span class="hljs-number">3</span>).记得暴露<span class="hljs-keyword">store</span>对象<br><br>(<span class="hljs-number">4</span>).count_reducer.js：<br>			<span class="hljs-number">1</span>).reducer的本质是一个函数，接收：preState<span class="hljs-punctuation">,</span>action，返回加工后的状态<br>			<span class="hljs-number">2</span>).reducer有两个作用：初始化状态，加工状态<br>			<span class="hljs-number">3</span>).reducer被第一次调用时，是<span class="hljs-keyword">store</span>自动触发的，<br>							传递的preState是undefined<span class="hljs-punctuation">,</span><br>							传递的action是:&#123;<span class="hljs-keyword">type</span>:&#x27;@<span class="hljs-title">@REDUX</span>/INIT_a.<span class="hljs-number">2</span>.b.<span class="hljs-number">4</span>&#125;<br><br>(<span class="hljs-number">5</span>).在index.js中监测<span class="hljs-keyword">store</span>中状态的改变，一旦发生改变重新渲染&lt;App/&gt;<br>		备注：redux只负责管理状态，至于状态的改变驱动着页面的展示，要靠我们自己写<br></code></pre></td></tr></table></figure>
+<h3 id="2-求和案例-redux完整版"><a href="#2-求和案例-redux完整版" class="headerlink" title="2.求和案例_redux完整版"></a>2.求和案例_redux完整版</h3><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs stylus">新增文件：<br><span class="hljs-number">1</span><span class="hljs-selector-class">.count_action</span><span class="hljs-selector-class">.js</span> 专门用于创建action对象<br><span class="hljs-number">2</span><span class="hljs-selector-class">.constant</span><span class="hljs-selector-class">.js</span> 放置容易写错的type值<br></code></pre></td></tr></table></figure>
+
+
+<h3 id="3-求和案例-redux异步action版"><a href="#3-求和案例-redux异步action版" class="headerlink" title="3.求和案例_redux异步action版"></a>3.求和案例_redux异步action版</h3><figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs fortran">(<span class="hljs-number">1</span>).明确：延迟的动作不想交给组件自身，想交给<span class="hljs-keyword">action</span><br>(<span class="hljs-number">2</span>).何时需要异步<span class="hljs-keyword">action</span>：想要对状态进行操作，但是具体的数据靠异步任务返回。<br>(<span class="hljs-number">3</span>).具体编码：<br>			<span class="hljs-number">1</span>).yarn add redux-thunk，并配置在store中<br>			<span class="hljs-number">2</span>).创建<span class="hljs-keyword">action</span>的函数不再返回一般对象，而是一个函数，该函数中写异步任务。<br>			<span class="hljs-number">3</span>).异步任务有结果后，分发一个同步的<span class="hljs-keyword">action</span>去真正操作数据。<br>(<span class="hljs-number">4</span>).备注：异步<span class="hljs-keyword">action</span>不是必须要写的，完全可以自己等待异步任务的结果了再去分发同步<span class="hljs-keyword">action</span>。<br></code></pre></td></tr></table></figure>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/React/">React</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%AC%94%E8%AE%B0/">笔记</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/09/13/Node%E7%AC%94%E8%AE%B0/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Node笔记</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/09/09/%E5%88%B7%E9%A2%98%E8%8E%B7%E5%8F%96%E7%9A%84%E5%B0%8F%E7%9F%A5%E8%AF%86/">
+                        <span class="hidden-mobile">刷题获取的小知识</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <div>@2020-2021  Zeij</div> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

@@ -1,0 +1,470 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.ico">
+  <link rel="icon" href="/img/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <meta name="description" content="题目假设你是一位很棒的家长，想要给你的孩子们一些小饼干。但是，每个孩子最多只能给一块饼干。   对每个孩子 i，都有一个胃口值 g[i]，这是能让孩子们满足胃口的饼干的最小尺寸；并且每块饼干 j，都有一个尺寸 s[j] 。如果 s[j] &gt;&#x3D; g[i]，我们可以将这个饼干 j 分配给孩子 i ，这个孩子会得到满足。你的目标是尽可能满足越多数量的孩子，并输出这个最大数值。  示例 1:输入:">
+<meta property="og:type" content="article">
+<meta property="og:title" content="力扣455 分发饼干">
+<meta property="og:url" content="http://example.com/2020/12/25/%E5%8A%9B%E6%89%A3455-%E5%88%86%E5%8F%91%E9%A5%BC%E5%B9%B2/index.html">
+<meta property="og:site_name" content="Zeij&#39;s blog">
+<meta property="og:description" content="题目假设你是一位很棒的家长，想要给你的孩子们一些小饼干。但是，每个孩子最多只能给一块饼干。   对每个孩子 i，都有一个胃口值 g[i]，这是能让孩子们满足胃口的饼干的最小尺寸；并且每块饼干 j，都有一个尺寸 s[j] 。如果 s[j] &gt;&#x3D; g[i]，我们可以将这个饼干 j 分配给孩子 i ，这个孩子会得到满足。你的目标是尽可能满足越多数量的孩子，并输出这个最大数值。  示例 1:输入:">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s3.ax1x.com/2020/12/25/rWTYu9.png">
+<meta property="og:image" content="https://s3.ax1x.com/2020/12/25/rWTWUP.png">
+<meta property="article:published_time" content="2020-12-25T11:03:04.000Z">
+<meta property="article:modified_time" content="2021-11-04T08:16:26.514Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="排序，优先队列">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://s3.ax1x.com/2020/12/25/rWTYu9.png">
+  
+  <title>力扣455 分发饼干 - Zeij&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Zeij</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default1.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="力扣455 分发饼干">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-12-25 19:03" pubdate>
+        2020年12月25日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      6.1k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      19 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">力扣455 分发饼干</h1>
+            
+            <div class="markdown-body">
+              <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>假设你是一位很棒的家长，想要给你的孩子们一些小饼干。但是，每个孩子最多只能给一块饼干。  </p>
+<p>对每个孩子 i，都有一个胃口值 g[i]，这是能让孩子们满足胃口的饼干的最小尺寸；并且每块饼干 j，都有一个尺寸 s[j] 。如果 s[j] &gt;= g[i]，我们可以将这个饼干 j 分配给孩子 i ，这个孩子会得到满足。你的目标是尽可能满足越多数量的孩子，并输出这个最大数值。</p>
+<p> <br>示例 1:<br>输入: g = [1,2,3], s = [1,1]<br>输出: 1<br>解释:<br>你有三个孩子和两块小饼干，3个孩子的胃口值分别是：1,2,3。<br>虽然你有两块小饼干，由于他们的尺寸都是1，你只能让胃口值是1的孩子满足。<br>所以你应该输出1。</p>
+<p>示例 2:<br>输入: g = [1,2], s = [1,2,3]<br>输出: 2<br>解释:<br>你有两个孩子和三块小饼干，2个孩子的胃口值分别是1,2。<br>你拥有的饼干数量和尺寸都足以让所有孩子满足。<br>所以你应该输出2. 
+ </p>
+<p>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/assign-cookies">https://leetcode-cn.com/problems/assign-cookies</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>排列两个数组（一定要重新自定义方法！！！！因为他默认排序用第一位）然后进行遍历孩子，如果尺寸不满足胃口值就下一个，直到遍历完或饼干用完</p>
+<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><h3 id="本人题解"><a href="#本人题解" class="headerlink" title="本人题解"></a>本人题解</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param <span class="hljs-type">&#123;number[]&#125;</span> <span class="hljs-variable">g</span></span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param <span class="hljs-type">&#123;number[]&#125;</span> <span class="hljs-variable">s</span></span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return <span class="hljs-type">&#123;number&#125;</span></span></span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">var</span> findContentChildren = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">g, s</span>) </span>&#123;<br>    g.sort(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">a, b</span>) </span>&#123;<br>  <span class="hljs-keyword">return</span> a - b;<br>&#125;);<br>    s.sort(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">a, b</span>) </span>&#123;<br>  <span class="hljs-keyword">return</span> a - b;<br>&#125;);<br>    <span class="hljs-keyword">let</span> j=<span class="hljs-number">0</span>,num=<span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> i=<span class="hljs-number">0</span>;i&lt;g.length;i++)&#123;<br>        <span class="hljs-keyword">while</span>(s[j]&lt;g[i])&#123;<br>            j++;<br>        &#125;<br>        <span class="hljs-keyword">if</span>(j!=s.length)&#123;<br>            num++;<br>            j++;<br>        &#125;<br>        <span class="hljs-keyword">if</span>(j==s.length)&#123;<br>            <span class="hljs-keyword">break</span>;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> num;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+
+<h3 id="他人题解"><a href="#他人题解" class="headerlink" title="他人题解"></a>他人题解</h3><p>贪心策略<br>孩子 选 饼干：如果 胃口小的孩子吃大饼干，剩下 胃口大的孩子没有饼干吃。所以如图<br>饼干 选 孩子：如果 大饼干给胃口小孩子吃，剩下 小饼干胃口大孩子不够吃。所以如图<br><a target="_blank" rel="noopener" href="https://imgchr.com/i/rWTYu9"><img src="https://s3.ax1x.com/2020/12/25/rWTYu9.png" srcset="/img/loading.gif" lazyload alt="rWTYu9.png"></a><br>迭代Math.min/Math.max每次从数组取最值，不如排序从头或尾移动指针效率高<br>所以，排序对于本题实现贪心算法，不是必须的，是为了更快地取最值</p>
+<h4 id="一-单排序"><a href="#一-单排序" class="headerlink" title="一 单排序"></a>一 单排序</h4><p>只排序要取最值的数组。以倒序遍历为例，顺序也可</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs javascript">孩子 选 饼干：小 → 大<br><span class="hljs-keyword">var</span> findContentChildren = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">g, s</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> r = <span class="hljs-number">0</span>, i = g.length<br>    s.sort(<span class="hljs-function">(<span class="hljs-params">a, b</span>) =&gt;</span> b - a) <span class="hljs-comment">// 饼干降序</span><br>    <span class="hljs-keyword">while</span> (i--) &#123;<br>        <span class="hljs-keyword">if</span> (s[<span class="hljs-number">0</span>] &lt; g[i]) <span class="hljs-keyword">continue</span> <span class="hljs-comment">// 最大饼干 都满足不了 跳过</span><br>        j = s.length<br>        <span class="hljs-keyword">while</span> (j--)  &#123;<br>            <span class="hljs-keyword">if</span> (s[j] &gt;= g[i]) &#123; <span class="hljs-comment">// 找满足胃口的最小饼干</span><br>                r++<br>                s.splice(j, <span class="hljs-number">1</span>) <span class="hljs-comment">// 吃</span><br>                <span class="hljs-keyword">break</span><br>            &#125;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> r<br>&#125;;<br><br>饼干 选 孩子：小 → 大<br><span class="hljs-keyword">var</span> findContentChildren = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">g, s</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> r = <span class="hljs-number">0</span>, j = s.length<br>    g.sort(<span class="hljs-function">(<span class="hljs-params">a, b</span>) =&gt;</span> a - b) <span class="hljs-comment">// 孩子升序</span><br>    <span class="hljs-keyword">while</span> (j--) &#123;<br>        <span class="hljs-keyword">if</span> (g[<span class="hljs-number">0</span>] &gt; s[j]) <span class="hljs-keyword">continue</span> <span class="hljs-comment">// 胃口最小孩子 都满足不了 跳过</span><br>        i = g.length<br>        <span class="hljs-keyword">while</span> (i--)  &#123;<br>            <span class="hljs-keyword">if</span> (s[j] &gt;= g[i]) &#123; <span class="hljs-comment">// 找能满足的胃口最大的孩子</span><br>                r++<br>                g.splice(i, <span class="hljs-number">1</span>) <span class="hljs-comment">// 被吃</span><br>                <span class="hljs-keyword">break</span><br>            &#125;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> r<br>&#125;;<br><br>作者：mantoufan<br>链接：https:<span class="hljs-comment">//leetcode-cn.com/problems/assign-cookies/solution/dan-shuang-pai-xu-you-xian-dui-lie-9jie-uhwdm/</span><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。<br></code></pre></td></tr></table></figure>
+
+<h4 id="二-双排序"><a href="#二-双排序" class="headerlink" title="二 双排序"></a>二 双排序</h4><p>解题思路<br>单排序时，未排序数组的元素都要遍历。双排序后<br><a target="_blank" rel="noopener" href="https://imgchr.com/i/rWTWUP"><img src="https://s3.ax1x.com/2020/12/25/rWTWUP.png" srcset="/img/loading.gif" lazyload alt="rWTWUP.png"></a><br>好处：移动指针，代替splice。不需要全部遍历<br>孩子选饼干：饼干指针到头，剩下 小饼干 + 胃口大的孩子，循环可提前终止<br>饼干选孩子：孩子指针到头，无孩子可分，循环可提前终止</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> findContentChildren = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">g, s</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> r = <span class="hljs-number">0</span>, i = g.length, j = s.length<br>    g.sort(<span class="hljs-function">(<span class="hljs-params">a, b</span>) =&gt;</span> b - a) <span class="hljs-comment">// 孩子也降序</span><br>    s.sort(<span class="hljs-function">(<span class="hljs-params">a, b</span>) =&gt;</span> b - a)<br>    <span class="hljs-keyword">while</span> (i--) &#123;<br>        <span class="hljs-keyword">if</span> (j === -<span class="hljs-number">1</span>) <span class="hljs-keyword">break</span> <span class="hljs-comment">// 饼干指针到头</span><br>        <span class="hljs-keyword">while</span> (j--) <span class="hljs-comment">// 排除最小饼干</span><br>            <span class="hljs-keyword">if</span> (s[j] &gt;= g[i]) &#123;<br>                r++<br>                <span class="hljs-keyword">break</span><br>            &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> r<br>&#125;;<br><br><br><br><br>饼干 选 孩子：小 → 大<br><span class="hljs-keyword">var</span> findContentChildren = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">g, s</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> r = <span class="hljs-number">0</span>, i = g.length - <span class="hljs-number">1</span>, j = s.length<br>    g.sort(<span class="hljs-function">(<span class="hljs-params">a, b</span>) =&gt;</span> b - a)<br>    s.sort(<span class="hljs-function">(<span class="hljs-params">a, b</span>) =&gt;</span> b - a) <span class="hljs-comment">// 饼干也降序</span><br>    <span class="hljs-keyword">while</span> (j--) <br>        <span class="hljs-keyword">if</span> (s[j] &gt;= g[i]) &#123;<br>            r++<br>            <span class="hljs-keyword">if</span> (i-- === <span class="hljs-number">0</span>) <span class="hljs-keyword">break</span> <span class="hljs-comment">// 孩子指针到头</span><br>        &#125;<br>    <span class="hljs-keyword">return</span> r<br>&#125;;<br><br><br><br><br>空间优化<br>饼干 选 孩子代码更简洁。只有得到饼干，指针i才会移动。移动距离 = 得到饼干人数<br>饼干 选 孩子 · 优化 · 倒序：小 → 大<br><span class="hljs-keyword">var</span> findContentChildren = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">g, s</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> i = g.length - <span class="hljs-number">1</span>, j = s.length<br>    g.sort(<span class="hljs-function">(<span class="hljs-params">a, b</span>) =&gt;</span> b - a)<br>    s.sort(<span class="hljs-function">(<span class="hljs-params">a, b</span>) =&gt;</span> b - a)<br>    <span class="hljs-keyword">while</span> (j--) <br>        <span class="hljs-keyword">if</span> (s[j] &gt;= g[i]) <br>            <span class="hljs-keyword">if</span> (i-- === <span class="hljs-number">0</span>) <span class="hljs-keyword">break</span><br>    <span class="hljs-keyword">return</span> g.length - i - <span class="hljs-number">1</span><br>&#125;;<br><br><br><br><br>饼干 选 孩子 · 优化 · 顺序：小 → 大<br><span class="hljs-keyword">var</span> findContentChildren = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">g, s</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>, j = -<span class="hljs-number">1</span><br>    g.sort(<span class="hljs-function">(<span class="hljs-params">a, b</span>) =&gt;</span> a - b) <span class="hljs-comment">// 升序</span><br>    s.sort(<span class="hljs-function">(<span class="hljs-params">a, b</span>) =&gt;</span> a - b) <span class="hljs-comment">// 升序</span><br>    <span class="hljs-keyword">while</span> (++j &lt; s.length) <br>        <span class="hljs-keyword">if</span> (s[j] &gt;= g[i]) <br>            <span class="hljs-keyword">if</span> (++i === g.length) <span class="hljs-keyword">break</span><br>    <span class="hljs-keyword">return</span> i<br>&#125;;<br><br><br><br><br><br>孩子 选 饼干 · 优化 · 倒序：大 → 小<br><span class="hljs-keyword">var</span> findContentChildren = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">g, s</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> i = g.length, j = s.length - <span class="hljs-number">1</span><br>    g.sort(<span class="hljs-function">(<span class="hljs-params">a, b</span>) =&gt;</span> a - b) <span class="hljs-comment">// 升序</span><br>    s.sort(<span class="hljs-function">(<span class="hljs-params">a, b</span>) =&gt;</span> a - b) <span class="hljs-comment">// 升序</span><br>    <span class="hljs-keyword">while</span> (i--) <br>        <span class="hljs-keyword">if</span> (s[j] &gt;= g[i]) <br>            <span class="hljs-keyword">if</span> (j-- === <span class="hljs-number">0</span>) <span class="hljs-keyword">break</span><br>    <span class="hljs-keyword">return</span> s.length - j - <span class="hljs-number">1</span><br>&#125;;<br><br>作者：mantoufan<br>链接：https:<span class="hljs-comment">//leetcode-cn.com/problems/assign-cookies/solution/dan-shuang-pai-xu-you-xian-dui-lie-9jie-uhwdm/</span><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。<br></code></pre></td></tr></table></figure>
+
+
+<h4 id="三-优先队列"><a href="#三-优先队列" class="headerlink" title="三 优先队列"></a>三 优先队列</h4><p>解题思路<br>小根堆优先队列，代替sort，对放入元素自动升序排列。每次弹出都是最小值<br>代码</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br></pre></td><td class="code"><pre><code class="hljs javascript">饼干 选 孩子 · MinPriorityQueue：力扣专供JS的小根堆优先队列<br><span class="hljs-keyword">var</span> findContentChildren = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">g, s</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> r = <span class="hljs-number">0</span>, i = g.length, j = s.length,<br>        gS = <span class="hljs-keyword">new</span> MinPriorityQueue, sS = <span class="hljs-keyword">new</span> MinPriorityQueue<br>    <span class="hljs-keyword">while</span> (i--) gS.enqueue(<span class="hljs-keyword">void</span> <span class="hljs-number">0</span>, g[i])<br>    <span class="hljs-keyword">while</span> (j--) sS.enqueue(<span class="hljs-keyword">void</span> <span class="hljs-number">0</span>, s[j])<br>    <span class="hljs-keyword">while</span> (sS.isEmpty() === <span class="hljs-literal">false</span>) <br>        <span class="hljs-keyword">if</span> (sS.dequeue().priority &gt;= gS.front().priority) &#123;<br>            r++<br>            gS.dequeue()<br>            <span class="hljs-keyword">if</span> (gS.isEmpty()) <span class="hljs-keyword">break</span><br>        &#125;<br>    <span class="hljs-keyword">return</span> r<br>&#125;;<br><br><br><br><br>饼干 选 孩子 · 单调递增栈：数组模拟JS小根堆<br><span class="hljs-keyword">var</span> findContentChildren = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">g, s</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> r = <span class="hljs-number">0</span>, i = g.length, j = s.length,<br>        gS = <span class="hljs-keyword">new</span> MonotonicStack, sS = <span class="hljs-keyword">new</span> MonotonicStack<br>    <span class="hljs-keyword">while</span> (i--) gS.push(g[i])<br>    <span class="hljs-keyword">while</span> (j--) sS.push(s[j])<br>    <span class="hljs-keyword">while</span> (sS.length()) &#123;<br>        <span class="hljs-keyword">if</span> (sS.pop() &gt;= gS.top()) &#123;<br>            r++<br>            gS.pop()<br>            <span class="hljs-keyword">if</span> (gS.length() === <span class="hljs-number">0</span>) <span class="hljs-keyword">break</span><br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> r<br>&#125;;<br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MonotonicStack</span> </span>&#123;<br>    <span class="hljs-title">constructor</span> (<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-built_in">this</span>.stack = []<br>    &#125;<br>    length () &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.stack.length<br>    &#125;<br>    push (v) &#123;<br>        <span class="hljs-keyword">let</span> i = <span class="hljs-built_in">this</span>.length() - <span class="hljs-number">1</span><br>        <span class="hljs-keyword">while</span>(<span class="hljs-built_in">this</span>.stack[i] &lt; v) i--<br>        <span class="hljs-built_in">this</span>.stack.splice(i + <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, v) <br>    &#125;<br>    top () &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.stack[<span class="hljs-built_in">this</span>.length() - <span class="hljs-number">1</span>]<br>    &#125;<br>    pop () &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.stack.pop()<br>    &#125;<br><br><br><br><br><br>饼干 选 孩子 · 二叉树：完全二叉树实现JS小根堆<br><span class="hljs-keyword">var</span> findContentChildren = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">g, s</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> r = <span class="hljs-number">0</span>, i = g.length, j = s.length,<br>        gS = <span class="hljs-keyword">new</span> PriorityQueue, sS = <span class="hljs-keyword">new</span> PriorityQueue<br>    <span class="hljs-keyword">while</span> (i--) gS.add(g[i])<br>    <span class="hljs-keyword">while</span> (j--) sS.add(s[j])<br>    <span class="hljs-keyword">while</span> (sS.length()) <br>        <span class="hljs-keyword">if</span> (sS.shift().v &gt;= gS.first().v) &#123;<br>            r++<br>            gS.shift()<br>            <span class="hljs-keyword">if</span> (gS.length() === <span class="hljs-number">0</span>) <span class="hljs-keyword">break</span><br>        &#125;<br>    <span class="hljs-keyword">return</span> r<br>&#125;;<br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PriorityQueue</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-title">constructor</span>(<span class="hljs-params">a</span>)</span> &#123;<br>        <span class="hljs-built_in">this</span>.q = []<br>        a &amp;&amp; <span class="hljs-built_in">this</span>._build(a)<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-title">add</span>(<span class="hljs-params">v, second</span>)</span> &#123; <span class="hljs-comment">// 添加</span><br>        <span class="hljs-built_in">this</span>.q.push(&#123;v, second&#125;) <span class="hljs-comment">// 添加 值（比较用） 和 第二参数（索引）</span><br>        <span class="hljs-built_in">this</span>._up(<span class="hljs-built_in">this</span>.q.length - <span class="hljs-number">1</span>) <span class="hljs-comment">// 放入 二叉树的尾部，然后 上浮</span><br>    &#125;<br>    <span class="hljs-function"><span class="hljs-title">shift</span>(<span class="hljs-params"></span>)</span> &#123; <span class="hljs-comment">// 弹出</span><br>        <span class="hljs-keyword">var</span> n = <span class="hljs-built_in">this</span>.q.shift() <span class="hljs-comment">// 弹出 根节点</span><br>        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.q.length) &#123; <span class="hljs-comment">// 如果还有节点</span><br>            <span class="hljs-built_in">this</span>.q.unshift(<span class="hljs-built_in">this</span>.q.pop()) <span class="hljs-comment">// 将 最尾部的节点 放到根节点位置</span><br>            <span class="hljs-built_in">this</span>._down(<span class="hljs-number">0</span>) <span class="hljs-comment">// 下沉 根节点</span><br>        &#125;<br>        <span class="hljs-keyword">return</span> n<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-title">first</span>(<span class="hljs-params"></span>)</span> &#123; <span class="hljs-comment">// 根节点的值</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.q[<span class="hljs-number">0</span>]<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-title">empty</span>(<span class="hljs-params"></span>)</span> &#123; <span class="hljs-comment">// 是否为空</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.q.length === <span class="hljs-number">0</span><br>    &#125;<br>    <span class="hljs-function"><span class="hljs-title">length</span>(<span class="hljs-params"></span>)</span> &#123; <span class="hljs-comment">// 返回队列长度</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.q.length<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-title">_build</span>(<span class="hljs-params">a</span>)</span> &#123; <span class="hljs-comment">// 初始化</span><br>        <span class="hljs-built_in">this</span>.q.push(&#123;<span class="hljs-attr">v</span>:a[<span class="hljs-number">0</span>]&#125;) <span class="hljs-comment">// 先给空队列放入第0个元素</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">1</span>; i &lt; a.length; i++) <span class="hljs-built_in">this</span>.q.unshift(&#123;<span class="hljs-attr">v</span>:a[i]&#125;), <span class="hljs-built_in">this</span>._down(<span class="hljs-number">0</span>)<br>        <span class="hljs-comment">// 从第1个元素起，把新元素放在根节点，然后下沉 根节点</span><br>    &#125;<br>    <span class="hljs-function"><span class="hljs-title">_swap</span>(<span class="hljs-params">l, r, t</span>)</span> &#123; <span class="hljs-comment">// 交换</span><br>        t = <span class="hljs-built_in">this</span>.q[l], <span class="hljs-built_in">this</span>.q[l] = <span class="hljs-built_in">this</span>.q[r], <span class="hljs-built_in">this</span>.q[r] = t <span class="hljs-comment">// 交换两个节点</span><br>    &#125;<br>    <span class="hljs-function"><span class="hljs-title">_down</span>(<span class="hljs-params">i</span>)</span>&#123; <span class="hljs-comment">// 下沉</span><br>        <span class="hljs-keyword">var</span> t = <span class="hljs-built_in">this</span>.q.length - <span class="hljs-number">2</span> &gt;&gt; <span class="hljs-number">1</span>, min, minI <span class="hljs-comment">// 叶子节点的根节点索引，下沉到 叶子节点的根节点停止</span><br>        <span class="hljs-keyword">while</span>(i &lt;= t)&#123;<br>            <span class="hljs-keyword">var</span> l = i * <span class="hljs-number">2</span> + <span class="hljs-number">1</span>, r = l + <span class="hljs-number">1</span> <span class="hljs-comment">// 左子节点的索引 = 当前节点索引 * 2 + 1，右子节点的索引 = 左子节点的索引 + 1</span><br>            <span class="hljs-keyword">if</span> ((<span class="hljs-built_in">this</span>.q[l] ? <span class="hljs-built_in">this</span>.q[l].v : <span class="hljs-literal">Infinity</span>) &lt; (<span class="hljs-built_in">this</span>.q[r] ? <span class="hljs-built_in">this</span>.q[r].v : <span class="hljs-literal">Infinity</span>))<br>                 min = <span class="hljs-built_in">this</span>.q[l].v, minI = l<br><br>作者：mantoufan<br>链接：https:<span class="hljs-comment">//leetcode-cn.com/problems/assign-cookies/solution/dan-shuang-pai-xu-you-xian-dui-lie-9jie-uhwdm/</span><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。<br></code></pre></td></tr></table></figure>
+
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%8A%9B%E6%89%A3/">力扣</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%8E%92%E5%BA%8F%EF%BC%8C%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97/">排序，优先队列</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/12/26/%E5%8A%9B%E6%89%A385-%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">力扣85 最大矩形</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/12/24/%E5%8A%9B%E6%89%A3135-%E5%88%86%E5%8F%91%E7%B3%96%E6%9E%9C/">
+                        <span class="hidden-mobile">力扣135 分发糖果</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <div>@2020-2021  Zeij</div> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

@@ -1,0 +1,493 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.ico">
+  <link rel="icon" href="/img/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <meta name="description" content="题目给你一个整数数组 nums，有一个大小为 k 的滑动窗口从数组的最左侧移动到数组的最右侧。你只可以看到在滑动窗口内的 k 个数字。滑动窗口每次只向右移动一位。 返回滑动窗口中的最大值。   示例 1：输入：nums &#x3D; [1,3,-1,-3,5,3,6,7], k &#x3D; 3输出：[3,3,5,5,6,7]解释：滑动窗口的位置                最大值   [1  3  -1] -3">
+<meta property="og:type" content="article">
+<meta property="og:title" content="力扣239 滑动窗口最大值">
+<meta property="og:url" content="http://example.com/2021/01/02/%E5%8A%9B%E6%89%A3239-%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E6%9C%80%E5%A4%A7%E5%80%BC/index.html">
+<meta property="og:site_name" content="Zeij&#39;s blog">
+<meta property="og:description" content="题目给你一个整数数组 nums，有一个大小为 k 的滑动窗口从数组的最左侧移动到数组的最右侧。你只可以看到在滑动窗口内的 k 个数字。滑动窗口每次只向右移动一位。 返回滑动窗口中的最大值。   示例 1：输入：nums &#x3D; [1,3,-1,-3,5,3,6,7], k &#x3D; 3输出：[3,3,5,5,6,7]解释：滑动窗口的位置                最大值   [1  3  -1] -3">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s3.ax1x.com/2021/01/02/spFWGt.md.png">
+<meta property="article:published_time" content="2021-01-02T13:04:59.000Z">
+<meta property="article:modified_time" content="2021-11-04T08:15:10.357Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="计数">
+<meta property="article:tag" content="双端">
+<meta property="article:tag" content="分块">
+<meta property="article:tag" content="优先">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://s3.ax1x.com/2021/01/02/spFWGt.md.png">
+  
+  <title>力扣239 滑动窗口最大值 - Zeij&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Zeij</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default1.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="力扣239 滑动窗口最大值">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-01-02 21:04" pubdate>
+        2021年1月2日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      5.7k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      18 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">力扣239 滑动窗口最大值</h1>
+            
+            <div class="markdown-body">
+              <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>给你一个整数数组 nums，有一个大小为 k 的滑动窗口从数组的最左侧移动到数组的最右侧。你只可以看到在滑动窗口内的 k 个数字。滑动窗口每次只向右移动一位。</p>
+<p>返回滑动窗口中的最大值。</p>
+<p> </p>
+<p>示例 1：<br>输入：nums = [1,3,-1,-3,5,3,6,7], k = 3<br>输出：[3,3,5,5,6,7]<br>解释：<br>滑动窗口的位置                最大值 </p>
+<hr>
+<p>[1  3  -1] -3  5  3  6  7&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3<br> 1 [3  -1  -3] 5  3  6  7&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3<br> 1  3 [-1  -3  5] 3  6  7&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5<br> 1  3  -1 [-3  5  3] 6  7&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5<br> 1  3  -1  -3 [5  3  6] 7&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6<br> 1  3  -1  -3  5 [3  6  7]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;7  </p>
+<p>示例 2：<br>输入：nums = [1], k = 1<br>输出：[1]  </p>
+<p>示例 3：<br>输入：nums = [1,-1], k = 1<br>输出：[1,-1]  </p>
+<p>示例 4：<br>输入：nums = [9,11], k = 2<br>输出：[11] </p>
+<p>示例 5：<br>输入：nums = [4,-2], k = 2<br>输出：[4]
+ </p>
+<p>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/sliding-window-maximum">https://leetcode-cn.com/problems/sliding-window-maximum</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>最近有点懈怠了准备找状态了。。         2021.1.2</p>
+<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><h3 id="本人题解"><a href="#本人题解" class="headerlink" title="本人题解"></a>本人题解</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><br></code></pre></td></tr></table></figure>
+
+
+<h3 id="他人题解"><a href="#他人题解" class="headerlink" title="他人题解"></a>他人题解</h3><h4 id="一-计数"><a href="#一-计数" class="headerlink" title="一 计数"></a>一 计数</h4><p>索引数 + 10000（负转正），值出现次数。最大：倒序遍历，索引大 → 小，第一个值不为0<br>向右移动，新数出现次数+1，最左边数出现次数-1。最大放入结果集即可</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> maxSlidingWindow = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">nums, k</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> h = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Uint16Array</span>(<span class="hljs-number">20001</span>), r = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Int16Array</span>(nums.length - k + <span class="hljs-number">1</span>), i = -<span class="hljs-number">1</span><br>    <span class="hljs-keyword">while</span> (++i &lt; k) h[nums[i] + <span class="hljs-number">10000</span>]++<br>    r[<span class="hljs-number">0</span>] = max(h), i--<br>    <span class="hljs-keyword">while</span>(++i &lt; nums.length) &#123;<br>        h[nums[i] + <span class="hljs-number">10000</span>]++<br>        h[nums[i - k] + <span class="hljs-number">10000</span>]--<br>        r[i - k + <span class="hljs-number">1</span>] = max(h)<br>    &#125;<br>    <span class="hljs-keyword">return</span> r<br>&#125;;<br>max = <span class="hljs-function"><span class="hljs-params">h</span> =&gt;</span> &#123;<br>    <span class="hljs-keyword">let</span> j = <span class="hljs-number">20001</span><br>    <span class="hljs-keyword">while</span>(h[--j] === <span class="hljs-number">0</span>) &#123;&#125;<br>    <span class="hljs-keyword">return</span> j - <span class="hljs-number">10000</span><br>&#125;<br><br>作者：mantoufan<br>链接：https:<span class="hljs-comment">//leetcode-cn.com/problems/sliding-window-maximum/solution/ji-shu-shuang-duan-fen-kuai-you-xian-5xi-87ud/</span><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。<br></code></pre></td></tr></table></figure>
+
+<h4 id="二-双端"><a href="#二-双端" class="headerlink" title="二 双端"></a>二 双端</h4><h5 id="2-1-数"><a href="#2-1-数" class="headerlink" title="2.1 数"></a>2.1 数</h5><p>单调递减队列，特点是欺软怕硬：新元素会删比它小的数，排在比它大的数后<br>向右移动，新数放队列，最左边数是最大删，不是最大（已经被比它大的删过）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> maxSlidingWindow = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">nums, k</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> q = [], r = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Int16Array</span>(nums.length - k + <span class="hljs-number">1</span>), i = -<span class="hljs-number">1</span><br>    <span class="hljs-keyword">while</span> (++i &lt; k) q.push(max(nums[i], q))<br>    r[<span class="hljs-number">0</span>] = q[<span class="hljs-number">0</span>], i--<br>    <span class="hljs-keyword">while</span> (++i &lt; nums.length) &#123;<br>        q.push(max(nums[i], q))<br>        <span class="hljs-keyword">if</span> (q[<span class="hljs-number">0</span>] === nums[i - k]) q.shift()<br>        r[i - k + <span class="hljs-number">1</span>] = q[<span class="hljs-number">0</span>]<br>    &#125;<br>    <span class="hljs-keyword">return</span> r<br>&#125;;<br>max = <span class="hljs-function">(<span class="hljs-params">n, q</span>) =&gt;</span> &#123;<br>    <span class="hljs-keyword">while</span> (n &gt; q[q.length - <span class="hljs-number">1</span>]) q.pop()<br>    <span class="hljs-keyword">return</span> n<br>&#125;<br><br>作者：mantoufan<br>链接：https:<span class="hljs-comment">//leetcode-cn.com/problems/sliding-window-maximum/solution/ji-shu-shuang-duan-fen-kuai-you-xian-5xi-87ud/</span><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。<br></code></pre></td></tr></table></figure>
+
+
+<h5 id="2-2-索引"><a href="#2-2-索引" class="headerlink" title="2.2 索引"></a>2.2 索引</h5><p>队列存索引，而不是数。数相等时，可以全删，保留自己<br>最左边数比较的是最大数索引。数相同，索引不同，不会多删</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> maxSlidingWindow = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">nums, k</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> q = [], r = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Int16Array</span>(nums.length - k + <span class="hljs-number">1</span>), i = -<span class="hljs-number">1</span><br>    <span class="hljs-keyword">while</span> (++i &lt; k) q.push(max(nums, q, i))<br>    r[<span class="hljs-number">0</span>] = nums[q[<span class="hljs-number">0</span>]], i--<br>    <span class="hljs-keyword">while</span> (++i &lt; nums.length) &#123;<br>        q.push(max(nums, q, i))<br>        <span class="hljs-keyword">if</span> (q[<span class="hljs-number">0</span>] === i - k) q.shift()<br>        r[i - k + <span class="hljs-number">1</span>] = nums[q[<span class="hljs-number">0</span>]]<br>    &#125;<br>    <span class="hljs-keyword">return</span> r<br>&#125;;<br>max = <span class="hljs-function">(<span class="hljs-params">nums, q, i</span>) =&gt;</span> &#123;<br>    <span class="hljs-keyword">while</span> (nums[i] &gt;= nums[q[q.length - <span class="hljs-number">1</span>]]) q.pop() <span class="hljs-comment">// &gt;=</span><br>    <span class="hljs-keyword">return</span> i<br>&#125;<br><br>作者：mantoufan<br>链接：https:<span class="hljs-comment">//leetcode-cn.com/problems/sliding-window-maximum/solution/ji-shu-shuang-duan-fen-kuai-you-xian-5xi-87ud/</span><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。<br></code></pre></td></tr></table></figure>
+<p>[-7,-8,7,5,7,1,6,0]<br>4<br>该测试用例可以说明：为什么队列存数时必须&gt;而索引可以&gt;=</p>
+<h4 id="三-分块"><a href="#三-分块" class="headerlink" title="三 分块"></a>三 分块</h4><p>将数组分成k块</p>
+<p>指针j → 统计每块内从块开头到j最大值<br>指针i ← 统计每块内从块结尾到i最大值<br>滑动区间[i, i + k - 1]最大值 = 某块结尾到i最大值 与 某块开头到i + k - 1最大值取大<br><a target="_blank" rel="noopener" href="https://imgchr.com/i/spFWGt"><img src="https://s3.ax1x.com/2021/01/02/spFWGt.md.png" srcset="/img/loading.gif" lazyload alt="spFWGt.md.png"></a></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> maxSlidingWindow = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">nums, k</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> n = nums.length, p = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Int16Array</span>(n), s = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Int16Array</span>(n), r = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Int16Array</span>(n - k + <span class="hljs-number">1</span>), i = n, j = -<span class="hljs-number">1</span><br>    <span class="hljs-keyword">while</span> (i--) &#123;<br>        p[++j] = j % k ? <span class="hljs-built_in">Math</span>.max(p[j - <span class="hljs-number">1</span>], nums[j]) : nums[j]<br>        s[i]   = i % k ? <span class="hljs-built_in">Math</span>.max(s[i + <span class="hljs-number">1</span>], nums[i]) : nums[i]<br>    &#125;<br>    <span class="hljs-keyword">while</span> (i++ &lt; n - k) r[i] = <span class="hljs-built_in">Math</span>.max(s[i], p[i + k - <span class="hljs-number">1</span>])<br>    <span class="hljs-keyword">return</span> r<br>&#125;; <br><br>作者：mantoufan<br>链接：https:<span class="hljs-comment">//leetcode-cn.com/problems/sliding-window-maximum/solution/ji-shu-shuang-duan-fen-kuai-you-xian-5xi-87ud/</span><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。<br></code></pre></td></tr></table></figure>
+
+<h4 id="四-优先"><a href="#四-优先" class="headerlink" title="四 优先"></a>四 优先</h4><p>优先队列只能顶端弹出最大值。每次删最左边数只能依靠第二参数索引来避免多删</p>
+<h5 id="4-1-MaxPriorityQueue"><a href="#4-1-MaxPriorityQueue" class="headerlink" title="4.1 MaxPriorityQueue"></a>4.1 MaxPriorityQueue</h5><p>力扣封装的JS大根堆优先队列，优先权重参数必须为正数</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> maxSlidingWindow = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">nums, k</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> q = <span class="hljs-keyword">new</span> MaxPriorityQueue, r = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Int16Array</span>(nums.length - k + <span class="hljs-number">1</span>), i = -<span class="hljs-number">1</span><br>    <span class="hljs-keyword">while</span> (++i &lt; k) q.enqueue(i, nums[i] + <span class="hljs-number">10001</span>)<br>    r[<span class="hljs-number">0</span>] = q.front().priority - <span class="hljs-number">10001</span>, i--<br>    <span class="hljs-keyword">while</span> (++i &lt; nums.length) &#123;<br>        q.enqueue(i, nums[i] + <span class="hljs-number">10001</span>)<br>        <span class="hljs-keyword">while</span> (q.front().element &lt;= i - k) q.dequeue()<br>        r[i - k + <span class="hljs-number">1</span>] = q.front().priority - <span class="hljs-number">10001</span><br>    &#125;<br>    <span class="hljs-keyword">return</span> r<br>&#125;;<br><br>作者：mantoufan<br>链接：https:<span class="hljs-comment">//leetcode-cn.com/problems/sliding-window-maximum/solution/ji-shu-shuang-duan-fen-kuai-you-xian-5xi-87ud/</span><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。<br></code></pre></td></tr></table></figure>
+
+<h5 id="4-2-MyMaxPriorityQueue"><a href="#4-2-MyMaxPriorityQueue" class="headerlink" title="4.2 MyMaxPriorityQueue"></a>4.2 MyMaxPriorityQueue</h5><p>完全二叉树封装的JS大根堆优先队列</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> maxSlidingWindow = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">nums, k</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> q = <span class="hljs-keyword">new</span> MyMaxPriorityQueue, r = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Int16Array</span>(nums.length - k + <span class="hljs-number">1</span>), i = -<span class="hljs-number">1</span><br>    <span class="hljs-keyword">while</span> (++i &lt; k) q.add(nums[i], i)<br>    r[<span class="hljs-number">0</span>] = q.first().v, i--<br>    <span class="hljs-keyword">while</span> (++i &lt; nums.length) &#123;<br>        q.add(nums[i], i)<br>        <span class="hljs-keyword">while</span> (q.first().second &lt;= i - k) q.shift()<br>        r[i - k + <span class="hljs-number">1</span>] = q.first().v<br>    &#125;<br>    <span class="hljs-keyword">return</span> r<br>&#125;;<br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyMaxPriorityQueue</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-title">constructor</span>(<span class="hljs-params">a</span>)</span> &#123;<br>        <span class="hljs-built_in">this</span>.q = []<br>        a &amp;&amp; <span class="hljs-built_in">this</span>._build(a)<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-title">add</span>(<span class="hljs-params">v, second</span>)</span> &#123; <span class="hljs-comment">// 添加</span><br>        <span class="hljs-built_in">this</span>.q.push(&#123;v, second&#125;) <span class="hljs-comment">// 添加 值（比较用） 和 第二参数（索引）</span><br>        <span class="hljs-built_in">this</span>._up(<span class="hljs-built_in">this</span>.q.length - <span class="hljs-number">1</span>) <span class="hljs-comment">// 放入 二叉树的尾部，然后 上浮</span><br>    &#125;<br>    <span class="hljs-function"><span class="hljs-title">shift</span>(<span class="hljs-params"></span>)</span> &#123; <span class="hljs-comment">// 弹出</span><br>        <span class="hljs-keyword">var</span> n = <span class="hljs-built_in">this</span>.q.shift() <span class="hljs-comment">// 弹出 根节点</span><br>        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.q.length) &#123; <span class="hljs-comment">// 如果还有节点</span><br>            <span class="hljs-built_in">this</span>.q.unshift(<span class="hljs-built_in">this</span>.q.pop()) <span class="hljs-comment">// 将 最尾部的节点 放到根节点位置</span><br>            <span class="hljs-built_in">this</span>._down(<span class="hljs-number">0</span>) <span class="hljs-comment">// 下沉 根节点</span><br>        &#125;<br>        <span class="hljs-keyword">return</span> n<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-title">first</span>(<span class="hljs-params"></span>)</span> &#123; <span class="hljs-comment">// 根节点</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.q[<span class="hljs-number">0</span>]<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-title">length</span>(<span class="hljs-params"></span>)</span> &#123; <span class="hljs-comment">// 优先队列长度</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.q.length<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-title">_build</span>(<span class="hljs-params">a</span>)</span> &#123; <span class="hljs-comment">// 初始化</span><br>        <span class="hljs-built_in">this</span>.q.push(&#123;<span class="hljs-attr">v</span>:a[<span class="hljs-number">0</span>]&#125;) <span class="hljs-comment">// 先给空队列放入第0个元素</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">1</span>; i &lt; a.length; i++) <span class="hljs-built_in">this</span>.q.unshift(&#123;<span class="hljs-attr">v</span>:a[i]&#125;), <span class="hljs-built_in">this</span>._down(<span class="hljs-number">0</span>)<br>        <span class="hljs-comment">// 从第1个元素起，把新元素放在根节点，然后下沉 根节点</span><br>    &#125;<br>    <span class="hljs-function"><span class="hljs-title">_swap</span>(<span class="hljs-params">l, r, t</span>)</span> &#123; <span class="hljs-comment">// 交换</span><br>        t = <span class="hljs-built_in">this</span>.q[l], <span class="hljs-built_in">this</span>.q[l] = <span class="hljs-built_in">this</span>.q[r], <span class="hljs-built_in">this</span>.q[r] = t <span class="hljs-comment">// 交换两个节点</span><br>    &#125;<br>    <span class="hljs-function"><span class="hljs-title">_down</span>(<span class="hljs-params">i</span>)</span>&#123; <span class="hljs-comment">// 下沉</span><br>        <span class="hljs-keyword">var</span> t = <span class="hljs-built_in">this</span>.q.length - <span class="hljs-number">2</span> &gt;&gt; <span class="hljs-number">1</span>, max, maxI <span class="hljs-comment">// 叶子节点的根节点索引，下沉到 叶子节点的根节点停止</span><br>        <span class="hljs-keyword">while</span>(i &lt;= t)&#123;<br>            <span class="hljs-keyword">var</span> l = i * <span class="hljs-number">2</span> + <span class="hljs-number">1</span>, r = l + <span class="hljs-number">1</span> <span class="hljs-comment">// 左子节点的索引 = 当前节点索引 * 2 + 1，右子节点的索引 = 左子节点的索引 + 1</span><br>            <span class="hljs-keyword">if</span> ((<span class="hljs-built_in">this</span>.q[l] ? <span class="hljs-built_in">this</span>.q[l].v : -<span class="hljs-literal">Infinity</span>) &gt;= (<span class="hljs-built_in">this</span>.q[r] ? <span class="hljs-built_in">this</span>.q[r].v : -<span class="hljs-literal">Infinity</span>))<br>                 max = <span class="hljs-built_in">this</span>.q[l].v, maxI = l<br>            <span class="hljs-keyword">else</span> max = <span class="hljs-built_in">this</span>.q[r].v, maxI = r <span class="hljs-comment">// 找到 左子节点 和 右子节点的 较大者</span><br>            <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.q[i].v &lt; max) <span class="hljs-built_in">this</span>._swap(i, maxI), i = maxI <span class="hljs-comment">// 当前节点的 左子节点 或 右子节点 比 它大，交换 </span><br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">break</span><br>        &#125;<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-title">_up</span>(<span class="hljs-params">i</span>)</span> &#123; <span class="hljs-comment">// 上浮</span><br>        <span class="hljs-keyword">while</span>(i &gt; <span class="hljs-number">0</span>)&#123; <span class="hljs-comment">// 不能超过根节点</span><br>            <span class="hljs-keyword">var</span> t = i - <span class="hljs-number">1</span> &gt;&gt; <span class="hljs-number">1</span> <span class="hljs-comment">// 当前节点的 根节点索引 = 当前节点索引 - 1 的一半</span><br>            <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.q[i].v &gt;= <span class="hljs-built_in">this</span>.q[t].v) <span class="hljs-built_in">this</span>._swap(i, t), i = t <span class="hljs-comment">// 当前节点值 比 它的根节点 大，交换</span><br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">break</span><br>        &#125;<br>    &#125;<br>&#125;<br><br>作者：mantoufan<br>链接：https:<span class="hljs-comment">//leetcode-cn.com/problems/sliding-window-maximum/solution/ji-shu-shuang-duan-fen-kuai-you-xian-5xi-87ud/</span><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。<br></code></pre></td></tr></table></figure>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%8A%9B%E6%89%A3/">力扣</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E8%AE%A1%E6%95%B0/">计数</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%8F%8C%E7%AB%AF/">双端</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%88%86%E5%9D%97/">分块</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E4%BC%98%E5%85%88/">优先</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/01/03/%E5%8A%9B%E6%89%A386-%E5%88%86%E9%9A%94%E9%93%BE%E8%A1%A8/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">力扣86 分隔链表</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/01/01/%E5%8A%9B%E6%89%A3605-%E7%A7%8D%E8%8A%B1%E9%97%AE%E9%A2%98/">
+                        <span class="hidden-mobile">力扣605 种花问题</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <div>@2020-2021  Zeij</div> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
