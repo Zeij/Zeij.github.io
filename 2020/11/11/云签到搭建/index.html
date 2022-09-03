@@ -24,7 +24,7 @@
 <meta property="og:description" content="获取云服务器可以从我的上一个博客（点击查看）获取教程，本篇使用的是宝塔面板（centos7.7），但即使不用宝塔面板搭建也大同小异。 准备自己配置好LNMP环境。选择的项目是GitHub上的一个开源项目，地址：https:&#x2F;&#x2F;github.com&#x2F;MoeNetwork&#x2F;Tieba-Cloud-Sign建议先自行查看下该项目的README。配置完的最终效果如图：在这里插入图片描述 配置1.安装doc">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-11-11T02:56:20.000Z">
-<meta property="article:modified_time" content="2021-11-04T08:17:49.561Z">
+<meta property="article:modified_time" content="2022-09-03T06:33:11.794Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="云签到">
 <meta property="article:tag" content="搭建">
@@ -198,7 +198,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      773 字
+      1.4k 字
     </span>
   
 
@@ -207,7 +207,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      2 分钟
+      4 分钟
     </span>
   
 
@@ -256,10 +256,10 @@
 <p>3.运行命令</p>
 <figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">docker-compose up -d</span><br></code></pre></td></tr></table></figure>
 <p>等待部署完毕。</p>
-<p>安装程序<br>输入ip+端口号，进入如下页面：<br>点击安装<br>选择“不”<br>选择“是”，并填写信息</p>
+<p>安装程序<br>输入ip+端口号，进入如下页面：<br>点击安装<br>选择“不”<br>选择“是”，并填写信息（自动获取数据库配置）</p>
 <p>完成安装<br>可以直接绑定账号使用了<br>有问题欢迎讨论</p>
 <p>版权声明：本文为博主原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接和本声明。<br>本文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45635130/article/details/105950047">https://blog.csdn.net/weixin_45635130/article/details/105950047</a></p>
-
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs n1ql">//根据install.template.sql<br><span class="hljs-keyword">CREATE</span> TABLE <span class="hljs-symbol">`&#123;VAR-PREFIX&#125;baiduid`</span> (<br>  <span class="hljs-symbol">`id`</span> int(<span class="hljs-number">30</span>) unsigned <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span> AUTO_INCREMENT,<br>  <span class="hljs-symbol">`uid`</span> int(<span class="hljs-number">30</span>) unsigned <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,<br>  <span class="hljs-symbol">`bduss`</span> text <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,<br>  <span class="hljs-symbol">`stoken`</span> text <span class="hljs-literal">NULL</span> DEFAULT <span class="hljs-literal">NULL</span>,<br>  <span class="hljs-symbol">`name`</span> varchar(<span class="hljs-number">40</span>) CHARACTER <span class="hljs-keyword">SET</span> utf8mb4 <span class="hljs-keyword">COLLATE</span> utf8mb4_general_ci DEFAULT <span class="hljs-string">&#x27;&#x27;</span> <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,<br>  <span class="hljs-symbol">`portrait`</span> varchar(<span class="hljs-number">40</span>) <span class="hljs-keyword">COLLATE</span> utf8mb4_general_ci DEFAULT <span class="hljs-string">&#x27;&#x27;</span> <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,<br>  <span class="hljs-keyword">PRIMARY</span> <span class="hljs-keyword">KEY</span> (<span class="hljs-symbol">`id`</span>),<br>  <span class="hljs-keyword">KEY</span> <span class="hljs-symbol">`uid`</span> (<span class="hljs-symbol">`uid`</span>) <span class="hljs-keyword">USING</span> BTREE,<br>  <span class="hljs-keyword">KEY</span> <span class="hljs-symbol">`portrait`</span> (<span class="hljs-symbol">`portrait`</span>) <span class="hljs-keyword">USING</span> BTREE<br>) <br>//工具箱-&gt;运行Sql语句<br><span class="hljs-keyword">ALTER</span> TABLE <span class="hljs-symbol">`&#123;VAR-PREFIX&#125;baiduid`</span> add <span class="hljs-symbol">`portrait`</span> varchar(<span class="hljs-number">40</span>) <span class="hljs-keyword">COLLATE</span> utf8mb4_general_ci DEFAULT <span class="hljs-string">&#x27;&#x27;</span> <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span><br><span class="hljs-keyword">ALTER</span> TABLE <span class="hljs-symbol">`&#123;VAR-PREFIX&#125;baiduid`</span> add <span class="hljs-symbol">`stoken`</span> text <span class="hljs-literal">NULL</span> DEFAULT <span class="hljs-literal">NULL</span>,<br></code></pre></td></tr></table></figure>
             </div>
             <hr>
             <div>

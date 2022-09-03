@@ -16,20 +16,28 @@
   <meta name="description" content="">
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
-  <meta name="description" content="创建空白字符串可以用1new Array(n).fill(&amp;#x27; &amp;#x27;).join(&amp;#x27;&amp;#x27;) 除法取整数部分可以12m&#x2F;n|0 或math.floor parseInt n&amp;1（位与运算）可以判断n是否为偶数如果是偶数，n&amp;1返回0；否则返回1，为奇数。 ||运算符真前假后，&amp;&amp;运算符假前真后 1可以用string.trim()去除">
+  <meta name="description" content="写在前面的话最近看到标题的问题问的比较多所以整理复习了一下知识点用于学习，主要来自于FinGet的从输入URL开始建立前端知识体系 第一部分 输入网址并解析url的组成url主要由协议、主机、端口、路径、查询参数、锚点6部分组成。  解析rul输入url后，浏览器会解析url的组成信息，并构造出http请求。  浏览器发送请求前，根据请求头的expires和cache-control判断是否命中（">
 <meta property="og:type" content="article">
-<meta property="og:title" content="刷题获取的小知识">
-<meta property="og:url" content="http://example.com/2021/09/09/%E5%88%B7%E9%A2%98%E8%8E%B7%E5%8F%96%E7%9A%84%E5%B0%8F%E7%9F%A5%E8%AF%86/index.html">
+<meta property="og:title" content="从输入url到浏览器显示页面发生了什么">
+<meta property="og:url" content="http://example.com/2021/11/09/%E4%BB%8E%E8%BE%93%E5%85%A5url%E5%88%B0%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%BE%E7%A4%BA%E9%A1%B5%E9%9D%A2%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88/index.html">
 <meta property="og:site_name" content="Zeij&#39;s blog">
-<meta property="og:description" content="创建空白字符串可以用1new Array(n).fill(&amp;#x27; &amp;#x27;).join(&amp;#x27;&amp;#x27;) 除法取整数部分可以12m&#x2F;n|0 或math.floor parseInt n&amp;1（位与运算）可以判断n是否为偶数如果是偶数，n&amp;1返回0；否则返回1，为奇数。 ||运算符真前假后，&amp;&amp;运算符假前真后 1可以用string.trim()去除">
+<meta property="og:description" content="写在前面的话最近看到标题的问题问的比较多所以整理复习了一下知识点用于学习，主要来自于FinGet的从输入URL开始建立前端知识体系 第一部分 输入网址并解析url的组成url主要由协议、主机、端口、路径、查询参数、锚点6部分组成。  解析rul输入url后，浏览器会解析url的组成信息，并构造出http请求。  浏览器发送请求前，根据请求头的expires和cache-control判断是否命中（">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-09-09T12:36:51.000Z">
-<meta property="article:modified_time" content="2022-01-30T14:41:40.219Z">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Zeij/CDN/img/202111111233877.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Zeij/CDN/img/202111111259749.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Zeij/CDN/img/202111171631810.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Zeij/CDN/img/202111171632405.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Zeij/CDN/img/202111171632533.jpg">
+<meta property="article:published_time" content="2021-11-09T15:49:43.000Z">
+<meta property="article:modified_time" content="2021-11-17T09:10:01.293Z">
 <meta property="article:author" content="John Doe">
-<meta property="article:tag" content="算法，函数">
+<meta property="article:tag" content="http">
+<meta property="article:tag" content="tcp">
+<meta property="article:tag" content="缓存">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Zeij/CDN/img/202111111233877.jpg">
   
-  <title>刷题获取的小知识 - Zeij&#39;s blog</title>
+  <title>从输入url到浏览器显示页面发生了什么 - Zeij&#39;s blog</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -175,7 +183,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="刷题获取的小知识">
+            <span class="h2" id="subtitle" title="从输入url到浏览器显示页面发生了什么">
               
             </span>
 
@@ -185,8 +193,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-09-09 20:36" pubdate>
-        2021年9月9日 晚上
+      <time datetime="2021-11-09 23:49" pubdate>
+        2021年11月9日 晚上
       </time>
     </span>
   
@@ -196,7 +204,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2k 字
+      2.3k 字
     </span>
   
 
@@ -205,7 +213,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      6 分钟
+      7 分钟
     </span>
   
 
@@ -234,33 +242,44 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">刷题获取的小知识</h1>
+            <h1 style="display: none">从输入url到浏览器显示页面发生了什么</h1>
             
             <div class="markdown-body">
-              <ul>
-<li>创建空白字符串可以用<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">new</span> <span class="hljs-built_in">Array</span>(n).fill(<span class="hljs-string">&#x27; &#x27;</span>).join(<span class="hljs-string">&#x27;&#x27;</span>)<br></code></pre></td></tr></table></figure></li>
-<li>除法取整数部分可以<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs javascript">m/n|<span class="hljs-number">0</span> 或<br>math.floor <span class="hljs-built_in">parseInt</span><br></code></pre></td></tr></table></figure></li>
-<li>n&amp;1（位与运算）可以判断n是否为偶数如果是偶数，n&amp;1返回0；否则返回1，为奇数。</li>
-<li>||运算符真前假后，&amp;&amp;运算符假前真后</li>
-<li><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javacript">可以用string.trim()去除两边空白，String.trimStart()和trimEnd()方法分别从一个字符串的开始或末端移除空白字符,而string.padEnd(targetLength [, padString])/*默认为空白*/当前字符串需要填充到的目标长度 <br></code></pre></td></tr></table></figure></li>
-<li>可以利用reduce将普通数组转化为对象数组，如    <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> a=[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>],b=[<span class="hljs-number">5</span>,<span class="hljs-number">4</span>,<span class="hljs-number">3</span>,<span class="hljs-number">2</span>,<span class="hljs-number">1</span>];<br><span class="hljs-keyword">const</span> c=a.map(<span class="hljs-function">(<span class="hljs-params">v,i</span>)=&gt;</span>(&#123;<span class="hljs-attr">key</span>:v,<span class="hljs-attr">value</span>:b[i]&#125;));<span class="hljs-comment">//注意不用return的话，使用(&#123;&#125;)的情况返回对象要用（）包裹</span><br><span class="hljs-built_in">console</span>.log(c)<br><span class="hljs-comment">// [&#123;&quot;key&quot;:1,&quot;value&quot;:5&#125;,&#123;&quot;key&quot;:2,&quot;value&quot;:4&#125;,&#123;&quot;key&quot;:3,&quot;value&quot;:3&#125;,&#123;&quot;key&quot;:4,&quot;value&quot;:2&#125;,&#123;&quot;key&quot;:5,&quot;value&quot;:1&#125;]</span><br></code></pre></td></tr></table></figure></li>
-<li>x**n  相当于 Math.pow(x,n)  即x的n次方</li>
-<li>Array.filter()返回一个新数组，一个也要用[0],Array.find()返回数组中满足提供的测试函数的第一个元素的值</li>
-<li>String.localeCompare()返回一个数字来指示一个参考字符串是否在排序顺序前面或之后或与给定字符串相同，经常用于字典序的排序</li>
-<li>「二分」不是单纯指从有序数组中快速找某个数，这只是「二分」的一个应用。<br>「二分」的本质是两段性，并非单调性。只要一段满足某个性质，另外一段不满足某个性质，就可以用「二分」。「二段性」还能继续细分，不仅仅只有满足 01 特性（满足/不满足）的「二段性」可以使用二分，满足 1? 特性（一定满足/不一定满足）也可以二分。（力扣162）</li>
-<li>已知 randN() 可以等概率的生成[1, N]范围的随机数,那么：(randX() - 1) × Y + randY() ==&gt; 可以等概率的生成[1, X * Y]范围的随机数<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getRndInteger</span>(<span class="hljs-params">min, max</span>) </span>&#123;<br>  <span class="hljs-keyword">return</span> <span class="hljs-built_in">Math</span>.floor(<span class="hljs-built_in">Math</span>.random() * (max - min) ) + min;<br>&#125;<br></code></pre></td></tr></table></figure></li>
-<li>可以利用二进制数记录01状态，初始化一个数组arr，如一个数num出现过则是arr[i]|=(1&lt;&lt;num)使相对应位置变为1，判断则arr[i]&gt;&gt;num&amp;1进行判断，若为1则出现过，0则反之</li>
-<li>正则：\s匹配任何空白字符，包括空格、制表符、换页符等等，\S匹配任何非空白字符。等价于 [^ \f\n\r\t\v],匹配非空白字符用string.match(/\S+/g)或str.trim().split(/\s+/) //注意要加trim()方法</li>
-<li>判断两数符号位让两数作异或运算x^y,如果两个整数的符号位相反，那么异或的结果就会让最高位的符号位为1，也就是异或得到的数会小于0，反之大于等于0则表示两个正数符号位相同</li>
-<li>关于求是否为某数的幂运算得到的值,取巧可以打表或者在范围内取最大值看这个是是否为最大值的质数即可</li>
-<li>map不改变原数组</li>
-<li>取整Math.floor(x/2)时可以用x/2|0或x&gt;&gt;1(可能存在不如前者可接受最大位数多的精度问题，如力扣441二分用&gt;&gt;1时存在溢出成负数)</li>
-<li>数字取补数可以通过和二进制全是1的数字进行异或操作</li>
-<li>判断是否是2的幂次方所得可以通过<figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs excel">return <span class="hljs-built_in">n</span> &gt; <span class="hljs-number">0</span> &amp;&amp; (<span class="hljs-built_in">n</span> &amp; (<span class="hljs-built_in">n</span> - <span class="hljs-number">1</span>)) === <span class="hljs-number">0</span>;<br>return <span class="hljs-built_in">n</span> &gt; <span class="hljs-number">0</span> &amp;&amp; (<span class="hljs-built_in">n</span> &amp; -<span class="hljs-built_in">n</span>) == <span class="hljs-built_in">n</span>;<br></code></pre></td></tr></table></figure>
-进行判断，n&amp;(n-1)作用：将n的二进制表示中的最低位为1的改为0，n&amp;=-n：可以保留n的最右侧为1的位，其余位为0</li>
-<li>判断一个数是否出现过两次可以通过异或运算，因为a^a = 0; a^0=a; a^(-1) = ~a</li>
-<li>^亦或相当于 无进位的求和，&amp;与相当于求每位的进位数</li>
+              <h2 id="写在前面的话"><a href="#写在前面的话" class="headerlink" title="写在前面的话"></a>写在前面的话</h2><p>最近看到标题的问题问的比较多所以整理复习了一下知识点用于学习，主要来自于<a target="_blank" rel="noopener" href="https://juejin.cn/post/6935232082482298911#heading-27">FinGet的从输入URL开始建立前端知识体系</a></p>
+<h2 id="第一部分-输入网址并解析"><a href="#第一部分-输入网址并解析" class="headerlink" title="第一部分 输入网址并解析"></a>第一部分 输入网址并解析</h2><h3 id="url的组成"><a href="#url的组成" class="headerlink" title="url的组成"></a>url的组成</h3><p>url主要由协议、主机、端口、路径、查询参数、锚点6部分组成。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Zeij/CDN/img/202111111233877.jpg" srcset="/img/loading.gif" lazyload></p>
+<h3 id="解析rul"><a href="#解析rul" class="headerlink" title="解析rul"></a>解析rul</h3><p>输入url后，浏览器会解析url的组成信息，并构造出http请求。</p>
+<ol>
+<li>浏览器发送请求前，根据请求头的expires和cache-control判断是否命中（包括是否过期）强缓存策略，如果命中，直接从缓存获取资源，并不会发送请求。如果没有命中，则进入下一步。</li>
+<li>没有命中强缓存规则，浏览器会发送请求，根据请求头的last-modified和etag判断是否命中协商缓存，如果命中，直接从缓存获取资源。如果没有命中，则进入下一步。</li>
+<li>如果前两步都没有命中，则直接从服务端获取资源。</li>
+</ol>
+<h4 id="HSTS"><a href="#HSTS" class="headerlink" title="HSTS"></a>HSTS</h4><p>由于安全隐患，会使用 HSTS 强制客户端使用 HTTPS 访问页面。其原理就是：</p>
+<ul>
+<li>在服务器响应头中添加Strict-Transport-Security，可以设置 max-age</li>
+<li>用户访问时，服务器种下这个头</li>
+<li>下次如果使用 http 访问，只要 max-age 未过期，客户端会进行内部跳转，可以看到 307 Redirect Internel 的响应码</li>
+<li>变成 https 访问源服务器</li>
 </ul>
+<p>这个过程有效避免了中间人对 80 端口的劫持。<br>当你的网站均采用 HTTPS，并符合它的安全规范，就可以申请加入 HSTS 列表，之后用户不加 HTTPS 协议再去访问你的网站，浏览器都会定向到 HTTPS。无论匹配到没有，都要开始 DNS 查询工作了。<br>浏览器缓存</p>
+<h3 id="浏览器缓存"><a href="#浏览器缓存" class="headerlink" title="浏览器缓存"></a>浏览器缓存</h3><h4 id="强缓存"><a href="#强缓存" class="headerlink" title="强缓存"></a>强缓存</h4><p>强制缓存就是向浏览器缓存查找该请求结果，并根据该结果的缓存规则来决定是否使用该缓存结果的过程。强缓存又分为两种Expires和Cache-Control<br><img src="https://cdn.jsdelivr.net/gh/Zeij/CDN/img/202111111259749.jpg" srcset="/img/loading.gif" lazyload><br>Expires</p>
+<ul>
+<li>版本：HTTP/1.0</li>
+<li>来源：存在于服务端返回的响应头中</li>
+<li>语法：Expires: Wed, 22 Nov 2019 08:41:00 GMT</li>
+<li>缺点：服务器的时间和浏览器的时间可能并不一致导致失效</li>
+</ul>
+<p>Cache-Control</p>
+<ul>
+<li>版本：HTTP/1.1</li>
+<li>来源：响应头和请求头</li>
+<li>语法：Cache-Control:max-age=3600</li>
+<li>缺点：时间最终还是会失效</li>
+</ul>
+<p>请求头:<br>|  字段名称   | 说明  |<br>|  :—-  | :—-  |<br>| no-cache  | 告知(代理)服务器不直接使用缓存，要求向原服务器发起请求|<br>| no-store  |     所有内容都不会被保存到缓存或Internet临时文件中 |<br>|max-age=delta-seconds|    告知服务器客户端希望接收一个存在时间不大于delta-secconds秒的资源    |<br>|  max-stale[=delta-seconds]|  告知(代理)服务器客户端愿意接收一个超过缓存时间的资源，若有定义delta-seconds则为delta-seconds秒，若没有则为任意超出时间      |<br>| min-fresh=delta-seconds        |   告知(代理)服务器客户端希望接收一个在小于delta-seconds秒内被更新过的资源     |<br>|   no-transform      |  告知(代理)服务器客户端希望获取实体数据没有被转换(比如压缩)过的资源      |<br>|   noly-if-cached      |  告知(代理)服务器客户端希望获取缓存的内容(若有),而不用向原服务器发去请求      |<br>|  cache-extension           |    自定义扩展值，若服务器不识别该值将被忽略掉    |</p>
+<p>响应头:<br>| 字段名称        |   说明     |<br>|  :—-       |   :—-      |<br>|  public       |  表明任何情况下都得缓存该资源(即使是需要HTTP认证的资源)      |<br>|  Private=[field-name]       |  表明返回报文中全部或部分(若指定了field-name则为field-name的字段数据)仅开放给某些用户(服务器指定的share-user，如代理服务器)做缓存使用，其他用户则不能缓存这些数据      |<br>|  no-cache       |  不直接使用缓存，要求向服务器发起(新鲜度校验)请求      |<br>|   no-store      |  所以内容都不会被保存到缓存或Internet临时文件中|<br>|no-transform             | 告知客户端缓存文件时不得对实体数据做任何改变     |<br>|   noly-if-cached          |  告知(代理)服务器客户端希望获取缓存的内容(若有),而不用向原服务器发去请求  |<br>|  must-revalidate           |  当前资源一定是向原方法服务器发去验证请求的，如请求是吧会返回504(而非代理服务器上的缓存)|<br>|   proxy-revalidate          |  与must-revalidate类似，但仅能应用于共享缓存(如代理) |<br>| max-age=delta-seconds            |  告知客户端该资源在delta-seconds秒内是新鲜的，无需向服务器发请求  |<br>|  s-maxage=delta-seconds           |    同max-age，但仅能应用于共享缓存(如代理)  |<br>|   cache-extension          |  自定义扩展值，若服务器不识别该值将被忽略掉     |</p>
+<h3 id="协商缓存"><a href="#协商缓存" class="headerlink" title="协商缓存"></a>协商缓存</h3><p>协商缓存就是强制缓存失效后，浏览器携带缓存标识向服务器发起请求，由服务器根据缓存标识决定是否使用缓存的过程。<br><img src="https://cdn.jsdelivr.net/gh/Zeij/CDN/img/202111171631810.jpg" srcset="/img/loading.gif" lazyload><br><img src="https://cdn.jsdelivr.net/gh/Zeij/CDN/img/202111171632405.jpg" srcset="/img/loading.gif" lazyload><br><img src="https://cdn.jsdelivr.net/gh/Zeij/CDN/img/202111171632533.jpg" srcset="/img/loading.gif" lazyload></p>
+<h4 id="Last-Modified-响应头-，If-Modified-Since-请求头"><a href="#Last-Modified-响应头-，If-Modified-Since-请求头" class="headerlink" title="Last-Modified(响应头)，If-Modified-Since(请求头)"></a>Last-Modified(响应头)，If-Modified-Since(请求头)</h4><p>在浏览器第一次给服务器发送请求后，服务器会在响应头中加上这个字段。<br>浏览器接收到后，如果再次请求，会在请求头中携带If-Modified-Since字段，这个字段的值也就是服务器传来的最后修改时间。<br>服务器拿到请求头中的If-Modified-Since的字段后，其实会和这个服务器中该资源的最后修改时间Last-Modified对比,询问服务器在该日期后资源是否有更新，有更新的话就会将新的资源发送回来。<br>但是如果在本地打开缓存文件，就会造成 Last-Modified 被修改，所以在 HTTP / 1.1 出现了 ETag。</p>
 
             </div>
             <hr>
@@ -270,7 +289,7 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a>
+                      <a class="hover-with-bg" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a>
                     
                   </div>
                 
@@ -278,7 +297,11 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E7%AE%97%E6%B3%95%EF%BC%8C%E5%87%BD%E6%95%B0/">算法，函数</a>
+                      <a class="hover-with-bg" href="/tags/http/">http</a>
+                    
+                      <a class="hover-with-bg" href="/tags/tcp/">tcp</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%BC%93%E5%AD%98/">缓存</a>
                     
                   </div>
                 
@@ -295,9 +318,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/09/13/React%E7%AC%94%E8%AE%B0/">
+                      <a href="/2021/11/11/%E4%BB%BF%E5%86%99jira%E9%A1%B9%E7%9B%AE%E7%BB%83%E4%B9%A0/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">React笔记</span>
+                        <span class="hidden-mobile">仿写jira项目练习</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -305,8 +328,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/01/21/%E5%8A%9B%E6%89%A3628-%E4%B8%89%E4%B8%AA%E6%95%B0%E7%9A%84%E6%9C%80%E5%A4%A7%E4%B9%98%E7%A7%AF/">
-                        <span class="hidden-mobile">力扣628 三个数的最大乘积</span>
+                      <a href="/2021/11/07/js%E6%B7%B1%E6%8B%B7%E8%B4%9D/">
+                        <span class="hidden-mobile">js深拷贝</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
